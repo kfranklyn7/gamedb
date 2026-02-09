@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,5 +31,9 @@ public class GameController {
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Game>> getSingleGame(@PathVariable Integer id){
         return new ResponseEntity<Optional<Game>>(gameService.singleGame(id), HttpStatus.OK);
+    }
+    @GetMapping("/search")
+    public ResponseEntity<List<Game>> findByName(@RequestParam String name){
+        return new ResponseEntity<>(gameService.findByName(name),HttpStatus.OK);
     }
 }
