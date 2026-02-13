@@ -25,8 +25,7 @@ public class GameController {
         //return new ResponseEntity<List<Game>>("All Games!", HttpStatus.OK);
         Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(page,size,sort);
-        Page<Game> games = gameService.allGames(pageable);
-        return games;
+        return gameService.allGames(pageable);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Game>> getSingleGame(@PathVariable Integer id){
