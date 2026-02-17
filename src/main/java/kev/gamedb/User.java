@@ -1,6 +1,6 @@
 package kev.gamedb;
 
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 

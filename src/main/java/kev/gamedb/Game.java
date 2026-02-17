@@ -64,9 +64,6 @@ public class Game {
     @Field("similar_games")
     @JsonIgnore
     private List<Game> similarGames;
-    @Field("first_release_date")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM dd, yyyy", timezone = "UTC")
-    private Instant releaseDate;
     private String slug;
     private String summary;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
@@ -80,11 +77,23 @@ public class Game {
     @Field("as_child_relations")
     @JsonIgnore
     private List<Game> asChildRelations;
+    @Field("first_release_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM dd, yyyy", timezone = "UTC")
+    private Instant releaseDate;
 
     @JsonProperty("genreNames")
     public List<String> getGenreNames() {
         if (genres == null) return null;
         return genres.stream().map(Genre::getName).toList();
+    }
+
+
+    public void setReleaseDate(Object date) {
+        if (date instanceof String && ((String) date).isEmpty()) {
+            this.releaseDate = null;
+        } else if (date instanceof Instant) {
+            this.releaseDate = (Instant) date;
+        }
     }
 
     @JsonProperty("franchiseNames")

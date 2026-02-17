@@ -1,5 +1,6 @@
 package kev.gamedb;
 
+import kev.gamedb.dto.GameSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class GameController {
     @Autowired
     private GameService gameService;
+    @Autowired
+    private GameSearchService searchService;
     @GetMapping
     public Page<Game> allGames(@RequestParam(defaultValue = "0") int page,
                                @RequestParam(defaultValue = "10") int size,
@@ -32,7 +35,13 @@ public class GameController {
         return new ResponseEntity<Optional<Game>>(gameService.singleGame(id), HttpStatus.OK);
     }
     @GetMapping("/search")
-    public ResponseEntity<List<Game>> findByName(@RequestParam String name){
+    public ResponseEntity<List<Game>> findByName(@RequestParam(defaultValue =  "Dishonored") String name ){
         return new ResponseEntity<>(gameService.findByName(name),HttpStatus.OK);
+    }
+
+    @PostMapping("/search-advanced")
+    public ResponseEntity<List<Game>> search(@RequestBody GameSearchDTO criteria) {
+        List<Game> results = searchService.searchGames(criteria);
+        return ResponseEntity.ok(results);
     }
 }
