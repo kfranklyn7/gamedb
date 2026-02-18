@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Collection {
+public class Collection<T> {
     @Id
     @JsonIgnore
     private ObjectId id;

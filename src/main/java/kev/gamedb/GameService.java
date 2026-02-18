@@ -16,7 +16,7 @@ public class GameService {
         return gameRepository.findAll(pageable);
     }
     public Optional<Game> singleGame(Integer id){
-        return gameRepository.findByigdbId(id);
+        return gameRepository.findByIgdbId(id);
     }
     public List<Game> findByName(String name){
         return gameRepository.findByNameContainingIgnoreCase(name);

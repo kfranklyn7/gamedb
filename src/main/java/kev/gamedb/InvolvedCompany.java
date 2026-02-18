@@ -34,6 +34,6 @@ public class InvolvedCompany {
     }
     @JsonProperty("company")
     public String getCompany(){
-        return company.getName();
+        return (company != null) ? company.getName() : null;
     }
 }

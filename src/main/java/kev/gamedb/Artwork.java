@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 public class Artwork {
     @Id
     private ObjectId id;
-    private Integer IgdbId;
+    private Integer igdbId;
     @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
     private Game game;
     private String imageId;
