@@ -19,28 +19,26 @@ repositories {
 }
 
 dependencies {
-    // --- Implementation (Runtime) ---
+
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
     implementation 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation "me.paulschwarz:springboot4-dotenv:5.1.0"
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 
-    // --- Testing (Spring Boot 4.0.1 Modular Stack) ---
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    // This is the NEW mandatory starter for @DataMongoTest
     testImplementation 'org.springframework.boot:spring-boot-starter-data-mongodb-test'
-    // Built-in Spring Boot support for Testcontainers 2.x
     testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-
-    // --- Testcontainers 2.0 (Modern Naming) ---
-    // Spring Boot 4 manages these versions; do NOT use the 1.21.4 BOM
+    testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
     testImplementation 'org.testcontainers:testcontainers-mongodb'
     testImplementation 'org.testcontainers:testcontainers-junit-jupiter'
-
-    // --- Optional Tools ---
     testAnnotationProcessor 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
+    testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.12.2'
 }
 
 
