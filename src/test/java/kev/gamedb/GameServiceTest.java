@@ -41,7 +41,7 @@ class GameServiceTest {
     void singleGame_ShouldReturnGameIfExists() {
         Game game = new Game();
         game.setIgdbId(123);
-        when(gameRepository.findByigdbId(123)).thenReturn(Optional.of(game));
+        when(gameRepository.findByIgdbId(123)).thenReturn(Optional.of(game));
 
         Optional<Game> result = gameService.singleGame(123);
 
