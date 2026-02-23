@@ -9,7 +9,7 @@ ENDPOINTS = {
     },
     'themes': {
         'collection': 'themes',
-        'fields': 'id, name, slug, url, image_id, width, height;',
+        'fields': 'id, name, slug, url, created_at, updated_at, checksum;',
         'limit': 500,
         'where': ''
     },
@@ -123,9 +123,9 @@ ENDPOINTS = {
     },
     'games': {
         'collection': 'games',
-        'fields': 'id, name, slug, summary, storyline, category, first_release_date, themes, genres, platforms, game_modes, keywords, involved_companies, cover, artworks, screenshots, franchises, collection, total_rating, total_rating_count, hypes, parent_game, dlcs, expansions, remakes, remasters, similar_games, game_status, game_type, aggregated_rating, aggregated_rating_count, rating, rating_count, url, checksum, version_title, player_perspectives, game_engines, age_ratings, language_supports, multiplayer_modes, videos, websites',
+        'fields': 'id, name, slug, summary, storyline, category, first_release_date, themes, genres, platforms, game_modes, keywords, involved_companies, cover, artworks, screenshots, franchises, franchise, collection, total_rating, total_rating_count, aggregated_rating, aggregated_rating_count, rating, rating_count, url, checksum, version_title, player_perspectives, game_engines, age_ratings, language_supports, multiplayer_modes, videos, websites, hypes, status, parent_game, dlcs, expansions, remakes, remasters, similar_games',
         'limit': 500,
-        'where': 'category = 0'
+        'where': ''
     }
 }
 

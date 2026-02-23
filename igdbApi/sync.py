@@ -39,17 +39,28 @@ class IGDBSync:
         with open(STATE_FILE, 'w') as f:
             json.dump(self.state, f, indent=4)
 
-    def format_item(self, item):
+    def format_item(self, item, endpoint_name):
         # 1. Map 'id' to 'igdbId'
         if 'id' in item:
             item['igdbId'] = item.pop('id')
             
         # 2. Convert Unix timestamps (seconds) to BSON Dates for Spring Boot
         date_fields = ['first_release_date', 'date', 'created_at', 'updated_at']
+        for field in date_fields:
+            if item.get(field) and isinstance(item[field], (int, float)):
+                item[field] = datetime.fromtimestamp(item[field])
+        
         # 3. Ensure image URLs have protocol prefix
-        for field in ['url']:
-            if item.get(field) and isinstance(item[field], str) and item[field].startswith('//'):
-                item[field] = 'https:' + item[field]
+        if 'url' in item and isinstance(item['url'], str) and item['url'].startswith('//'):
+            item['url'] = 'https:' + item['url']
+
+        # 4. Handle Field Aliases for Spring Boot (matching @Field annotations)
+        if endpoint_name == 'games':
+            if 'category' in item:
+                item['game_type'] = item.pop('category')
+            if 'status' in item:
+                item['game_status'] = item.pop('status')
+            
         return item
 
     def fetch_and_upsert(self, endpoint_name, offset, base_url, headers, body_template, coll):
@@ -68,7 +79,7 @@ class IGDBSync:
                 
             ops = []
             for item in data:
-                item = self.format_item(item)
+                item = self.format_item(item, endpoint_name)
                 ops.append(
                     UpdateOne(
                         {'igdbId': item['igdbId']},
