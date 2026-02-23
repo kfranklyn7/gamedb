@@ -89,8 +89,30 @@ public class GameSearchServiceTest {
         GameSearchDTO criteria = new GameSearchDTO();
         criteria.setPlatforms(List.of("PC"));
 
-        // Update setup to include platform if needed, but for now assuming data matches
         List<Game> results = searchService.searchGames(criteria);
-        // Note:setup only adds name, year, genre currently.
+
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getName()).isEqualTo("The Witcher 3");
+    }
+
+    @Test
+    void testMinRatingFilter() {
+        GameSearchDTO criteria = new GameSearchDTO();
+        criteria.setMinTotalRating(90.0);
+
+        List<Game> results = searchService.searchGames(criteria);
+
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getName()).isEqualTo("The Witcher 3");
+    }
+
+    @Test
+    void testMinRatingFilter_NoResults() {
+        GameSearchDTO criteria = new GameSearchDTO();
+        criteria.setMinTotalRating(99.0);
+
+        List<Game> results = searchService.searchGames(criteria);
+
+        assertThat(results).isEmpty();
     }
 }

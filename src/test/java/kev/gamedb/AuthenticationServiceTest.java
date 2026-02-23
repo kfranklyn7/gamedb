@@ -48,6 +48,7 @@ class AuthenticationServiceTest {
     @Test
     void register_ShouldSaveUserAndReturnToken() {
         RegisterRequest request = new RegisterRequest("test@example.com", "password");
+        when(repository.findByEmail("test@example.com")).thenReturn(Optional.empty());
         when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
         when(jwtService.generateToken(any(User.class))).thenReturn("testToken");
 
@@ -55,6 +56,16 @@ class AuthenticationServiceTest {
 
         verify(repository, times(1)).save(any(User.class));
         assertEquals("testToken", response.getToken());
+    }
+
+    @Test
+    void register_ShouldThrowConflictWhenDuplicateEmail() {
+        RegisterRequest request = new RegisterRequest("test@example.com", "password");
+        when(repository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
+
+        assertThrows(kev.gamedb.exception.ResourceAlreadyExistsException.class,
+                () -> authenticationService.register(request));
+        verify(repository, never()).save(any(User.class));
     }
 
     @Test
@@ -74,6 +85,7 @@ class AuthenticationServiceTest {
         AuthenticationRequest request = new AuthenticationRequest("notfound@example.com", "password");
         when(repository.findByEmail("notfound@example.com")).thenReturn(Optional.empty());
 
-        assertThrows(RuntimeException.class, () -> authenticationService.authenticate(request));
+        assertThrows(kev.gamedb.exception.ResourceNotFoundException.class, () -> authenticationService.authenticate(request));
     }
 }
+
