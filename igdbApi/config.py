@@ -26,7 +26,7 @@ ENDPOINTS = {
         'where': ''
     },
     'game_modes': {
-        'collection': 'gameModes',
+        'collection': 'game_modes',
         'fields': 'id, name, slug;',
         'limit': 500,
         'where': ''
@@ -38,7 +38,7 @@ ENDPOINTS = {
         'where': ''
     },
     'involved_companies': {
-        'collection': 'involvedCompanies',
+        'collection': 'involved_companies',
         'fields': 'id, company, game, developer, publisher, supporting, porting;',
         'limit': 500,
         'where': ''
@@ -74,8 +74,8 @@ ENDPOINTS = {
         'where': ''
     },
     'release_dates': {
-        'collection': 'releaseDates',
-        'fields': 'id, game, category, platform, date, human, m, y;',
+        'collection': 'release_dates',
+        'fields': 'id, game, category, platform, date, human, m, y, status;',
         'limit': 500,
         'where': ''
     },
@@ -128,4 +128,3 @@ ENDPOINTS = {
         'where': ''
     }
 }
-

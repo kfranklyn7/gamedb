@@ -40,9 +40,14 @@ class IGDBSync:
             json.dump(self.state, f, indent=4)
 
     def format_item(self, item, endpoint_name):
-        # 1. Map 'id' to 'igdbId'
+        # 1. Map 'id' to 'igdbId' and potentially '_id'
         if 'id' in item:
             item['igdbId'] = item.pop('id')
+            
+            # SEVERE SCHEMA FIX: Some models use igdbId as the primary @Id (MongoDB _id)
+            # Video.java: @Id private Integer igdbId;
+            if endpoint_name == 'game_videos':
+                item['_id'] = item['igdbId']
             
         # 2. Convert Unix timestamps (seconds) to BSON Dates for Spring Boot
         date_fields = ['first_release_date', 'date', 'created_at', 'updated_at']
