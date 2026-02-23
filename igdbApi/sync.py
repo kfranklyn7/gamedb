@@ -44,10 +44,12 @@ class IGDBSync:
         if 'id' in item:
             item['igdbId'] = item.pop('id')
             
-            # SEVERE SCHEMA FIX: Some models use igdbId as the primary @Id (MongoDB _id)
+            # SCHEMA PARITY: Match Java @Id fields
             # Video.java: @Id private Integer igdbId;
             if endpoint_name == 'game_videos':
                 item['_id'] = item['igdbId']
+            # Website.java, AgeRating.java, etc. use String id
+            # We let MongoDB handle ObjectId, but ensure igdbId is present for lookups
             
         # 2. Convert Unix timestamps (seconds) to BSON Dates for Spring Boot
         date_fields = ['first_release_date', 'date', 'created_at', 'updated_at']
@@ -60,14 +62,19 @@ class IGDBSync:
             item['url'] = 'https:' + item['url']
 
         # 4. Handle Field Aliases and Type Conversions for Spring Boot
+        status_map = {1: "released", 2: "alpha", 3: "beta", 4: "early_access", 5: "offline", 6: "cancelled", 7: "rumored", 8: "delisted"}
+        
         if endpoint_name == 'games':
             if 'category' in item:
                 item['game_type'] = item.pop('category')
             if 'status' in item:
-                # Java model expects String for game_status, IGDB sends integer enum
-                status_map = {1: "released", 2: "alpha", 3: "beta", 4: "early_access", 5: "offline", 6: "cancelled", 7: "rumored", 8: "delisted"}
                 val = item.pop('status')
                 item['game_status'] = status_map.get(val, str(val))
+        
+        if endpoint_name == 'release_dates':
+            if 'status' in item:
+                val = item.pop('status')
+                item['status'] = status_map.get(val, str(val))
             
         return item
 
