@@ -54,12 +54,15 @@ class IGDBSync:
         if 'url' in item and isinstance(item['url'], str) and item['url'].startswith('//'):
             item['url'] = 'https:' + item['url']
 
-        # 4. Handle Field Aliases for Spring Boot (matching @Field annotations)
+        # 4. Handle Field Aliases and Type Conversions for Spring Boot
         if endpoint_name == 'games':
             if 'category' in item:
                 item['game_type'] = item.pop('category')
             if 'status' in item:
-                item['game_status'] = item.pop('status')
+                # Java model expects String for game_status, IGDB sends integer enum
+                status_map = {1: "released", 2: "alpha", 3: "beta", 4: "early_access", 5: "offline", 6: "cancelled", 7: "rumored", 8: "delisted"}
+                val = item.pop('status')
+                item['game_status'] = status_map.get(val, str(val))
             
         return item
 
@@ -92,10 +95,13 @@ class IGDBSync:
                 coll.bulk_write(ops, ordered=False)
                 return len(ops)
         except Exception as e:
-            # Safer error message: check if e has 'response' safely
+            # Verbose error for 400 Bad Request
             resp = getattr(e, 'response', None)
-            sc = getattr(resp, 'status_code', 'No Status') if resp else 'No Response'
-            print(f"Error at offset {offset}: {sc} - {str(e)[:100]}")
+            if resp is not None:
+                sc = resp.status_code
+                print(f"Error at offset {offset}: {sc} - {resp.text}")
+            else:
+                print(f"Error at offset {offset}: No Response - {str(e)[:100]}")
             return -1
         return 0
 

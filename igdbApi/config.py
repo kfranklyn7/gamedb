@@ -9,7 +9,7 @@ ENDPOINTS = {
     },
     'themes': {
         'collection': 'themes',
-        'fields': 'id, name, slug, url, created_at, updated_at, checksum;',
+        'fields': 'name, slug, url;',
         'limit': 500,
         'where': ''
     },
