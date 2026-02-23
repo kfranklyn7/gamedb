@@ -13,5 +13,4 @@ public class GamedbApplication {
     public static void main(String[] args) {
         SpringApplication.run(GamedbApplication.class, args);
     }
-
 }

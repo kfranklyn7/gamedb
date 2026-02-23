@@ -18,6 +18,8 @@ public class Screenshot {
     private Integer igdbId;
     private Integer height;
     private Integer width;
+    @org.springframework.data.mongodb.core.mapping.Field("image_id")
+    private String imageId;
     private String url;
     @DocumentReference
     private Game game;

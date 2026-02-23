@@ -18,6 +18,7 @@ public class Artwork {
     private Integer igdbId;
     @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
     private Game game;
+    @org.springframework.data.mongodb.core.mapping.Field("image_id")
     private String imageId;
     private String url;
 

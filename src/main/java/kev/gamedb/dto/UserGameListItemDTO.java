@@ -13,4 +13,10 @@ public class UserGameListItemDTO {
     private Integer personalRating;
     private String review;
     private Instant lastUpdated;
+
+    // Quest Journal v2 fields
+    private Integer replayCount;
+    private Instant startedAt;
+    private Instant completedAt;
+    private String priority;
 }

@@ -9,6 +9,7 @@ import kev.gamedb.exception.InvalidRequestException;
 import kev.gamedb.exception.ResourceAlreadyExistsException;
 import kev.gamedb.exception.ResourceNotFoundException;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,35 +22,20 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserListService {
-    private final UserGameListItemRepository itemRepository;
-    private final UserListRepository listRepository;
-    private final GameSearchService gameSearchService;
-    private final GameRepository gameRepository;
-
-    public UserListService(UserGameListItemRepository itemRepository,
-                           UserListRepository listRepository,
-                           GameSearchService gameSearchService,
-                           GameRepository gameRepository) {
-        this.itemRepository = itemRepository;
-        this.listRepository = listRepository;
-        this.gameSearchService = gameSearchService;
-        this.gameRepository = gameRepository;
-    }
+    @Autowired
+    private UserGameListItemRepository itemRepository;
+    @Autowired
+    private UserListRepository listRepository;
+    @Autowired
+    private GameSearchService gameSearchService;
+    @Autowired
+    private GameRepository gameRepository;
 
     // ─── Add a game to your list ─────────────────────────────────────
 
     public UserGameListItem addItem(String userId, UserListItemRequestDTO request) {
-        // Validate required fields
-        if (request.getGameId() == null) {
-            throw new InvalidRequestException("'gameId' is required");
-        }
         if (request.getStatus() == null) {
             throw new InvalidRequestException("'status' is required");
-        }
-
-        // Validate personalRating range
-        if (request.getPersonalRating() != null && (request.getPersonalRating() < 1 || request.getPersonalRating() > 10)) {
-            throw new InvalidRequestException("'personalRating' must be between 1 and 10");
         }
 
         // Check if game exists in the database
@@ -76,21 +62,17 @@ public class UserListService {
     // ─── Update an existing game in your list ─────────────────────────
 
     public UserGameListItem updateItem(String userId, UserListItemRequestDTO request) {
-        if (request.getGameId() == null) {
-            throw new InvalidRequestException("'gameId' is required");
-        }
-
-        // Validate personalRating range
-        if (request.getPersonalRating() != null && (request.getPersonalRating() < 1 || request.getPersonalRating() > 10)) {
-            throw new InvalidRequestException("'personalRating' must be between 1 and 10");
-        }
-
         UserGameListItem item = itemRepository.findByUserIdAndGameId(userId, request.getGameId())
                 .orElseThrow(() -> new ResourceNotFoundException("Game with ID " + request.getGameId() + " is not in your list"));
 
         if (request.getStatus() != null) item.setStatus(request.getStatus());
         if (request.getPersonalRating() != null) item.setPersonalRating(request.getPersonalRating());
         if (request.getReview() != null) item.setReview(request.getReview());
+        // Quest Journal v2 fields
+        if (request.getReplayCount() != null) item.setReplayCount(request.getReplayCount());
+        if (request.getStartedAt() != null) item.setStartedAt(request.getStartedAt());
+        if (request.getCompletedAt() != null) item.setCompletedAt(request.getCompletedAt());
+        if (request.getPriority() != null) item.setPriority(request.getPriority());
         item.setLastUpdated(Instant.now());
 
         return itemRepository.save(item);
@@ -378,6 +360,11 @@ public class UserListService {
             dto.setPersonalRating(item.getPersonalRating());
             dto.setReview(item.getReview());
             dto.setLastUpdated(item.getLastUpdated());
+            // Quest Journal v2 fields
+            dto.setReplayCount(item.getReplayCount());
+            dto.setStartedAt(item.getStartedAt());
+            dto.setCompletedAt(item.getCompletedAt());
+            dto.setPriority(item.getPriority());
             return dto;
         }).collect(Collectors.toCollection(ArrayList::new));
     }

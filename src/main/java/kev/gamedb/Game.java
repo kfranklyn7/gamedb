@@ -98,6 +98,40 @@ public class Game {
     private Integer gameType;
     private String storyline;
     private Integer hypes;
+
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @JsonIgnore
+    private List<Video> videos;
+
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @JsonIgnore
+    private List<Website> websites;
+
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @JsonIgnore
+    @Field("player_perspectives")
+    private List<PlayerPerspective> playerPerspectives;
+
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @JsonIgnore
+    @Field("game_engines")
+    private List<GameEngine> gameEngines;
+
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @JsonIgnore
+    @Field("age_ratings")
+    private List<AgeRating> ageRatings;
+
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @JsonIgnore
+    @Field("language_supports")
+    private List<LanguageSupport> languageSupports;
+
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @JsonIgnore
+    @Field("multiplayer_modes")
+    private List<MultiplayerMode> multiplayerModes;
+
     @Field("version_title")
     private String versionTitle;
 
@@ -107,7 +141,7 @@ public class Game {
     @JsonProperty("genreNames")
     public List<String> getGenreNames() {
         if (genres == null) return null;
-        return genres.stream().map(Genre::getName).toList();
+        return genres.stream().map(Genre::getName).distinct().toList();
     }
 
     public void setReleaseDate(Object date) {
@@ -131,19 +165,19 @@ public class Game {
     @JsonProperty("gameModes")
     public List<String> getGameModes() {
         if (gameModes == null) return java.util.Collections.emptyList();
-        return gameModes.stream().map(GameModes::getName).toList();
+        return gameModes.stream().map(GameModes::getName).distinct().toList();
     }
 
     @JsonProperty("themes")
     public List<String> getThemes() {
         if (themes == null) return java.util.Collections.emptyList();
-        return themes.stream().map(Theme::getName).toList();
+        return themes.stream().map(Theme::getName).distinct().toList();
     }
 
     @JsonProperty("platforms")
     public List<String> getPlatforms() {
         if (platforms == null) return java.util.Collections.emptyList();
-        return platforms.stream().map(Platform::getName).toList();
+        return platforms.stream().map(Platform::getName).distinct().toList();
     }
 
     @JsonProperty("cover")
@@ -220,4 +254,65 @@ public class Game {
 
     @JsonProperty("checksum")
     public String getChecksum() { return checksum; }
+
+    @JsonProperty("videos")
+    public List<String> getVideos() {
+        if (videos == null) return java.util.Collections.emptyList();
+        return videos.stream().map(Video::getVideoId).distinct().toList();
+    }
+
+    @JsonProperty("websites")
+    public List<String> getWebsites() {
+        if (websites == null) return java.util.Collections.emptyList();
+        return websites.stream().map(Website::getUrl).distinct().toList();
+    }
+
+    @JsonProperty("playerPerspectives")
+    public List<String> getPlayerPerspectives() {
+        if (playerPerspectives == null) return java.util.Collections.emptyList();
+        return playerPerspectives.stream().map(PlayerPerspective::getName).distinct().toList();
+    }
+
+    @JsonProperty("gameEngines")
+    public List<String> getGameEngines() {
+        if (gameEngines == null) return java.util.Collections.emptyList();
+        return gameEngines.stream().map(GameEngine::getName).distinct().toList();
+    }
+
+    @JsonProperty("artworks")
+    public List<String> getArtworks() {
+        if (artworks == null) return java.util.Collections.emptyList();
+        return artworks.stream().filter(java.util.Objects::nonNull).map(Artwork::getImageId).distinct().toList();
+    }
+
+    @JsonProperty("screenshots")
+    public List<String> getScreenshots() {
+        if (screenshots == null) return java.util.Collections.emptyList();
+        return screenshots.stream().filter(java.util.Objects::nonNull).map(Screenshot::getImageId).distinct().toList();
+    }
+
+    @JsonProperty("ageRatings")
+    public List<java.util.Map<String, Object>> getAgeRatings() {
+        if (ageRatings == null) return java.util.Collections.emptyList();
+        return ageRatings.stream()
+                .map(ar -> java.util.Map.<String, Object>of(
+                        "category", ar.getCategory(),
+                        "rating", ar.getRating()
+                )).toList();
+    }
+
+    @JsonProperty("similarGamesData")
+    public List<java.util.Map<String, Object>> getSimilarGamesData() {
+        if (similarGames == null) return java.util.Collections.emptyList();
+        return similarGames.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(g -> {
+                    java.util.Map<String, Object> map = new java.util.HashMap<>();
+                    map.put("igdbId", g.getIgdbId());
+                    map.put("name", g.getName());
+                    if (g.getCover() != null) map.put("cover", g.getCover());
+                    return map;
+                })
+                .toList();
+    }
 }

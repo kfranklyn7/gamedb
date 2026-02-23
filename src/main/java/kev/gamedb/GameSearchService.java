@@ -2,6 +2,7 @@ package kev.gamedb;
 
 import kev.gamedb.dto.GameSearchDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.MongoExpression;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -19,6 +20,7 @@ public class GameSearchService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Cacheable(value = "gameSearch", key = "#criteria.hashCode()")
     public List<Game> searchGames(GameSearchDTO criteria) {
         List<AggregationOperation> pipeline = new ArrayList<>();
 
@@ -98,6 +100,7 @@ public class GameSearchService {
                 .addFieldWithValue("cleanInvolved", MongoExpression.create(String.format(cleanArrayExp, "involved_companies", "involved_companies", "involved_companies", "involved_companies", "involved_companies")))
                 .addFieldWithValue("cleanFranchises", MongoExpression.create(String.format(cleanArrayExp, "franchises", "franchises", "franchises", "franchises", "franchises")))
                 .addFieldWithValue("cleanCollections", MongoExpression.create(String.format(cleanArrayExp, "collections", "collections", "collections", "collections", "collections")))
+                .addFieldWithValue("first_release_date", MongoExpression.create("{ \"$cond\": { \"if\": { \"$eq\": [\"$first_release_date\", \"\"] }, \"then\": null, \"else\": \"$first_release_date\" } }"))
                 .build());
 
         // 5. LOOKUPS

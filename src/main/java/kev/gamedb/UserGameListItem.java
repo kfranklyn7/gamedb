@@ -23,6 +23,12 @@ public class UserGameListItem {
     private String review;
     private Instant lastUpdated;
 
+    // Quest Journal v2 fields
+    private Integer replayCount;     // how many times replayed
+    private Instant startedAt;       // when the user started playing
+    private Instant completedAt;     // when the user completed
+    private String priority;         // HIGH, MEDIUM, LOW
+
     @JsonProperty("id")
     public String getIdString() {
         return id != null ? id.toHexString() : null;

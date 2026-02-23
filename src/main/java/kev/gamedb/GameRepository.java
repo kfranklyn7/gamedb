@@ -14,6 +14,4 @@ public interface GameRepository extends MongoRepository<Game, ObjectId> {
     List<Game> findByIgdbIdIn(List<Integer> igdbIds);
 
     List<Game> findByNameContainingIgnoreCase(String name);
-
-    Object findByigdbId(Integer igdbId);
 }
