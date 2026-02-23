@@ -2,6 +2,7 @@ import os
 import json
 import time
 import requests
+from datetime import datetime
 from pymongo import MongoClient, UpdateOne
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
@@ -11,7 +12,8 @@ from config import ENDPOINTS
 
 load_dotenv()
 
-MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
+# Handle both naming conventions for better compatibility
+MONGO_URI = os.getenv('MONGO_URI') or os.getenv('MONGODB_URI') or 'mongodb://localhost:27017/'
 DB_NAME = 'gamedb'
 STATE_FILE = 'sync_state.json'
 MAX_WORKERS = 4  # Target 4 requests per second
@@ -37,9 +39,17 @@ class IGDBSync:
         with open(STATE_FILE, 'w') as f:
             json.dump(self.state, f, indent=4)
 
-    def flatten_id(self, item):
+    def format_item(self, item):
+        # 1. Map 'id' to 'igdbId'
         if 'id' in item:
             item['igdbId'] = item.pop('id')
+            
+        # 2. Convert Unix timestamps (seconds) to BSON Dates for Spring Boot
+        date_fields = ['first_release_date', 'date', 'created_at', 'updated_at']
+        # 3. Ensure image URLs have protocol prefix
+        for field in ['url']:
+            if item.get(field) and isinstance(item[field], str) and item[field].startswith('//'):
+                item[field] = 'https:' + item[field]
         return item
 
     def fetch_and_upsert(self, endpoint_name, offset, base_url, headers, body_template, coll):
@@ -58,7 +68,7 @@ class IGDBSync:
                 
             ops = []
             for item in data:
-                item = self.flatten_id(item)
+                item = self.format_item(item)
                 ops.append(
                     UpdateOne(
                         {'igdbId': item['igdbId']},
