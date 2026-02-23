@@ -71,8 +71,9 @@ class IGDBSync:
                 coll.bulk_write(ops, ordered=False)
                 return len(ops)
         except Exception as e:
-            # Safer error message
-            sc = getattr(e.response, 'status_code', 'No Status') if hasattr(e, 'response') else 'No Response'
+            # Safer error message: check if e has 'response' safely
+            resp = getattr(e, 'response', None)
+            sc = getattr(resp, 'status_code', 'No Status') if resp else 'No Response'
             print(f"Error at offset {offset}: {sc} - {str(e)[:100]}")
             return -1
         return 0
@@ -93,13 +94,15 @@ class IGDBSync:
         
         base_url = f"https://api.igdb.com/v4/{endpoint_name}"
         
-        # Super robust query construction
-        body_template = f"fields {fields}"
+        # Pure IGDB syntax: Clauses separated by semicolons, no trailing semicolon
+        query_parts = [f"fields {fields}"]
         if where:
             clean_where = where.replace('where ', '', 1) if where.lower().startswith('where ') else where
-            body_template += f"; where {clean_where}"
+            query_parts.append(f"where {clean_where}")
         
-        body_template += f"; limit {limit}; offset OFFSET_PLACEHOLDER;"
+        query_parts.append(f"limit {limit}")
+        query_parts.append("offset OFFSET_PLACEHOLDER")
+        body_template = ";".join(query_parts)
 
         while True:
             start_time = time.time()
@@ -113,21 +116,25 @@ class IGDBSync:
                     off = futures[future]
                     results_by_offset[off] = future.result()
             
-            # 1. Handle Critical Failures (Rate limits or network)
+            # 1. Handle Critical Failures
             if any(r == -429 for r in results_by_offset.values()):
                 print("Rate limited! Waiting 10s...")
                 time.sleep(10)
                 continue
                 
             if any(r == -1 for r in results_by_offset.values()):
-                print("Batch had errors, retrying soon...")
+                print("Batch had network errors, retrying soon...")
                 time.sleep(3)
                 continue
 
             # 2. Check for End of Data
-            # We only stop if the LOWEST offset in the batch returned 0 results.
+            # We only stop if the LOWEST offset in the batch returned 0 items.
             if results_by_offset[min(offsets_to_fetch)] == 0:
-                print(f"Reached end of {endpoint_name}.")
+                if offset == 0:
+                    print(f"CRITICAL: End of data reached at Offset 0 for {endpoint_name}. This usually means the query is invalid.")
+                    print(f"Debug Query Template: {body_template.replace('OFFSET_PLACEHOLDER', '0')}")
+                else:
+                    print(f"Reached end of {endpoint_name}.")
                 break
             
             total_upserted = sum(r for r in results_by_offset.values() if r > 0)
