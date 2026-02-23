@@ -141,6 +141,14 @@ class IGDBSync:
             total_upserted = sum(r for r in results_by_offset.values() if r > 0)
             print(f"[{endpoint_name}] Offset {offset}: +{total_upserted} items")
             
+            # 3. Post-Sync Indexing (First Batch Only)
+            if offset == 0 and endpoint_name == 'games':
+                print(f"Creating indexes for {endpoint_name}...")
+                coll.create_index([("name", "text")])
+                coll.create_index([("igdbId", 1)], unique=True)
+                coll.create_index([("first_release_date", -1)])
+                print("Indexes created.")
+            
             offset += (MAX_WORKERS * limit)
             self.state[endpoint_name] = offset
             self.save_state()
