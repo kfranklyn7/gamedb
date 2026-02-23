@@ -3,19 +3,19 @@
 ENDPOINTS = {
     'genres': {
         'collection': 'genres',
-        'fields': 'id, name, slug;',
+        'fields': 'id, name, slug, url;',
         'limit': 500,
         'where': ''
     },
     'themes': {
         'collection': 'themes',
-        'fields': 'id, name, slug;',
+        'fields': 'id, name, slug, url, image_id, width, height;',
         'limit': 500,
         'where': ''
     },
     'platforms': {
         'collection': 'platforms',
-        'fields': 'id, name, abbreviation, slug, category, generation;',
+        'fields': 'id, name, abbreviation, slug, category, generation, summary, url;',
         'limit': 500,
         'where': ''
     },
@@ -45,13 +45,13 @@ ENDPOINTS = {
     },
     'franchises': {
         'collection': 'franchises',
-        'fields': 'id, name, slug, games;',
+        'fields': 'id, name, slug, games, url;',
         'limit': 500,
         'where': ''
     },
     'collections': {
         'collection': 'collections',
-        'fields': 'id, name, slug, games, type;',
+        'fields': 'id, name, slug, games, url;',
         'limit': 500,
         'where': ''
     },
@@ -123,8 +123,9 @@ ENDPOINTS = {
     },
     'games': {
         'collection': 'games',
-        'fields': 'id, name, slug, summary, storyline, category, first_release_date, themes, genres, platforms, game_modes, keywords, involved_companies, cover, artworks, screenshots, franchises, total_rating, total_rating_count, hypes, parent_game, dlcs, expansions, remakes, remasters, similar_games',
+        'fields': 'id, name, slug, summary, storyline, category, first_release_date, themes, genres, platforms, game_modes, keywords, involved_companies, cover, artworks, screenshots, franchises, collection, total_rating, total_rating_count, hypes, parent_game, dlcs, expansions, remakes, remasters, similar_games, game_status, game_type, aggregated_rating, aggregated_rating_count, rating, rating_count, url, checksum, version_title, player_perspectives, game_engines, age_ratings, language_supports, multiplayer_modes, videos, websites',
         'limit': 500,
         'where': 'category = 0'
     }
 }
+
