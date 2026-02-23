@@ -16,7 +16,8 @@ load_dotenv()
 MONGO_URI = os.getenv('MONGO_URI') or os.getenv('MONGODB_URI') or 'mongodb://localhost:27017/'
 DB_NAME = 'gamedb'
 STATE_FILE = 'sync_state.json'
-MAX_WORKERS = 4  # Target 4 requests per second
+MAX_WORKERS = 8  # Higher concurrency for multi-threaded fetching
+UPSERT_INDEX_BATCH = 1000 # Create indexes after this many docs if not exists
 
 class IGDBSync:
     def __init__(self):
@@ -192,11 +193,40 @@ class IGDBSync:
             self.state[endpoint_name] = offset
             self.save_state()
             
-            # Maintain 4 requests per second
+            # Maintain target requests per second (balanced with concurrency)
             elapsed = time.time() - start_time
-            time.sleep(max(0.1, 1.1 - elapsed))
+            # With MAX_WORKERS=8 and 2.2s sleep, we average ~3.6 rps
+            time.sleep(max(0.1, 2.2 - elapsed))
+
+    def ensure_indexes(self):
+        """Creates indexes for ALL collections to prevent O(N) scan slowdowns during sync."""
+        print("Ensuring indexes for all collections (High Performance Mode)...")
+        for ep_name, config in ENDPOINTS.items():
+            coll_name = config['collection']
+            coll = self.db[coll_name]
+            
+            # 1. igdbId index for all collections (unless it's the primary _id)
+            if ep_name != 'game_videos':
+                try:
+                    coll.create_index([("igdbId", 1)], unique=True)
+                    # print(f" - {coll_name}: Unique index on igdbId ensured.")
+                except Exception as e:
+                    print(f" - {coll_name}: Warning ensuring index: {str(e)[:50]}")
+            
+            # 2. Specialized indexes
+            if ep_name == 'games':
+                coll.create_index([("name", "text")])
+                coll.create_index([("first_release_date", -1)])
+            
+            if ep_name == 'companies':
+                coll.create_index([("name", 1)])
+
+        print("All critical indexes ensured. Upserts will be O(1).")
 
     def run_all(self):
+        # ensure indexes first so upserts don't slow down to a crawl
+        self.ensure_indexes()
+        
         order = [
             'genres', 'themes', 'platforms', 'keywords', 'game_modes',
             'companies', 'franchises', 'collections', 'release_dates',
