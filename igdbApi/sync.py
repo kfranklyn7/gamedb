@@ -14,7 +14,7 @@ load_dotenv()
 MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017/')
 DB_NAME = 'gamedb'
 STATE_FILE = 'sync_state.json'
-MAX_WORKERS = 4  # IGDB allows 4 requests per second
+MAX_WORKERS = 4  # Target 4 requests per second
 
 class IGDBSync:
     def __init__(self):
@@ -22,6 +22,7 @@ class IGDBSync:
         self.client = MongoClient(MONGO_URI)
         self.db = self.client[DB_NAME]
         self.state = self.load_state()
+        self.session = requests.Session()  # Reuse TCP connections
 
     def load_state(self):
         if os.path.exists(STATE_FILE):
@@ -44,7 +45,12 @@ class IGDBSync:
     def fetch_and_upsert(self, endpoint_name, offset, base_url, headers, body_template, coll):
         body = body_template.replace("OFFSET_PLACEHOLDER", str(offset))
         try:
-            response = requests.post(base_url, headers=headers, data=body)
+            # Use the shared session for faster requests
+            response = self.session.post(base_url, headers=headers, data=body, timeout=30)
+            
+            if response.status_code == 429:
+                return -429
+            
             response.raise_for_status()
             data = response.json()
             
@@ -63,7 +69,8 @@ class IGDBSync:
                 )
             
             if ops:
-                result = coll.bulk_write(ops)
+                # IMPORTANT: ordered=False is MUCH faster for bulk writes
+                coll.bulk_write(ops, ordered=False)
                 return len(ops)
         except Exception as e:
             print(f"Error at offset {offset}: {e}")
@@ -82,50 +89,58 @@ class IGDBSync:
         coll = self.db[collection_name]
         
         offset = self.state.get(endpoint_name, 0)
-        print(f"\n>>> Turbo Sync: '{endpoint_name}' -> '{collection_name}' (Starting at {offset})")
+        print(f"\n>>> MAX TURBO: '{endpoint_name}' (Starting at {offset})")
         
         base_url = f"https://api.igdb.com/v4/{endpoint_name}"
-        body_template = f"fields {fields} limit {limit}; offset OFFSET_PLACEHOLDER;"
+        
+        body_template = f"fields {fields}"
         if where:
-            body_template += f" {where}"
+            if not where.strip().startswith('where'):
+                body_template += f" where {where}"
+            else:
+                body_template += f" {where}"
+        body_template += f" limit {limit}; offset OFFSET_PLACEHOLDER;"
 
         while True:
+            start_time = time.time()
             headers = self.auth.get_headers()
             offsets_to_fetch = [offset + (i * limit) for i in range(MAX_WORKERS)]
             
             with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
                 futures = {executor.submit(self.fetch_and_upsert, endpoint_name, off, base_url, headers, body_template, coll): off for off in offsets_to_fetch}
                 
-                results = []
+                results_by_offset = {}
                 for future in as_completed(futures):
-                    results.append(future.result())
+                    off = futures[future]
+                    results_by_offset[off] = future.result()
                 
-                # If any returned 0, we reached the end soon
-                if any(r == 0 for r in results):
-                    # Find the highest offset that actually returned data before reaching 0
-                    # For simplicity, if we hit 0, we just finish this collection after this batch
-                    # and assume we'll catch any stragglers on next run or just move on.
-                    print(f"Reached end of {endpoint_name}.")
-                    self.state[endpoint_name] = offset + (MAX_WORKERS * limit)
-                    self.save_state()
-                    break
-                
-                # If any failed (-1), we pause and retry this batch
-                if any(r == -1 for r in results):
-                    print("Error detected, pausing 5s...")
+                # Check for rate limiting or general errors
+                if any(r == -429 for r in results_by_offset.values()):
+                    print("Rate limited! Sleeping 10s...")
+                    time.sleep(10)
+                    continue
+                    
+                if any(r == -1 for r in results_by_offset.values()):
+                    print("Network error, retrying batch in 5s...")
                     time.sleep(5)
                     continue
 
-                total_upserted = sum(results)
-                print(f"[{endpoint_name}] Batch {offset}-{offset + (MAX_WORKERS * limit)}: Upserted {total_upserted} docs.")
+                # Break ONLY if the lowest requested offset returned nothing
+                if results_by_offset[min(offsets_to_fetch)] == 0:
+                    print(f"Reached end of {endpoint_name}.")
+                    break
+                
+                total_upserted = sum(r for r in results_by_offset.values() if r > 0)
+                print(f"[{endpoint_name}] Offset {offset}: +{total_upserted} items")
                 
                 offset += (MAX_WORKERS * limit)
                 self.state[endpoint_name] = offset
                 self.save_state()
                 
-                # 4 requests per second. Each worker did 1 request.
-                # So we wait 1 second to start the next batch of 4.
-                time.sleep(1.1)
+                # Dynamically sleep to maintain exactly 4 requests per second
+                elapsed = time.time() - start_time
+                sleep_time = max(0.1, 1.05 - elapsed) 
+                time.sleep(sleep_time)
 
     def run_all(self):
         order = [
@@ -139,7 +154,7 @@ class IGDBSync:
         for ep in order:
             if ep in ENDPOINTS:
                 self.sync_endpoint(ep)
-        print("\n=== TURBO SYNC COMPLETE ===")
+        print("\n=== MAX TURBO SYNC COMPLETE ===")
 
 if __name__ == "__main__":
     sync = IGDBSync()
