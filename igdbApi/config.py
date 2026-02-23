@@ -123,8 +123,8 @@ ENDPOINTS = {
     },
     'games': {
         'collection': 'games',
-        'fields': 'id, name, slug, summary, storyline, category, first_release_date, themes, genres, platforms, game_modes, keywords, involved_companies, cover, artworks, screenshots, franchises, total_rating, total_rating_count, hypes, parent_game, dlcs, expansions, remakes, remasters, similar_games',
+        'fields': 'id, name, slug, summary, category, first_release_date, themes, genres, platforms, game_modes, cover, total_rating, total_rating_count',
         'limit': 500,
-        'where': 'category = 0'
+        'where': ''
     }
 }

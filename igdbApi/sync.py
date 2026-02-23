@@ -94,7 +94,8 @@ class IGDBSync:
         
         base_url = f"https://api.igdb.com/v4/{endpoint_name}"
         
-        # Standard Segmented Syntax: "fields X; limit Y; offset Z;"
+        # Pure IGDB Syntax: "fields X;where Y;limit Z;offset W;"
+        # (Matched exactly to verified successful curl command)
         query_parts = [f"fields {fields}"]
         if where:
             clean_where = where.replace('where ', '', 1) if where.lower().startswith('where ') else where
@@ -102,7 +103,7 @@ class IGDBSync:
         
         query_parts.append(f"limit {limit}")
         query_parts.append("offset OFFSET_PLACEHOLDER")
-        body_template = "; ".join(query_parts) + ";"
+        body_template = ";".join(query_parts) + ";"
 
         while True:
             start_time = time.time()
@@ -123,14 +124,18 @@ class IGDBSync:
                 continue
                 
             if any(r == -1 for r in results_by_offset.values()):
-                print(f"Batch had errors. Debug Query Template: {body_template}")
+                print(f"Batch at {offset} had errors. Retrying...")
                 time.sleep(5)
                 continue
 
             # 2. Check for End of Data
-            # We only stop if the LOWEST offset in the batch returned 0 items.
-            if results_by_offset[min(offsets_to_fetch)] == 0:
-                print(f"Reached end of {endpoint_name} collection.")
+            # Note: We use min(offsets_to_fetch) to ensure we don't break if a later offset is empty
+            # but an earlier one still has data.
+            base_result = results_by_offset[min(offsets_to_fetch)]
+            if base_result == 0:
+                print(f"Reached end of {endpoint_name} collection (Returned 0 items at Offset {min(offsets_to_fetch)}).")
+                if offset == 0:
+                    print(f"DEBUG: Body was: {body_template.replace('OFFSET_PLACEHOLDER', '0')}")
                 break
             
             total_upserted = sum(r for r in results_by_offset.values() if r > 0)
