@@ -94,7 +94,7 @@ class IGDBSync:
         
         base_url = f"https://api.igdb.com/v4/{endpoint_name}"
         
-        # Pure IGDB syntax: Clauses separated by semicolons, no trailing semicolon
+        # Standard Segmented Syntax: "fields X; limit Y; offset Z;"
         query_parts = [f"fields {fields}"]
         if where:
             clean_where = where.replace('where ', '', 1) if where.lower().startswith('where ') else where
@@ -102,7 +102,7 @@ class IGDBSync:
         
         query_parts.append(f"limit {limit}")
         query_parts.append("offset OFFSET_PLACEHOLDER")
-        body_template = ";".join(query_parts)
+        body_template = "; ".join(query_parts) + ";"
 
         while True:
             start_time = time.time()
@@ -118,23 +118,19 @@ class IGDBSync:
             
             # 1. Handle Critical Failures
             if any(r == -429 for r in results_by_offset.values()):
-                print("Rate limited! Waiting 10s...")
-                time.sleep(10)
+                print("Rate limited! Waiting 15s...")
+                time.sleep(15)
                 continue
                 
             if any(r == -1 for r in results_by_offset.values()):
-                print("Batch had network errors, retrying soon...")
-                time.sleep(3)
+                print(f"Batch had errors. Debug Query Template: {body_template}")
+                time.sleep(5)
                 continue
 
             # 2. Check for End of Data
             # We only stop if the LOWEST offset in the batch returned 0 items.
             if results_by_offset[min(offsets_to_fetch)] == 0:
-                if offset == 0:
-                    print(f"CRITICAL: End of data reached at Offset 0 for {endpoint_name}. This usually means the query is invalid.")
-                    print(f"Debug Query Template: {body_template.replace('OFFSET_PLACEHOLDER', '0')}")
-                else:
-                    print(f"Reached end of {endpoint_name}.")
+                print(f"Reached end of {endpoint_name} collection.")
                 break
             
             total_upserted = sum(r for r in results_by_offset.values() if r > 0)
