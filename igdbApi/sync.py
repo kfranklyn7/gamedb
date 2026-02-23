@@ -71,10 +71,9 @@ class IGDBSync:
                 coll.bulk_write(ops, ordered=False)
                 return len(ops)
         except Exception as e:
-            msg = str(e)
-            if "response" in locals() and response is not None:
-                msg = f"{response.status_code} - {response.text[:100]}"
-            print(f"Error at offset {offset}: {msg}")
+            # Safer error message
+            sc = getattr(e.response, 'status_code', 'No Status') if hasattr(e, 'response') else 'No Response'
+            print(f"Error at offset {offset}: {sc} - {str(e)[:100]}")
             return -1
         return 0
 
@@ -90,60 +89,57 @@ class IGDBSync:
         coll = self.db[collection_name]
         
         offset = self.state.get(endpoint_name, 0)
-        print(f"\n>>> SUPER TURBO: '{endpoint_name}' (Starting at {offset})")
+        print(f"\n>>> SYNC: '{endpoint_name}' (Starting at {offset})")
         
         base_url = f"https://api.igdb.com/v4/{endpoint_name}"
         
-        # Clean query construction
-        query_parts = [f"fields {fields}"]
+        # Super robust query construction
+        body_template = f"fields {fields}"
         if where:
-            # Strip redundant 'where' keyword
             clean_where = where.replace('where ', '', 1) if where.lower().startswith('where ') else where
-            query_parts.append(f"where {clean_where}")
+            body_template += f"; where {clean_where}"
         
-        query_parts.append(f"limit {limit}; offset OFFSET_PLACEHOLDER;")
-        body_template = "; ".join(query_parts)
+        body_template += f"; limit {limit}; offset OFFSET_PLACEHOLDER;"
 
         while True:
             start_time = time.time()
             headers = self.auth.get_headers()
             offsets_to_fetch = [offset + (i * limit) for i in range(MAX_WORKERS)]
             
+            results_by_offset = {}
             with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
                 futures = {executor.submit(self.fetch_and_upsert, endpoint_name, off, base_url, headers, body_template, coll): off for off in offsets_to_fetch}
-                
-                results_by_offset = {}
                 for future in as_completed(futures):
                     off = futures[future]
                     results_by_offset[off] = future.result()
+            
+            # 1. Handle Critical Failures (Rate limits or network)
+            if any(r == -429 for r in results_by_offset.values()):
+                print("Rate limited! Waiting 10s...")
+                time.sleep(10)
+                continue
                 
-                # Check for rate limiting
-                if any(r == -429 for r in results_by_offset.values()):
-                    print("Rate limited! Sleeping 10s...")
-                    time.sleep(10)
-                    continue
-                    
-                # Check for errors - only retry if it wasn't a 200 OK with 0 results
-                if any(r == -1 for r in results_by_offset.values()):
-                    print("Batch had errors, retrying in 5s...")
-                    time.sleep(5)
-                    continue
+            if any(r == -1 for r in results_by_offset.values()):
+                print("Batch had errors, retrying soon...")
+                time.sleep(3)
+                continue
 
-                # END OF DATA: Stop if the lowest offset returned 0 items
-                if results_by_offset[min(offsets_to_fetch)] == 0:
-                    print(f"Reached end of {endpoint_name}.")
-                    break
-                
-                total_upserted = sum(r for r in results_by_offset.values() if r > 0)
-                print(f"[{endpoint_name}] Offset {offset}: +{total_upserted} items")
-                
-                offset += (MAX_WORKERS * limit)
-                self.state[endpoint_name] = offset
-                self.save_state()
-                
-                # Wait just enough to respect 4 req/sec
-                elapsed = time.time() - start_time
-                time.sleep(max(0.1, 1.1 - elapsed))
+            # 2. Check for End of Data
+            # We only stop if the LOWEST offset in the batch returned 0 results.
+            if results_by_offset[min(offsets_to_fetch)] == 0:
+                print(f"Reached end of {endpoint_name}.")
+                break
+            
+            total_upserted = sum(r for r in results_by_offset.values() if r > 0)
+            print(f"[{endpoint_name}] Offset {offset}: +{total_upserted} items")
+            
+            offset += (MAX_WORKERS * limit)
+            self.state[endpoint_name] = offset
+            self.save_state()
+            
+            # Maintain 4 requests per second
+            elapsed = time.time() - start_time
+            time.sleep(max(0.1, 1.1 - elapsed))
 
     def run_all(self):
         order = [
@@ -157,7 +153,7 @@ class IGDBSync:
         for ep in order:
             if ep in ENDPOINTS:
                 self.sync_endpoint(ep)
-        print("\n=== SYNC PROGRESS COMPLETE ===")
+        print("\n=== COMPLETE ===")
 
 if __name__ == "__main__":
     sync = IGDBSync()
