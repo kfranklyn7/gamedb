@@ -1,0 +1,28 @@
+
+> frontend@0.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32mΓ£ô[39m 1823 modules transformed.
+Γ£ù Build failed in 2.81s
+error during build:
+src/components/CategoryTagConfig.js (17:44): "SiXbox" is not exported by "node_modules/react-icons/si/index.mjs", imported by "src/components/CategoryTagConfig.js".
+file: C:/Users/kevon/IntelliJ/gamedb/frontend/src/components/CategoryTagConfig.js:17:44
+
+15: } from 'lucide-react';
+16: import {
+17:     SiWindows, SiApple, SiLinux, SiAndroid, SiXbox, SiPlaystation, SiNintendo, SiSteam, SiSega, SiAtari
+                                                ^
+18: } from 'react-icons/si';
+
+    at getRollupError (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at Identifier.bind (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/node-entry.js:5447:40)
+    at Property.bind (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/node-entry.js:2829:23)
+    at ObjectExpression.bind (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/node-entry.js:2825:28)
+    at VariableDeclarator.bind (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/node-entry.js:2829:23)
+    at VariableDeclaration.bind (file:///C:/Users/kevon/IntelliJ/gamedb/frontend/node_modules/rollup/dist/es/shared/node-entry.js:2825:28)
