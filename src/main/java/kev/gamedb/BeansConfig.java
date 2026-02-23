@@ -16,7 +16,7 @@ public class BeansConfig {
 
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return username -> userRepository.findByEmail(username)
+        return username -> userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

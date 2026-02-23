@@ -1,0 +1,268 @@
+Initialized native services in: C:\Users\kevon\.gradle\native
+Initialized jansi services in: C:\Users\kevon\.gradle\native
+Found daemon DaemonInfo{pid=79568, address=[7ee7a2f1-42c5-4b99-92a1-ef0b0d54c46b port:61998, addresses:[/127.0.0.1]], state=Idle, lastBusy=1771389308109, context=DefaultDaemonContext[uid=c7ae6f77-d843-485f-808c-656e5d2fc551,javaHome=C:\Users\kevon\.antigravity\extensions\redhat.java-1.12.0-win32-x64\jre\17.0.4.1-win32-x86_64,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=C:\Users\kevon\.gradle\daemon,pid=79568,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+JVM is incompatible.
+Wanted: DaemonRequestContext{jvmCriteria=C:\Program Files\Java\jdk-23 (no JDK specified, using current Java home), daemonOpts=[-XX:MaxMetaspaceSize=384m, -XX:+HeapDumpOnOutOfMemoryError, -Xms256m, -Xmx512m, -Dfile.encoding=UTF-8, -Duser.country=US, -Duser.language=en, -Duser.variant], applyInstrumentationAgent=true, nativeServicesMode=ENABLED, priority=NORMAL}
+Actual: DefaultDaemonContext[uid=c7ae6f77-d843-485f-808c-656e5d2fc551,javaHome=C:\Users\kevon\.antigravity\extensions\redhat.java-1.12.0-win32-x64\jre\17.0.4.1-win32-x86_64,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=C:\Users\kevon\.gradle\daemon,pid=79568,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+Found daemon DaemonInfo{pid=52932, address=[2530e0ec-950c-41c2-ae7b-c20d83120418 port:58154, addresses:[/127.0.0.1]], state=Idle, lastBusy=1771393542677, context=DefaultDaemonContext[uid=b7ee4019-955b-43cf-b9d2-b8caecc8ccf7,javaHome=C:\Users\kevon\.jdks\openjdk-25.0.2,javaVersion=25,javaVendor=Oracle Corporation,daemonRegistryDir=C:\Users\kevon\.gradle\daemon,pid=52932,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+JVM is incompatible.
+Wanted: DaemonRequestContext{jvmCriteria=C:\Program Files\Java\jdk-23 (no JDK specified, using current Java home), daemonOpts=[-XX:MaxMetaspaceSize=384m, -XX:+HeapDumpOnOutOfMemoryError, -Xms256m, -Xmx512m, -Dfile.encoding=UTF-8, -Duser.country=US, -Duser.language=en, -Duser.variant], applyInstrumentationAgent=true, nativeServicesMode=ENABLED, priority=NORMAL}
+Actual: DefaultDaemonContext[uid=b7ee4019-955b-43cf-b9d2-b8caecc8ccf7,javaHome=C:\Users\kevon\.jdks\openjdk-25.0.2,javaVersion=25,javaVendor=Oracle Corporation,daemonRegistryDir=C:\Users\kevon\.gradle\daemon,pid=52932,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+The client will now receive all logging from the daemon (pid: 15892). The daemon log file: C:\Users\kevon\.gradle\daemon\9.2.1\daemon-15892.out.log
+Starting 5th build in daemon [uptime: 6 mins 30.155 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 512 MiB, non-heap usage: 17% of 384 MiB]
+Using 32 worker leases.
+Operational build model parameters: {requiresToolingModels=false, parallelProjectExecution=false, configureOnDemand=false, configurationCache=false, configurationCacheParallelStore=false, configurationCacheParallelLoad=true, isolatedProjects=false, parallelProjectConfiguration=false, intermediateModelCache=false, parallelToolingApiActions=false, invalidateCoupledProjects=false, modelAsProjectDependency=false, resilientModelBuilding=false}
+Now considering [C:\Users\kevon\IntelliJ\gamedb] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file 'C:\Users\kevon\IntelliJ\gamedb\settings.gradle'.
+Projects loaded. Root project using build file 'C:\Users\kevon\IntelliJ\gamedb\build.gradle'.
+Included projects: [root project 'gamedb']
+
+> Configure project :
+Evaluating root project 'gamedb' using build file 'C:\Users\kevon\IntelliJ\gamedb\build.gradle'.
+Resolved plugin [id: 'java']
+Resolved plugin [id: 'org.springframework.boot', version: '4.0.1']
+Resolved plugin [id: 'io.spring.dependency-management', version: '1.1.7']
+Applying dependency management to configuration 'annotationProcessor' in project 'gamedb'
+Applying dependency management to configuration 'apiElements' in project 'gamedb'
+Applying dependency management to configuration 'archives' in project 'gamedb'
+Applying dependency management to configuration 'bootArchives' in project 'gamedb'
+Applying dependency management to configuration 'compileClasspath' in project 'gamedb'
+Applying dependency management to configuration 'compileOnly' in project 'gamedb'
+Applying dependency management to configuration 'default' in project 'gamedb'
+Applying dependency management to configuration 'developmentOnly' in project 'gamedb'
+Applying dependency management to configuration 'implementation' in project 'gamedb'
+Applying dependency management to configuration 'mainSourceElements' in project 'gamedb'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'gamedb'
+Applying dependency management to configuration 'runtimeClasspath' in project 'gamedb'
+Applying dependency management to configuration 'runtimeElements' in project 'gamedb'
+Applying dependency management to configuration 'runtimeOnly' in project 'gamedb'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'gamedb'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'gamedb'
+Applying dependency management to configuration 'testCompileClasspath' in project 'gamedb'
+Applying dependency management to configuration 'testCompileOnly' in project 'gamedb'
+Applying dependency management to configuration 'testImplementation' in project 'gamedb'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'gamedb'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'gamedb'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'gamedb'
+All projects evaluated.
+Task name matched 'compileTestJava'
+Selected primary task 'compileTestJava' from project :
+Resolving global dependency management for project 'gamedb'
+Excluding []
+Excluding []
+Excluding []
+Excluding []
+Excluding []
+Tasks to be executed: [task ':compileJava', task ':processResources', task ':classes', task ':compileTestJava']
+Tasks that were excluded: []
+Resolve mutations for :compileJava (Thread[#1360,Execution worker,5,main]) started.
+:compileJava (Thread[#1360,Execution worker,5,main]) started.
+
+> Task :compileJava UP-TO-DATE
+Custom actions are attached to task ':compileJava'.
+Caching disabled for task ':compileJava' because:
+  Build cache is disabled
+Skipping task ':compileJava' as it is up-to-date.
+Resolve mutations for :processResources (Thread[#1360,Execution worker,5,main]) started.
+:processResources (Thread[#1360,Execution worker,5,main]) started.
+
+> Task :processResources UP-TO-DATE
+Caching disabled for task ':processResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processResources' as it is up-to-date.
+Resolve mutations for :classes (Thread[#1360,Execution worker,5,main]) started.
+:classes (Thread[#1360,Execution worker,5,main]) started.
+
+> Task :classes UP-TO-DATE
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :compileTestJava (Thread[#1360,Execution worker,5,main]) started.
+:compileTestJava (Thread[#1360,Execution worker,5,main]) started.
+This JVM does not support getting OS memory, so no OS memory status updates will be broadcast
+
+> Task :compileTestJava
+Custom actions are attached to task ':compileTestJava'.
+Caching disabled for task ':compileTestJava' because:
+  Build cache is disabled
+Task ':compileTestJava' is not up-to-date because:
+  Input property 'classpath' file C:\Users\kevon\IntelliJ\gamedb\build\classes\java\main\kev\gamedb\AuthService.class has been removed.
+  Input property 'classpath' file C:\Users\kevon\IntelliJ\gamedb\build\classes\java\main\kev\gamedb\BeansConfig.class has been added.
+  Input property 'classpath' file C:\Users\kevon\IntelliJ\gamedb\build\classes\java\main\kev\gamedb\BeansConfig.class has been removed.
+  and more...
+Compilation mode: default, forking compiler
+Created classpath snapshot for incremental compilation in 0.038 secs.
+Compiling with toolchain 'C:\Users\kevon\.jdks\openjdk-25.0.2'.
+Log level has changed, stopping idle worker daemon with out-of-date log level.
+Starting process 'Gradle Worker Daemon 3'. Working directory: C:\Users\kevon\.gradle\workers Command: C:\Users\kevon\.jdks\openjdk-25.0.2\bin\java.exe --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED @C:\Users\kevon\.gradle\.tmp\gradle-worker-classpath6560342402515554301txt --enable-native-access=ALL-UNNAMED -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Worker Daemon 3'
+Successfully started process 'Gradle Worker Daemon 3'
+Started Gradle worker daemon (0.668 secs) with fork options DaemonForkOptions{executable=C:\Users\kevon\.jdks\openjdk-25.0.2\bin\java.exe, minHeapSize=null, maxHeapSize=null, jvmArgs=[--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED, --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED], keepAliveMode=DAEMON}.
+Compiling with JDK Java compiler API.
+
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by lombok.permit.Permit
+WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+
+> Task :compileTestJava
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:3: error: package com.fasterxml.jackson.databind does not exist
+import com.fasterxml.jackson.databind.ObjectMapper;
+                                     ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:9: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:10: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:11: error: package org.springframework.boot.test.mock.mockito does not exist
+import org.springframework.boot.test.mock.mockito.MockBean;
+                                                 ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:20: error: cannot find symbol
+@WebMvcTest(AuthenticationController.class)
+ ^
+  symbol: class WebMvcTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:21: error: cannot find symbol
+@AutoConfigureMockMvc(addFilters = false) // Disable security filters for unit testing the controller
+ ^
+  symbol: class AutoConfigureMockMvc
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:31: error: cannot find symbol
+    private ObjectMapper objectMapper;
+            ^
+  symbol:   class ObjectMapper
+  location: class AuthenticationControllerTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\CollectionControllerTest.java:5: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\CollectionControllerTest.java:6: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\CollectionControllerTest.java:7: error: package org.springframework.boot.test.mock.mockito does not exist
+import org.springframework.boot.test.mock.mockito.MockBean;
+                                                 ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\CollectionControllerTest.java:20: error: cannot find symbol
+@WebMvcTest(CollectionController.class)
+ ^
+  symbol: class WebMvcTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\CollectionControllerTest.java:21: error: cannot find symbol
+@AutoConfigureMockMvc(addFilters = false)
+ ^
+  symbol: class AutoConfigureMockMvc
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:3: error: package com.fasterxml.jackson.databind does not exist
+import com.fasterxml.jackson.databind.ObjectMapper;
+                                     ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:7: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:8: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:9: error: package org.springframework.boot.test.mock.mockito does not exist
+import org.springframework.boot.test.mock.mockito.MockBean;
+                                                 ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:25: error: cannot find symbol
+@WebMvcTest(GameController.class)
+ ^
+  symbol: class WebMvcTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:26: error: cannot find symbol
+@AutoConfigureMockMvc(addFilters = false)
+ ^
+  symbol: class AutoConfigureMockMvc
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:39: error: cannot find symbol
+    private ObjectMapper objectMapper;
+            ^
+  symbol:   class ObjectMapper
+  location: class GameControllerTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GenreControllerTest.java:5: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GenreControllerTest.java:6: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GenreControllerTest.java:7: error: package org.springframework.boot.test.mock.mockito does not exist
+import org.springframework.boot.test.mock.mockito.MockBean;
+                                                 ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GenreControllerTest.java:20: error: cannot find symbol
+@WebMvcTest(GenreController.class)
+ ^
+  symbol: class WebMvcTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GenreControllerTest.java:21: error: cannot find symbol
+@AutoConfigureMockMvc(addFilters = false)
+ ^
+  symbol: class AutoConfigureMockMvc
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\PlatformControllerTest.java:5: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\PlatformControllerTest.java:6: error: package org.springframework.boot.test.autoconfigure.web.servlet does not exist
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+                                                              ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\PlatformControllerTest.java:7: error: package org.springframework.boot.test.mock.mockito does not exist
+import org.springframework.boot.test.mock.mockito.MockBean;
+                                                 ^
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\PlatformControllerTest.java:20: error: cannot find symbol
+@WebMvcTest(PlatformController.class)
+ ^
+  symbol: class WebMvcTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\PlatformControllerTest.java:21: error: cannot find symbol
+@AutoConfigureMockMvc(addFilters = false)
+ ^
+  symbol: class AutoConfigureMockMvc
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:27: error: cannot find symbol
+    @MockBean
+     ^
+  symbol:   class MockBean
+  location: class AuthenticationControllerTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\CollectionControllerTest.java:27: error: cannot find symbol
+    @MockBean
+     ^
+  symbol:   class MockBean
+  location: class CollectionControllerTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:32: error: cannot find symbol
+    @MockBean
+     ^
+  symbol:   class MockBean
+  location: class GameControllerTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameControllerTest.java:35: error: cannot find symbol
+    @MockBean
+     ^
+  symbol:   class MockBean
+  location: class GameControllerTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GenreControllerTest.java:27: error: cannot find symbol
+    @MockBean
+     ^
+  symbol:   class MockBean
+  location: class GenreControllerTest
+C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\PlatformControllerTest.java:27: error: cannot find symbol
+    @MockBean
+     ^
+  symbol:   class MockBean
+  location: class PlatformControllerTest
+35 errors
+Incremental compilation of 11 classes completed in 4.402 secs.
+
+> Task :compileTestJava FAILED
+
+[Incubating] Problems report is available at: file:///C:/Users/kevon/IntelliJ/gamedb/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileTestJava'.
+> Compilation failed; see the compiler output below.
+  C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\AuthenticationControllerTest.java:3: error: package com.fasterxml.jackson.databind does not exist
+  import com.fasterxml.jackson.databind.ObjectMapper;
+                                       ^
+  35 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to generate a Build Scan (powered by Develocity).
+
+3 actionable tasks: 1 executed, 2 up-to-date
+Watched directory hierarchies: [C:\Users\kevon\IntelliJ\gamedb]
+BUILD FAILED in 6s

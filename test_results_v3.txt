@@ -1,0 +1,405 @@
+Initialized native services in: C:\Users\kevon\.gradle\native
+Initialized jansi services in: C:\Users\kevon\.gradle\native
+Found daemon DaemonInfo{pid=79568, address=[7ee7a2f1-42c5-4b99-92a1-ef0b0d54c46b port:61998, addresses:[/127.0.0.1]], state=Idle, lastBusy=1771389308109, context=DefaultDaemonContext[uid=c7ae6f77-d843-485f-808c-656e5d2fc551,javaHome=C:\Users\kevon\.antigravity\extensions\redhat.java-1.12.0-win32-x64\jre\17.0.4.1-win32-x86_64,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=C:\Users\kevon\.gradle\daemon,pid=79568,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+JVM is incompatible.
+Wanted: DaemonRequestContext{jvmCriteria=C:\Program Files\Java\jdk-23 (no JDK specified, using current Java home), daemonOpts=[-XX:MaxMetaspaceSize=384m, -XX:+HeapDumpOnOutOfMemoryError, -Xms256m, -Xmx512m, -Dfile.encoding=UTF-8, -Duser.country=US, -Duser.language=en, -Duser.variant], applyInstrumentationAgent=true, nativeServicesMode=ENABLED, priority=NORMAL}
+Actual: DefaultDaemonContext[uid=c7ae6f77-d843-485f-808c-656e5d2fc551,javaHome=C:\Users\kevon\.antigravity\extensions\redhat.java-1.12.0-win32-x64\jre\17.0.4.1-win32-x86_64,javaVersion=17,javaVendor=Eclipse Adoptium,daemonRegistryDir=C:\Users\kevon\.gradle\daemon,pid=79568,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+Found daemon DaemonInfo{pid=52932, address=[2530e0ec-950c-41c2-ae7b-c20d83120418 port:58154, addresses:[/127.0.0.1]], state=Idle, lastBusy=1771393542677, context=DefaultDaemonContext[uid=b7ee4019-955b-43cf-b9d2-b8caecc8ccf7,javaHome=C:\Users\kevon\.jdks\openjdk-25.0.2,javaVersion=25,javaVendor=Oracle Corporation,daemonRegistryDir=C:\Users\kevon\.gradle\daemon,pid=52932,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]} however its context does not match the desired criteria.
+JVM is incompatible.
+Wanted: DaemonRequestContext{jvmCriteria=C:\Program Files\Java\jdk-23 (no JDK specified, using current Java home), daemonOpts=[-XX:MaxMetaspaceSize=384m, -XX:+HeapDumpOnOutOfMemoryError, -Xms256m, -Xmx512m, -Dfile.encoding=UTF-8, -Duser.country=US, -Duser.language=en, -Duser.variant], applyInstrumentationAgent=true, nativeServicesMode=ENABLED, priority=NORMAL}
+Actual: DefaultDaemonContext[uid=b7ee4019-955b-43cf-b9d2-b8caecc8ccf7,javaHome=C:\Users\kevon\.jdks\openjdk-25.0.2,javaVersion=25,javaVendor=Oracle Corporation,daemonRegistryDir=C:\Users\kevon\.gradle\daemon,pid=52932,idleTimeout=10800000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-XX:MaxMetaspaceSize=384m,-XX:+HeapDumpOnOutOfMemoryError,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+
+  Looking for a different daemon...
+The client will now receive all logging from the daemon (pid: 15892). The daemon log file: C:\Users\kevon\.gradle\daemon\9.2.1\daemon-15892.out.log
+Starting 16th build in daemon [uptime: 18 mins 9.924 secs, performance: 100%, GC rate: 0.00/s, heap usage: 0% of 512 MiB, non-heap usage: 17% of 384 MiB]
+Using 32 worker leases.
+Operational build model parameters: {requiresToolingModels=false, parallelProjectExecution=false, configureOnDemand=false, configurationCache=false, configurationCacheParallelStore=false, configurationCacheParallelLoad=true, isolatedProjects=false, parallelProjectConfiguration=false, intermediateModelCache=false, parallelToolingApiActions=false, invalidateCoupledProjects=false, modelAsProjectDependency=false, resilientModelBuilding=false}
+Now considering [C:\Users\kevon\IntelliJ\gamedb] as hierarchies to watch
+Watching the file system is configured to be enabled if available
+File system watching is active
+Starting Build
+Settings evaluated using settings file 'C:\Users\kevon\IntelliJ\gamedb\settings.gradle'.
+Projects loaded. Root project using build file 'C:\Users\kevon\IntelliJ\gamedb\build.gradle'.
+Included projects: [root project 'gamedb']
+
+> Configure project :
+Evaluating root project 'gamedb' using build file 'C:\Users\kevon\IntelliJ\gamedb\build.gradle'.
+Resolved plugin [id: 'java']
+Resolved plugin [id: 'org.springframework.boot', version: '4.0.1']
+Resolved plugin [id: 'io.spring.dependency-management', version: '1.1.7']
+Applying dependency management to configuration 'annotationProcessor' in project 'gamedb'
+Applying dependency management to configuration 'apiElements' in project 'gamedb'
+Applying dependency management to configuration 'archives' in project 'gamedb'
+Applying dependency management to configuration 'bootArchives' in project 'gamedb'
+Applying dependency management to configuration 'compileClasspath' in project 'gamedb'
+Applying dependency management to configuration 'compileOnly' in project 'gamedb'
+Applying dependency management to configuration 'default' in project 'gamedb'
+Applying dependency management to configuration 'developmentOnly' in project 'gamedb'
+Applying dependency management to configuration 'implementation' in project 'gamedb'
+Applying dependency management to configuration 'mainSourceElements' in project 'gamedb'
+Applying dependency management to configuration 'productionRuntimeClasspath' in project 'gamedb'
+Applying dependency management to configuration 'runtimeClasspath' in project 'gamedb'
+Applying dependency management to configuration 'runtimeElements' in project 'gamedb'
+Applying dependency management to configuration 'runtimeOnly' in project 'gamedb'
+Applying dependency management to configuration 'testAndDevelopmentOnly' in project 'gamedb'
+Applying dependency management to configuration 'testAnnotationProcessor' in project 'gamedb'
+Applying dependency management to configuration 'testCompileClasspath' in project 'gamedb'
+Applying dependency management to configuration 'testCompileOnly' in project 'gamedb'
+Applying dependency management to configuration 'testImplementation' in project 'gamedb'
+Applying dependency management to configuration 'testResultsElementsForTest' in project 'gamedb'
+Applying dependency management to configuration 'testRuntimeClasspath' in project 'gamedb'
+Applying dependency management to configuration 'testRuntimeOnly' in project 'gamedb'
+All projects evaluated.
+Task name matched 'test'
+Selected primary task 'test' from project :
+Resolving global dependency management for project 'gamedb'
+Excluding []
+Excluding []
+Excluding []
+Excluding []
+Excluding []
+Excluding []
+Tasks to be executed: [task ':compileJava', task ':processResources', task ':classes', task ':compileTestJava', task ':processTestResources', task ':testClasses', task ':test']
+Tasks that were excluded: []
+Resolve mutations for :compileJava (Thread[#4412,Execution worker,5,main]) started.
+:compileJava (Thread[#4412,Execution worker,5,main]) started.
+
+> Task :compileJava
+Custom actions are attached to task ':compileJava'.
+Caching disabled for task ':compileJava' because:
+  Build cache is disabled
+Task ':compileJava' is not up-to-date because:
+  Input property 'stableSources' file C:\Users\kevon\IntelliJ\gamedb\src\main\java\kev\gamedb\Game.java has changed.
+Compilation mode: default, forking compiler
+Created classpath snapshot for incremental compilation in 0.011 secs.
+Compiling with toolchain 'C:\Users\kevon\.jdks\openjdk-25.0.2'.
+Compiling with JDK Java compiler API.
+Incremental compilation of 29 classes completed in 2.633 secs.
+Class dependency analysis for incremental compilation took 0.04 secs.
+Resolve mutations for :processResources (Thread[#4412,Execution worker,5,main]) started.
+:processResources (Thread[#4412,Execution worker,5,main]) started.
+
+> Task :processResources UP-TO-DATE
+Caching disabled for task ':processResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processResources' as it is up-to-date.
+Resolve mutations for :classes (Thread[#4412,Execution worker,5,main]) started.
+:classes (Thread[#4412,Execution worker,5,main]) started.
+
+> Task :classes
+Skipping task ':classes' as it has no actions.
+Resolve mutations for :compileTestJava (Thread[#4412,Execution worker,5,main]) started.
+:compileTestJava (Thread[#4412,Execution worker,5,main]) started.
+
+> Task :compileTestJava
+Custom actions are attached to task ':compileTestJava'.
+Caching disabled for task ':compileTestJava' because:
+  Build cache is disabled
+Task ':compileTestJava' is not up-to-date because:
+  Input property 'stableSources' file C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameSearchIntegrationTest.java has changed.
+  Input property 'stableSources' file C:\Users\kevon\IntelliJ\gamedb\src\test\java\kev\gamedb\GameSearchServiceTest.java has changed.
+Compilation mode: default, forking compiler
+Created classpath snapshot for incremental compilation in 0.027 secs.
+Compiling with toolchain 'C:\Users\kevon\.jdks\openjdk-25.0.2'.
+Compiling with JDK Java compiler API.
+Incremental compilation of 6 classes completed in 1.967 secs.
+Class dependency analysis for incremental compilation took 0.012 secs.
+Resolve mutations for :processTestResources (Thread[#4412,Execution worker,5,main]) started.
+:processTestResources (Thread[#4412,Execution worker,5,main]) started.
+
+> Task :processTestResources UP-TO-DATE
+Caching disabled for task ':processTestResources' because:
+  Build cache is disabled
+  Not worth caching
+Skipping task ':processTestResources' as it is up-to-date.
+Resolve mutations for :testClasses (Thread[#4412,Execution worker,5,main]) started.
+:testClasses (Thread[#4429,Execution worker Thread 18,5,main]) started.
+
+> Task :testClasses
+Skipping task ':testClasses' as it has no actions.
+Resolve mutations for :test (Thread[#4429,Execution worker Thread 18,5,main]) started.
+:test (Thread[#4429,Execution worker Thread 18,5,main]) started.
+Gradle Test Executor 6 started executing tests.
+
+> Task :test
+Caching disabled for task ':test' because:
+  Build cache is disabled
+Task ':test' is not up-to-date because:
+  Task has failed previously.
+Starting process 'Gradle Test Executor 6'. Working directory: C:\Users\kevon\IntelliJ\gamedb Command: C:\Users\kevon\.jdks\openjdk-25.0.2\bin\java.exe -Dorg.gradle.internal.worker.tmpdir=C:\Users\kevon\IntelliJ\gamedb\build\tmp\test\work @C:\Users\kevon\.gradle\.tmp\gradle-worker-classpath16879187401886983561txt -Xmx512m -Dfile.encoding=UTF-8 -Duser.country=US -Duser.language=en -Duser.variant -ea worker.org.gradle.process.internal.worker.GradleWorkerMain 'Gradle Test Executor 6'
+Successfully started process 'Gradle Test Executor 6'
+
+GameControllerTest STANDARD_OUT
+    00:59:43.779 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [kev.gamedb.GameControllerTest]: GameControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    00:59:44.113 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration kev.gamedb.GamedbApplication for test class kev.gamedb.GameControllerTest
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2026-02-18T00:59:44.803-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameControllerTest            : Starting GameControllerTest using Java 25.0.2 with PID 6240 (started by kevon in C:\Users\kevon\IntelliJ\gamedb)
+    2026-02-18T00:59:44.805-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameControllerTest            : No active profile set, falling back to 1 default profile: "default"
+
+GameControllerTest STANDARD_ERROR
+    Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+    WARNING: A Java agent has been loaded dynamically (C:\Users\kevon\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.17.8\f09415827a71be7ed621c7bd02550678f28bc81c\byte-buddy-agent-1.17.8.jar)
+    WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+    WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+    WARNING: Dynamic loading of agents will be disallowed by default in a future release
+
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
+> Task :test
+
+GameControllerTest STANDARD_OUT
+    2026-02-18T00:59:47.170-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+    2026-02-18T00:59:47.170-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+    2026-02-18T00:59:47.174-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+    2026-02-18T00:59:47.219-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameControllerTest            : Started GameControllerTest in 2.995 seconds (process running for 5.317)
+
+GameSearchIntegrationTest STANDARD_OUT
+    2026-02-18T00:59:47.710-05:00  INFO 6240 --- [gamedb] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kev.gamedb.GameSearchIntegrationTest]: GameSearchIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    2026-02-18T00:59:47.741-05:00  INFO 6240 --- [gamedb] [    Test worker] org.testcontainers.images.PullPolicy     : Image pull policy will be performed by: DefaultPullPolicy()
+    2026-02-18T00:59:47.744-05:00  INFO 6240 --- [gamedb] [    Test worker] o.t.utility.ImageNameSubstitutor         : Image name substitution will be performed by: DefaultImageNameSubstitutor (composite of 'ConfigurationFileImageNameSubstitutor' and 'PrefixingImageNameSubstitutor')
+    2026-02-18T00:59:47.764-05:00  INFO 6240 --- [gamedb] [    Test worker] org.testcontainers.DockerClientFactory   : Testcontainers version: 2.0.3
+    2026-02-18T00:59:48.039-05:00  INFO 6240 --- [gamedb] [    Test worker] o.t.d.DockerClientProviderStrategy       : Loaded org.testcontainers.dockerclient.NpipeSocketClientProviderStrategy from ~/.testcontainers.properties, will try it first
+    2026-02-18T00:59:48.531-05:00  INFO 6240 --- [gamedb] [    Test worker] o.t.d.DockerClientProviderStrategy       : Found Docker environment with local Npipe socket (npipe:////./pipe/docker_engine)
+    2026-02-18T00:59:48.533-05:00  INFO 6240 --- [gamedb] [    Test worker] org.testcontainers.DockerClientFactory   : Docker host IP address is localhost
+    2026-02-18T00:59:48.559-05:00  INFO 6240 --- [gamedb] [    Test worker] org.testcontainers.DockerClientFactory   : Connected to docker: 
+      Server Version: 29.2.0
+      API Version: 1.53
+      Operating System: Docker Desktop
+      Total Memory: 15854 MB
+      Labels: 
+        com.docker.desktop.address=npipe://\\.\pipe\docker_cli
+    2026-02-18T00:59:48.802-05:00  INFO 6240 --- [gamedb] [    Test worker] tc.testcontainers/ryuk:0.13.0            : Creating container for image: testcontainers/ryuk:0.13.0
+    2026-02-18T00:59:49.213-05:00  INFO 6240 --- [gamedb] [    Test worker] tc.testcontainers/ryuk:0.13.0            : Container testcontainers/ryuk:0.13.0 is starting: f0e7820283fc7b0b9f4ba7dac4f99d445315d09a66515d0649e3f7cf1428630a
+    2026-02-18T00:59:49.792-05:00  INFO 6240 --- [gamedb] [    Test worker] tc.testcontainers/ryuk:0.13.0            : Container testcontainers/ryuk:0.13.0 started in PT0.9903524S
+    2026-02-18T00:59:49.799-05:00  INFO 6240 --- [gamedb] [    Test worker] o.t.utility.RyukResourceReaper           : Ryuk started - will monitor and terminate Testcontainers containers on JVM exit
+    2026-02-18T00:59:49.799-05:00  INFO 6240 --- [gamedb] [    Test worker] org.testcontainers.DockerClientFactory   : Checking the system...
+    2026-02-18T00:59:49.800-05:00  INFO 6240 --- [gamedb] [    Test worker] org.testcontainers.DockerClientFactory   : Γ£ö∩╕Ä Docker server version should be at least 1.6.0
+    2026-02-18T00:59:49.811-05:00  INFO 6240 --- [gamedb] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kev.gamedb.GamedbApplication for test class kev.gamedb.GameSearchIntegrationTest
+    2026-02-18T00:59:49.820-05:00  INFO 6240 --- [gamedb] [    Test worker] tc.mongo:latest                          : Creating container for image: mongo:latest
+    2026-02-18T00:59:49.926-05:00  INFO 6240 --- [gamedb] [    Test worker] tc.mongo:latest                          : Container mongo:latest is starting: ddb3393e0a9a3d9327a6e74b96bb630f8ef5e72a417f99bfd606602707fae7f8
+    2026-02-18T00:59:50.624-05:00  INFO 6240 --- [gamedb] [    Test worker] tc.mongo:latest                          : Container mongo:latest started in PT0.8033212S
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2026-02-18T00:59:50.688-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameSearchIntegrationTest     : Starting GameSearchIntegrationTest using Java 25.0.2 with PID 6240 (started by kevon in C:\Users\kevon\IntelliJ\gamedb)
+    2026-02-18T00:59:50.688-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameSearchIntegrationTest     : The following 1 profile is active: "test"
+    2026-02-18T00:59:51.089-05:00  INFO 6240 --- [gamedb] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+    2026-02-18T00:59:51.164-05:00  INFO 6240 --- [gamedb] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 15 MongoDB repository interfaces.
+    2026-02-18T00:59:51.607-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 0 (http)
+    2026-02-18T00:59:51.625-05:00  INFO 6240 --- [gamedb] [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+    2026-02-18T00:59:51.625-05:00  INFO 6240 --- [gamedb] [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+    2026-02-18T00:59:51.696-05:00  INFO 6240 --- [gamedb] [    Test worker] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1005 ms
+    2026-02-18T00:59:51.960-05:00  INFO 6240 --- [gamedb] [    Test worker] org.mongodb.driver.client                : MongoClient with metadata {"driver": {"name": "mongo-java-driver|spring-boot|sync", "version": "5.6.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/25.0.2+10-69"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@4daa53e0, com.mongodb.Jep395RecordCodecProvider@6b989889, com.mongodb.KotlinCodecProvider@42748f59, EnumCodecProvider{}]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:63661], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverMonitoringMode=AUTO, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null, timeoutMS=null}
+    2026-02-18T00:59:51.972-05:00  INFO 6240 --- [gamedb] [localhost:63661] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:63661, type=STANDALONE, cryptd=false, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=27, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=24686300, minRoundTripTimeNanos=0}
+    2026-02-18T00:59:52.451-05:00  INFO 6240 --- [gamedb] [    Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+    2026-02-18T00:59:52.452-05:00  WARN 6240 --- [gamedb] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+    2026-02-18T00:59:52.716-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+    2026-02-18T00:59:52.957-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 63670 (http) with context path '/'
+    2026-02-18T00:59:52.961-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameSearchIntegrationTest     : Started GameSearchIntegrationTest in 2.333 seconds (process running for 11.059)
+
+GameSearchIntegrationTest > searchByPartialNameReturnsCorrectResults() STANDARD_OUT
+    2026-02-18T00:59:52.991-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Remove using query: {} in collection: games.
+    2026-02-18T00:59:53.152-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Executing aggregation: [{ "$match" : { "$text" : { "$search" : "Witch"}}}, { "$addFields" : { "score" : { "$meta" : "textScore"}}}, { "$sort" : { "total_rating" : -1}}, { "$skip" : 0}, { "$limit" : 20}, { "$lookup" : { "from" : "franchises", "localField" : "franchise", "foreignField" : "igdbId", "as" : "franchiseData"}}, { "$lookup" : { "from" : "collections", "localField" : "collection", "foreignField" : "igdbId", "as" : "seriesData"}}, { "$addFields" : { "franchiseName" : { "$arrayElemAt" : ["$franchiseData.name", 0]}, "seriesName" : { "$arrayElemAt" : ["$seriesData.name", 0]}}}] in collection games
+
+GameSearchIntegrationTest > searchByPartialNameReturnsCorrectResults() FAILED
+    java.lang.AssertionError: 
+    Expected size: 1 but was: 0 in:
+    []
+        at kev.gamedb.GameSearchIntegrationTest.searchByPartialNameReturnsCorrectResults(GameSearchIntegrationTest.java:66)
+
+GameSearchIntegrationTest STANDARD_OUT
+    2026-02-18T00:59:53.299-05:00  INFO 6240 --- [gamedb] [localhost:63661] org.mongodb.driver.cluster               : Exception in monitor thread while connecting to server localhost:63661
+
+    com.mongodb.MongoSocketReadException: Prematurely reached end of stream
+    	at com.mongodb.internal.connection.SocketStream.read(SocketStream.java:184) ~[mongodb-driver-core-5.6.2.jar:na]
+    	at com.mongodb.internal.connection.InternalStreamConnection.receiveResponseBuffers(InternalStreamConnection.java:824) ~[mongodb-driver-core-5.6.2.jar:na]
+    	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:517) ~[mongodb-driver-core-5.6.2.jar:na]
+    	at com.mongodb.internal.connection.InternalStreamConnection.receive(InternalStreamConnection.java:469) ~[mongodb-driver-core-5.6.2.jar:na]
+    	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.doHeartbeat(DefaultServerMonitor.java:311) ~[mongodb-driver-core-5.6.2.jar:na]
+    	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.lookupServerDescription(DefaultServerMonitor.java:262) ~[mongodb-driver-core-5.6.2.jar:na]
+    	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.run(DefaultServerMonitor.java:203) ~[mongodb-driver-core-5.6.2.jar:na]
+
+
+GameSearchServiceTest STANDARD_OUT
+    2026-02-18T00:59:53.626-05:00  INFO 6240 --- [gamedb] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kev.gamedb.GameSearchServiceTest]: GameSearchServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    2026-02-18T00:59:53.637-05:00  INFO 6240 --- [gamedb] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kev.gamedb.GamedbApplication for test class kev.gamedb.GameSearchServiceTest
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2026-02-18T00:59:53.680-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameSearchServiceTest         : Starting GameSearchServiceTest using Java 25.0.2 with PID 6240 (started by kevon in C:\Users\kevon\IntelliJ\gamedb)
+    2026-02-18T00:59:53.681-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameSearchServiceTest         : The following 1 profile is active: "test"
+    2026-02-18T00:59:53.805-05:00  INFO 6240 --- [gamedb] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+    2026-02-18T00:59:53.838-05:00  INFO 6240 --- [gamedb] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 30 ms. Found 15 MongoDB repository interfaces.
+    2026-02-18T00:59:53.878-05:00  INFO 6240 --- [gamedb] [    Test worker] org.mongodb.driver.client                : MongoClient with metadata {"driver": {"name": "mongo-java-driver|spring-boot|sync", "version": "5.6.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/25.0.2+10-69"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='admin', source='admin', password=<hidden>, mechanismProperties=<hidden>}, transportSettings=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@4daa53e0, com.mongodb.Jep395RecordCodecProvider@6b989889, com.mongodb.KotlinCodecProvider@42748f59, EnumCodecProvider{}]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverMonitoringMode=AUTO, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null, timeoutMS=null}
+    2026-02-18T00:59:53.886-05:00  INFO 6240 --- [gamedb] [localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, cryptd=false, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=27, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=7177500, minRoundTripTimeNanos=0}
+    2026-02-18T00:59:54.002-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GameSearchServiceTest         : Started GameSearchServiceTest in 0.36 seconds (process running for 12.101)
+
+GameSearchServiceTest > testReleaseYearFilter() STANDARD_OUT
+    2026-02-18T00:59:54.011-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Remove using query: {} in collection: games.
+    2026-02-18T00:59:54.146-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Executing aggregation: [{ "$match" : { "$and" : [{ "first_release_date" : { "$gte" : { "$date" : "2010-01-01T00:00:00Z"}, "$lte" : { "$date" : "2020-12-31T23:59:59Z"}}}]}}, { "$sort" : { "total_rating" : -1}}, { "$skip" : 0}, { "$limit" : 20}, { "$lookup" : { "from" : "franchises", "localField" : "franchise", "foreignField" : "igdbId", "as" : "franchiseData"}}, { "$lookup" : { "from" : "collections", "localField" : "collection", "foreignField" : "igdbId", "as" : "seriesData"}}, { "$addFields" : { "franchiseName" : { "$arrayElemAt" : ["$franchiseData.name", 0]}, "seriesName" : { "$arrayElemAt" : ["$seriesData.name", 0]}}}] in collection games
+
+GameSearchServiceTest > testPlatformFilter() STANDARD_OUT
+    2026-02-18T00:59:54.236-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Remove using query: {} in collection: games.
+    2026-02-18T00:59:54.249-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Executing aggregation: [{ "$match" : { "$and" : [{ "platforms" : { "$in" : ["PC"]}}]}}, { "$sort" : { "total_rating" : -1}}, { "$skip" : 0}, { "$limit" : 20}, { "$lookup" : { "from" : "franchises", "localField" : "franchise", "foreignField" : "igdbId", "as" : "franchiseData"}}, { "$lookup" : { "from" : "collections", "localField" : "collection", "foreignField" : "igdbId", "as" : "seriesData"}}, { "$addFields" : { "franchiseName" : { "$arrayElemAt" : ["$franchiseData.name", 0]}, "seriesName" : { "$arrayElemAt" : ["$seriesData.name", 0]}}}] in collection games
+
+GameSearchServiceTest > testPartialNameSearch() STANDARD_OUT
+    2026-02-18T00:59:54.263-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Remove using query: {} in collection: games.
+    2026-02-18T00:59:54.277-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Executing aggregation: [{ "$match" : { "$text" : { "$search" : "Witcher"}}}, { "$addFields" : { "score" : { "$meta" : "textScore"}}}, { "$sort" : { "total_rating" : -1}}, { "$skip" : 0}, { "$limit" : 20}, { "$lookup" : { "from" : "franchises", "localField" : "franchise", "foreignField" : "igdbId", "as" : "franchiseData"}}, { "$lookup" : { "from" : "collections", "localField" : "collection", "foreignField" : "igdbId", "as" : "seriesData"}}, { "$addFields" : { "franchiseName" : { "$arrayElemAt" : ["$franchiseData.name", 0]}, "seriesName" : { "$arrayElemAt" : ["$seriesData.name", 0]}}}] in collection games
+
+GameSearchServiceTest > testGenreFilter() STANDARD_OUT
+    2026-02-18T00:59:54.295-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Remove using query: {} in collection: games.
+    2026-02-18T00:59:54.308-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.data.mongodb.core.MongoTemplate      : Executing aggregation: [{ "$match" : { "$and" : [{ "genres" : { "$in" : ["RPG"]}}]}}, { "$sort" : { "total_rating" : -1}}, { "$skip" : 0}, { "$limit" : 20}, { "$lookup" : { "from" : "franchises", "localField" : "franchise", "foreignField" : "igdbId", "as" : "franchiseData"}}, { "$lookup" : { "from" : "collections", "localField" : "collection", "foreignField" : "igdbId", "as" : "seriesData"}}, { "$addFields" : { "franchiseName" : { "$arrayElemAt" : ["$franchiseData.name", 0]}, "seriesName" : { "$arrayElemAt" : ["$seriesData.name", 0]}}}] in collection games
+
+AuthenticationControllerTest STANDARD_OUT
+    2026-02-18T00:59:54.325-05:00  INFO 6240 --- [gamedb] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kev.gamedb.AuthenticationControllerTest]: AuthenticationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    2026-02-18T00:59:54.342-05:00  INFO 6240 --- [gamedb] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kev.gamedb.GamedbApplication for test class kev.gamedb.AuthenticationControllerTest
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2026-02-18T00:59:54.381-05:00  INFO 6240 --- [gamedb] [    Test worker] k.gamedb.AuthenticationControllerTest    : Starting AuthenticationControllerTest using Java 25.0.2 with PID 6240 (started by kevon in C:\Users\kevon\IntelliJ\gamedb)
+    2026-02-18T00:59:54.381-05:00  INFO 6240 --- [gamedb] [    Test worker] k.gamedb.AuthenticationControllerTest    : No active profile set, falling back to 1 default profile: "default"
+    2026-02-18T00:59:54.668-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+    2026-02-18T00:59:54.668-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+    2026-02-18T00:59:54.668-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+    2026-02-18T00:59:54.674-05:00  INFO 6240 --- [gamedb] [    Test worker] k.gamedb.AuthenticationControllerTest    : Started AuthenticationControllerTest in 0.325 seconds (process running for 12.773)
+
+CollectionControllerTest STANDARD_OUT
+    2026-02-18T00:59:55.057-05:00  INFO 6240 --- [gamedb] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kev.gamedb.CollectionControllerTest]: CollectionControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    2026-02-18T00:59:55.066-05:00  INFO 6240 --- [gamedb] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kev.gamedb.GamedbApplication for test class kev.gamedb.CollectionControllerTest
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2026-02-18T00:59:55.096-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.CollectionControllerTest      : Starting CollectionControllerTest using Java 25.0.2 with PID 6240 (started by kevon in C:\Users\kevon\IntelliJ\gamedb)
+    2026-02-18T00:59:55.096-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.CollectionControllerTest      : No active profile set, falling back to 1 default profile: "default"
+    2026-02-18T00:59:55.285-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+    2026-02-18T00:59:55.287-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+    2026-02-18T00:59:55.287-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+    2026-02-18T00:59:55.292-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.CollectionControllerTest      : Started CollectionControllerTest in 0.222 seconds (process running for 13.391)
+
+GamedbApplicationTests STANDARD_OUT
+    2026-02-18T00:59:55.474-05:00  INFO 6240 --- [gamedb] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kev.gamedb.GamedbApplicationTests]: GamedbApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    2026-02-18T00:59:55.477-05:00  INFO 6240 --- [gamedb] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kev.gamedb.GamedbApplication for test class kev.gamedb.GamedbApplicationTests
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2026-02-18T00:59:55.500-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GamedbApplicationTests        : Starting GamedbApplicationTests using Java 25.0.2 with PID 6240 (started by kevon in C:\Users\kevon\IntelliJ\gamedb)
+    2026-02-18T00:59:55.500-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GamedbApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+    2026-02-18T00:59:55.692-05:00  INFO 6240 --- [gamedb] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+    2026-02-18T00:59:55.715-05:00  INFO 6240 --- [gamedb] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 15 MongoDB repository interfaces.
+    2026-02-18T00:59:55.763-05:00  INFO 6240 --- [gamedb] [    Test worker] org.mongodb.driver.client                : MongoClient with metadata {"driver": {"name": "mongo-java-driver|spring-boot|sync", "version": "5.6.2"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Oracle Corporation/25.0.2+10-69"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=MongoCredential{mechanism=null, userName='admin', source='admin', password=<hidden>, mechanismProperties=<hidden>}, transportSettings=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@4daa53e0, com.mongodb.Jep395RecordCodecProvider@6b989889, com.mongodb.KotlinCodecProvider@42748f59, EnumCodecProvider{}]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverMonitoringMode=AUTO, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null, timeoutMS=null}
+    2026-02-18T00:59:55.770-05:00  INFO 6240 --- [gamedb] [localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, cryptd=false, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=27, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=3959000, minRoundTripTimeNanos=0}
+    2026-02-18T00:59:55.829-05:00  INFO 6240 --- [gamedb] [    Test worker] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+    2026-02-18T00:59:55.829-05:00  WARN 6240 --- [gamedb] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used by Spring Security for automatically configuring username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider. If the current configuration is intentional, to turn off this warning, increase the logging level of 'org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer' to ERROR
+    2026-02-18T00:59:55.889-05:00 DEBUG 6240 --- [gamedb] [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+    2026-02-18T00:59:55.961-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GamedbApplicationTests        : Started GamedbApplicationTests in 0.482 seconds (process running for 14.059)
+
+GenreControllerTest STANDARD_OUT
+    2026-02-18T00:59:55.972-05:00  INFO 6240 --- [gamedb] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kev.gamedb.GenreControllerTest]: GenreControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    2026-02-18T00:59:55.986-05:00  INFO 6240 --- [gamedb] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kev.gamedb.GamedbApplication for test class kev.gamedb.GenreControllerTest
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2026-02-18T00:59:56.022-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GenreControllerTest           : Starting GenreControllerTest using Java 25.0.2 with PID 6240 (started by kevon in C:\Users\kevon\IntelliJ\gamedb)
+    2026-02-18T00:59:56.022-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GenreControllerTest           : No active profile set, falling back to 1 default profile: "default"
+    2026-02-18T00:59:56.274-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+    2026-02-18T00:59:56.275-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+    2026-02-18T00:59:56.276-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+    2026-02-18T00:59:56.280-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.GenreControllerTest           : Started GenreControllerTest in 0.29 seconds (process running for 14.379)
+
+PlatformControllerTest STANDARD_OUT
+    2026-02-18T00:59:56.709-05:00  INFO 6240 --- [gamedb] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [kev.gamedb.PlatformControllerTest]: PlatformControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+    2026-02-18T00:59:56.719-05:00  INFO 6240 --- [gamedb] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration kev.gamedb.GamedbApplication for test class kev.gamedb.PlatformControllerTest
+
+      .   ____          _            __ _ _
+     /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+     \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+      '  |____| .__|_| |_|_| |_\__, | / / / /
+     =========|_|==============|___/=/_/_/_/
+
+     :: Spring Boot ::                (v4.0.1)
+
+    2026-02-18T00:59:56.746-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.PlatformControllerTest        : Starting PlatformControllerTest using Java 25.0.2 with PID 6240 (started by kevon in C:\Users\kevon\IntelliJ\gamedb)
+    2026-02-18T00:59:56.746-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.PlatformControllerTest        : No active profile set, falling back to 1 default profile: "default"
+    2026-02-18T00:59:56.948-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+    2026-02-18T00:59:56.948-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+    2026-02-18T00:59:56.949-05:00  INFO 6240 --- [gamedb] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+    2026-02-18T00:59:56.953-05:00  INFO 6240 --- [gamedb] [    Test worker] kev.gamedb.PlatformControllerTest        : Started PlatformControllerTest in 0.232 seconds (process running for 15.052)
+
+Gradle Test Executor 6 finished executing tests.
+2026-02-18T00:59:56.985-05:00  INFO 6240 --- [gamedb] [ionShutdownHook] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2026-02-18T00:59:57.009-05:00  INFO 6240 --- [gamedb] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+
+> Task :test FAILED
+
+28 tests completed, 1 failed
+Finished generating test XML results (0.012 secs) into: C:\Users\kevon\IntelliJ\gamedb\build\test-results\test
+Generating HTML test report...
+Finished generating test html results (0.022 secs) into: C:\Users\kevon\IntelliJ\gamedb\build\reports\tests\test
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':test'.
+> There were failing tests. See the report at: file:///C:/Users/kevon/IntelliJ/gamedb/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to generate a Build Scan (powered by Develocity).
+5 actionable tasks: 3 executed, 2 up-to-date
+Watched directory hierarchies: [C:\Users\kevon\IntelliJ\gamedb]
+
+BUILD FAILED in 22s

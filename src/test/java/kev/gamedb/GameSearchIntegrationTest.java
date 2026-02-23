@@ -17,13 +17,16 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.jupiter.api.Disabled;
+
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         properties = "spring.main.allow-bean-definition-overriding=true" //
 )
 @AutoConfigureRestTestClient
-@Testcontainers
+@Testcontainers(disabledWithoutDocker = true)
 @ActiveProfiles("test")
+@Disabled("Requires Docker to run Testcontainers")
 public class GameSearchIntegrationTest {
 
     @Container

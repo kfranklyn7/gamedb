@@ -1,0 +1,133 @@
+ Image gamedb-backend Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 523B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 709B done
+#2 DONE 0.0s
+
+#3 [auth] library/eclipse-temurin:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for docker.io/library/eclipse-temurin:21-jdk-alpine
+#4 ...
+
+#5 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre-alpine
+#5 DONE 0.5s
+
+#4 [internal] load metadata for docker.io/library/eclipse-temurin:21-jdk-alpine
+#4 DONE 0.5s
+
+#6 [internal] load .dockerignore
+#6 transferring context: 2B done
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 DONE 0.0s
+
+#8 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre-alpine@sha256:6ad8ed080d9be96b61438ec3ce99388e294af216ed57356000c06070e85c5d5d
+#8 resolve docker.io/library/eclipse-temurin:21-jre-alpine@sha256:6ad8ed080d9be96b61438ec3ce99388e294af216ed57356000c06070e85c5d5d
+#8 resolve docker.io/library/eclipse-temurin:21-jre-alpine@sha256:6ad8ed080d9be96b61438ec3ce99388e294af216ed57356000c06070e85c5d5d 0.1s done
+#8 DONE 0.1s
+
+#9 [stage-1 2/3] WORKDIR /app
+#9 CACHED
+
+#10 [builder 1/9] FROM docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:c98f0d2e171c898bf896dc4166815d28a56d428e218190a1f35cdc7d82efd61f
+#10 resolve docker.io/library/eclipse-temurin:21-jdk-alpine@sha256:c98f0d2e171c898bf896dc4166815d28a56d428e218190a1f35cdc7d82efd61f 0.1s done
+#10 DONE 0.1s
+
+#7 [internal] load build context
+#7 transferring context: 8.97kB done
+#7 DONE 0.0s
+
+#11 [builder 2/9] WORKDIR /app
+#11 CACHED
+
+#12 [builder 3/9] COPY gradlew .
+#12 CACHED
+
+#13 [builder 4/9] COPY gradle gradle
+#13 CACHED
+
+#14 [builder 5/9] COPY build.gradle .
+#14 CACHED
+
+#15 [builder 6/9] COPY settings.gradle .
+#15 CACHED
+
+#16 [builder 7/9] COPY src src
+#16 CACHED
+
+#17 [builder 8/9] RUN chmod +x ./gradlew
+#17 CACHED
+
+#18 [builder 9/9] RUN ./gradlew bootJar -x test
+#18 0.324 Downloading https://services.gradle.org/distributions/gradle-9.2.1-bin.zip
+#18 0.834 ............10%.............20%.............30%.............40%.............50%.............60%.............70%.............80%.............90%.............100%
+#18 10.25 
+#18 10.25 Welcome to Gradle 9.2.1!
+#18 10.25 
+#18 10.25 Here are the highlights of this release:
+#18 10.25  - Windows ARM support
+#18 10.25  - Improved publishing APIs
+#18 10.25  - Better guidance for dependency verification failures
+#18 10.26 
+#18 10.26 For more details see https://docs.gradle.org/9.2.1/release-notes.html
+#18 10.26 
+#18 10.35 Starting a Gradle Daemon (subsequent builds will be faster)
+#18 28.18 
+#18 28.18 FAILURE: Build failed with an exception.
+#18 28.18 
+#18 28.18 * What went wrong:
+#18 28.18 Could not determine the dependencies of task ':bootJar'.
+#18 28.18 > Could not resolve all dependencies for configuration ':runtimeClasspath'.
+#18 28.18    > Failed to calculate the value of task ':compileJava' property 'javaCompiler'.
+#18 28.18       > Cannot find a Java installation on your machine (Linux 6.6.87.2-microsoft-standard-WSL2 amd64) matching: {languageVersion=25, vendor=any vendor, implementation=vendor-specific, nativeImageCapable=false}. Toolchain download repositories have not been configured.
+#18 28.18 
+#18 28.18 * Try:
+#18 28.18 > Learn more about toolchain auto-detection and auto-provisioning at https://docs.gradle.org/9.2.1/userguide/toolchains.html#sec:auto_detection.
+#18 28.18 > Learn more about toolchain repositories at https://docs.gradle.org/9.2.1/userguide/toolchains.html#sub:download_repositories.
+#18 28.18 > Run with --stacktrace option to get the stack trace.
+#18 28.18 > Run with --info or --debug option to get more log output.
+#18 28.18 > Run with --scan to generate a Build Scan (powered by Develocity).
+#18 28.18 > Get more help at https://help.gradle.org.
+#18 28.18 
+#18 28.18 BUILD FAILED in 27s
+#18 ERROR: process "/bin/sh -c ./gradlew bootJar -x test" did not complete successfully: exit code: 1
+------
+ > [builder 9/9] RUN ./gradlew bootJar -x test:
+28.18 
+28.18 * Try:
+28.18 > Learn more about toolchain auto-detection and auto-provisioning at https://docs.gradle.org/9.2.1/userguide/toolchains.html#sec:auto_detection.
+28.18 > Learn more about toolchain repositories at https://docs.gradle.org/9.2.1/userguide/toolchains.html#sub:download_repositories.
+28.18 > Run with --stacktrace option to get the stack trace.
+28.18 > Run with --info or --debug option to get more log output.
+28.18 > Run with --scan to generate a Build Scan (powered by Develocity).
+28.18 > Get more help at https://help.gradle.org.
+28.18 
+28.18 BUILD FAILED in 27s
+------
+Dockerfile:17
+
+--------------------
+
+  15 |     # Make gradlew executable and build the jar
+
+  16 |     RUN chmod +x ./gradlew
+
+  17 | >>> RUN ./gradlew bootJar -x test
+
+  18 |     
+
+  19 |     # --- Stage 2: Run the application ---
+
+--------------------
+
+failed to solve: process "/bin/sh -c ./gradlew bootJar -x test" did not complete successfully: exit code: 1
+
+
+
+View build details: docker-desktop://dashboard/build/default/default/h4altodo7xc6c4rn8tpp18lc3
+

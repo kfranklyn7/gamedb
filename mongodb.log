@@ -1,0 +1,528 @@
+{"t":{"$date":"2026-02-22T12:14:44.626+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":2130432085}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+{"t":{"$date":"2026-02-22T12:14:44.627+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:14:44.630+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:14:44.632+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:14:44.632+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:14:44.633+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:16:45.213+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3757751330}}
+{"t":{"$date":"2026-02-22T12:16:45.216+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:16:45.223+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:16:45.224+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:16:45.224+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:16:45.224+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:18:45.805+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3233236675}}
+{"t":{"$date":"2026-02-22T12:18:45.807+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:18:45.811+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:18:45.813+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:18:45.813+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:18:45.814+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:20:46.388+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1748040332}}
+{"t":{"$date":"2026-02-22T12:20:46.390+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:20:46.393+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:20:46.395+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:20:46.396+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:20:46.396+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:22:47.014+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":2954490975}}
+{"t":{"$date":"2026-02-22T12:22:47.017+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:22:47.021+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:22:47.022+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:22:47.022+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:22:47.022+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:24:48.007+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":2361306300}}
+{"t":{"$date":"2026-02-22T12:24:48.014+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:24:48.024+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:24:48.025+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:24:48.027+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:24:48.027+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:26:48.959+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":2486968757}}
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+{"t":{"$date":"2026-02-22T12:26:48.964+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:26:48.973+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:26:48.974+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:26:48.975+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T12:26:48.975+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+{"t":{"$date":"2026-02-22T12:28:49.732+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1108886753}}
+{"t":{"$date":"2026-02-22T12:28:49.736+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:28:49.744+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:28:49.745+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:28:49.745+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:28:49.745+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:30:50.594+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1015543106}}
+{"t":{"$date":"2026-02-22T12:30:50.597+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:30:50.604+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:30:50.607+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:30:50.607+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:30:50.608+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:32:51.491+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1920854320}}
+{"t":{"$date":"2026-02-22T12:32:51.496+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:32:51.501+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:32:51.510+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:32:51.511+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:32:51.511+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T12:34:52.374+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1587199091}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+{"t":{"$date":"2026-02-22T12:34:52.377+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:34:52.384+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:34:52.386+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:34:52.387+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T12:34:52.387+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+{"t":{"$date":"2026-02-22T12:36:53.144+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":2889519193}}
+{"t":{"$date":"2026-02-22T12:36:53.148+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:36:53.156+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:36:53.157+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:36:53.158+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:36:53.158+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+  -h, --help   help for server
+
+{"t":{"$date":"2026-02-22T12:38:54.141+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1074070422}}
+{"t":{"$date":"2026-02-22T12:38:54.147+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:38:54.159+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:38:54.162+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T12:38:54.162+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:38:54.162+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:40:54.885+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":2111060270}}
+{"t":{"$date":"2026-02-22T12:40:54.888+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+{"t":{"$date":"2026-02-22T12:40:54.896+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:40:54.897+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:40:54.898+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+Flags:
+{"t":{"$date":"2026-02-22T12:40:54.898+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:42:55.722+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1132291239}}
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+{"t":{"$date":"2026-02-22T12:42:55.725+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:42:55.736+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:42:55.737+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:42:55.738+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:42:55.738+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T12:44:56.645+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3013580260}}
+{"t":{"$date":"2026-02-22T12:44:56.647+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:44:56.659+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:44:56.662+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:44:56.662+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+{"t":{"$date":"2026-02-22T12:44:56.662+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+{"t":{"$date":"2026-02-22T12:46:57.643+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1326452262}}
+{"t":{"$date":"2026-02-22T12:46:57.646+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:46:57.668+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:46:57.669+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:46:57.670+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:46:57.670+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+{"t":{"$date":"2026-02-22T12:48:58.604+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":698594016}}
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+{"t":{"$date":"2026-02-22T12:48:58.607+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T12:48:58.613+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:48:58.618+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:48:58.619+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:48:58.619+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T12:50:59.476+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1732788963}}
+{"t":{"$date":"2026-02-22T12:50:59.480+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:50:59.490+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:50:59.492+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:50:59.493+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:50:59.493+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+{"t":{"$date":"2026-02-22T12:53:00.435+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":4031137262}}
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T12:53:00.438+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:53:00.449+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:53:00.451+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+{"t":{"$date":"2026-02-22T12:53:00.452+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:53:00.452+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+{"t":{"$date":"2026-02-22T12:55:01.128+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3965139578}}
+{"t":{"$date":"2026-02-22T12:55:01.131+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:55:01.136+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:55:01.138+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:55:01.138+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:55:01.138+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:57:01.858+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":789581658}}
+{"t":{"$date":"2026-02-22T12:57:01.860+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:57:01.865+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T12:57:01.866+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:57:01.866+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:57:01.866+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T12:59:02.482+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3760235417}}
+{"t":{"$date":"2026-02-22T12:59:02.484+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T12:59:02.488+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+
+goroutine 1 [running]:
+main.main()
+{"t":{"$date":"2026-02-22T12:59:02.489+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T12:59:02.490+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T12:59:02.490+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T13:01:03.511+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3871967630}}
+{"t":{"$date":"2026-02-22T13:01:03.516+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T13:01:03.522+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T13:01:03.524+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T13:01:03.525+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T13:01:03.525+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T13:03:04.347+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":2431561338}}
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T13:03:04.349+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T13:03:04.356+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T13:03:04.359+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T13:03:04.359+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+{"t":{"$date":"2026-02-22T13:03:04.359+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+{"t":{"$date":"2026-02-22T13:05:05.369+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3092845056}}
+{"t":{"$date":"2026-02-22T13:05:05.373+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T13:05:05.381+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+{"t":{"$date":"2026-02-22T13:05:05.382+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T13:05:05.383+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T13:05:05.383+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T13:07:06.290+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3820671734}}
+{"t":{"$date":"2026-02-22T13:07:06.294+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T13:07:06.304+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T13:07:06.305+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T13:07:06.306+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T13:07:06.306+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+{"t":{"$date":"2026-02-22T13:09:07.254+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":176017573}}
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+{"t":{"$date":"2026-02-22T13:09:07.258+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T13:09:07.266+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T13:09:07.269+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T13:09:07.269+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T13:09:07.269+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T13:11:08.254+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":3922135046}}
+{"t":{"$date":"2026-02-22T13:11:08.259+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T13:11:08.269+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T13:11:08.271+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T13:11:08.272+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T13:11:08.272+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}
+Error: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+Usage:
+  runner server [flags]
+
+Flags:
+  -h, --help   help for server
+
+panic: error checking mongod: error pinging: server selection error: server selection timeout, current topology: { Type: ReplicaSetNoPrimary, Servers: [{ Addr: localhost:27017, Type: Unknown, Last error: dial tcp [::1]:27017: connect: connection refused }, ] }
+
+goroutine 1 [running]:
+main.main()
+	/app/cmd/runner/main.go:65 +0x165
+{"t":{"$date":"2026-02-22T13:13:09.352+00:00"},"s":"I",  "c":"-",        "id":8991200, "ctx":"main","msg":"Shuffling initializers","attr":{"seed":1171742324}}
+{"t":{"$date":"2026-02-22T13:13:09.356+00:00"},"s":"I",  "c":"CONTROL",  "id":5760901, "ctx":"main","msg":"Applied --setParameter options","attr":{"serverParameters":{"mongotHost":{"default":"","value":"localhost:27027"},"searchIndexManagementHostAndPort":{"default":"","value":"localhost:27027"}}}}
+{"t":{"$date":"2026-02-22T13:13:09.362+00:00"},"s":"I",  "c":"CONTROL",  "id":97374,   "ctx":"main","msg":"Automatically disabling TLS 1.0 and TLS 1.1, to force-enable TLS 1.1 specify --sslDisabledProtocols 'TLS1_0'; to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2026-02-22T13:13:09.363+00:00"},"s":"I",  "c":"ACCESS",   "id":20254,   "ctx":"main","msg":"Read security file failed","attr":{"error":{"code":30,"codeName":"InvalidPath","errmsg":"Error reading file /data/configdb/keyfile: No such file or directory"}}}
+{"t":{"$date":"2026-02-22T13:13:09.364+00:00"},"s":"I",  "c":"SHARDING", "id":5847201, "ctx":"main","msg":"Balancer command scheduler stop requested"}
+{"t":{"$date":"2026-02-22T13:13:09.364+00:00"},"s":"F",  "c":"CONTROL",  "id":20575,   "ctx":"main","msg":"Error creating service context","attr":{"error":"Location5579201: Unable to acquire security key[s]"}}

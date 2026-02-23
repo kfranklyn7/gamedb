@@ -1,0 +1,27 @@
+
+C:\Users\kevon\IntelliJ\gamedb\src\main\java\kev\gamedb\MongoConfig.java:19: error: annotation interface not applicable to this kind of declaration
+> Task :compileJava FAILED
+    @org.springframework.lang.NonNull
+    ^
+Note: C:\Users\kevon\IntelliJ\gamedb\src\main\java\kev\gamedb\MongoConfig.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 error
+
+FAILURE: Build failed with an exception.
+
+
+[Incubating] Problems report is available at: file:///C:/Users/kevon/IntelliJ/gamedb/build/reports/problems/problems-report.html
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  C:\Users\kevon\IntelliJ\gamedb\src\main\java\kev\gamedb\MongoConfig.java:19: error: annotation interface not applicable to this kind of declaration
+      @org.springframework.lang.NonNull
+      ^
+  1 error
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to generate a Build Scan (powered by Develocity).
+
+BUILD FAILED in 2s
+1 actionable task: 1 executed

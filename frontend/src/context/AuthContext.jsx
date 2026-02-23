@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { authApi } from '../api/auth';
 
-// Actually we don't need jwt-decode if we just use the token opaquely. Let's provide a basic manual decode to get user email.
+// Actually we don't need jwt-decode if we just use the token opaquely. Let's provide a basic manual decode to get user username.
 const decodeToken = (token) => {
     try {
         const base64Url = token.split('.')[1];
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         if (token) {
             const decoded = decodeToken(token);
             if (decoded && decoded.exp * 1000 > Date.now()) {
-                setUser({ email: decoded.sub || decoded.email, token });
+                setUser({ username: decoded.sub, token });
             } else {
                 localStorage.removeItem('token');
             }
@@ -46,7 +46,7 @@ export const AuthProvider = ({ children }) => {
         const token = data.token;
         localStorage.setItem('token', token);
         const decoded = decodeToken(token);
-        setUser({ email: decoded.sub || decoded.email, token });
+        setUser({ username: decoded.sub, token });
     };
 
     const register = async (userData) => {
@@ -54,7 +54,7 @@ export const AuthProvider = ({ children }) => {
         const token = data.token;
         localStorage.setItem('token', token);
         const decoded = decodeToken(token);
-        setUser({ email: decoded.sub || decoded.email, token });
+        setUser({ username: decoded.sub, token });
     };
 
     const logout = () => {

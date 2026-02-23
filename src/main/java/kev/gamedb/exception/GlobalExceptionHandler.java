@@ -40,7 +40,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Map<String, Object>> handleBadCredentials(BadCredentialsException ex) {
-        return buildResponse(HttpStatus.UNAUTHORIZED, "Invalid email or password");
+        return buildResponse(HttpStatus.UNAUTHORIZED, "Invalid username or password");
     }
 
     private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String message) {

@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { Gamepad2, AlertCircle } from 'lucide-react';
 
 const LoginPage = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -17,11 +17,11 @@ const LoginPage = () => {
         setError('');
         setIsLoading(true);
         try {
-            await login({ email, password });
+            await login({ username, password });
             navigate('/');
         } catch (err) {
             if (err.response?.status === 401 || err.response?.status === 403) {
-                setError('Invalid email or password.');
+                setError('Invalid username or password.');
             } else if (err.response?.data?.message) {
                 setError(err.response.data.message);
             } else {
@@ -52,15 +52,15 @@ const LoginPage = () => {
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-text mb-1" htmlFor="email">Email</label>
+                        <label className="block text-sm font-medium text-text mb-1" htmlFor="username">Username</label>
                         <input
-                            id="email"
-                            type="email"
+                            id="username"
+                            type="text"
                             required
                             className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-colors"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="hero@example.com"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="hero_quest"
                         />
                     </div>
                     <div>

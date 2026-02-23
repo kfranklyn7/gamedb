@@ -8,5 +8,5 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends MongoRepository<User, org.bson.types.ObjectId> {
     // Spring generates the implementation for this automatically
-    Optional<User> findByEmail(String email);
+    Optional<User> findByUsername(String username);
 }

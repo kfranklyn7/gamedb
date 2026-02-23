@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { UserPlus, AlertCircle } from 'lucide-react';
 
 const RegisterPage = () => {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
@@ -29,11 +29,11 @@ const RegisterPage = () => {
 
         setIsLoading(true);
         try {
-            await register({ email, password });
+            await register({ username, password });
             navigate('/');
         } catch (err) {
             if (err.response?.status === 409) {
-                setError('An account with this email already exists.');
+                setError('An account with this username already exists.');
             } else if (err.response?.data) {
                 // Handle Spring Validation errors maps
                 if (typeof err.response.data === 'object' && !err.response.data.message) {
@@ -70,15 +70,15 @@ const RegisterPage = () => {
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-text mb-1" htmlFor="email">Email</label>
+                        <label className="block text-sm font-medium text-text mb-1" htmlFor="username">Username</label>
                         <input
-                            id="email"
-                            type="email"
+                            id="username"
+                            type="text"
                             required
                             className="w-full px-4 py-2 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-500 focus:border-accent-500 transition-colors"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="hero@example.com"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            placeholder="hero_quest"
                         />
                     </div>
                     <div>

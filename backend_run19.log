@@ -1,0 +1,222 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.1)
+
+2026-02-22T13:44:46.998Z  INFO 1 --- [gamedb] [           main] kev.gamedb.GamedbApplication             : Starting GamedbApplication v0.0.1-SNAPSHOT using Java 21.0.10 with PID 1 (/app/app.jar started by root in /app)
+2026-02-22T13:44:47.003Z  INFO 1 --- [gamedb] [           main] kev.gamedb.GamedbApplication             : The following 1 profile is active: "prod"
+2026-02-22T13:44:47.421Z  INFO 1 --- [gamedb] [           main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'corsConfigurationSource' with a different definition: replacing [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=corsConfig; factoryMethodName=corsConfigurationSource; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [kev/gamedb/CorsConfig.class]] with [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=securityConfig; factoryMethodName=corsConfigurationSource; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [kev/gamedb/SecurityConfig.class]]
+2026-02-22T13:44:47.592Z  INFO 1 --- [gamedb] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2026-02-22T13:44:47.649Z  INFO 1 --- [gamedb] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 50 ms. Found 17 MongoDB repository interfaces.
+2026-02-22T13:44:48.020Z  INFO 1 --- [gamedb] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-02-22T13:44:48.031Z  INFO 1 --- [gamedb] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-22T13:44:48.031Z  INFO 1 --- [gamedb] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-22T13:44:48.052Z  INFO 1 --- [gamedb] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 997 ms
+2026-02-22T13:44:48.253Z  INFO 1 --- [gamedb] [           main] org.mongodb.driver.client                : MongoClient with metadata {"driver": {"name": "mongo-java-driver|spring-boot|sync", "version": "5.6.2"}, "os": {"type": "Linux", "name": "Linux", "architecture": "amd64", "version": "6.6.87.2-microsoft-standard-WSL2"}, "platform": "Java/Eclipse Adoptium/21.0.10+7-LTS", "env": {"container": {"runtime": "docker"}}} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@21f7e537, com.mongodb.Jep395RecordCodecProvider@32ea16b7, com.mongodb.KotlinCodecProvider@62b6c045, EnumCodecProvider{}]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverMonitoringMode=AUTO, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null, timeoutMS=null}
+2026-02-22T13:44:48.252Z  INFO 1 --- [gamedb] [localhost:27017] org.mongodb.driver.cluster               : Exception in monitor thread while connecting to server localhost:27017
+
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.lambda$open$0(SocketStream.java:85) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at java.base/java.util.Optional.orElseThrow(Unknown Source) ~[na:na]
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:85) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:233) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.setupNewConnectionAndGetInitialDescription(DefaultServerMonitor.java:282) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.lookupServerDescription(DefaultServerMonitor.java:253) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.run(DefaultServerMonitor.java:203) ~[mongodb-driver-core-5.6.2.jar!/:na]
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source) ~[na:na]
+	at java.base/java.net.Socket.connect(Unknown Source) ~[na:na]
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:76) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:104) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:79) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	... 4 common frames omitted
+
+2026-02-22T13:44:48.488Z  INFO 1 --- [gamedb] [           main] org.mongodb.driver.cluster               : Waiting for server to become available for operation createIndexes with ID 3. Remaining time: 29995 ms. Selector: WritableServerSelector, topology description: {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}].
+2026-02-22T13:45:18.574Z  WARN 1 --- [gamedb] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'applicationConfiguration' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/kev/gamedb/ApplicationConfiguration.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsService' defined in class path resource [kev/gamedb/BeansConfig.class]: Unsatisfied dependency expressed through method 'userDetailsService' parameter 0: Error creating bean with name 'userRepository' defined in kev.gamedb.UserRepository defined in @EnableMongoRepositories declared on DataMongoRepositoriesRegistrar.EnableMongoRepositoriesConfiguration: Cannot resolve reference to bean 'mongoTemplate' while setting bean property 'mongoOperations'
+2026-02-22T13:45:18.577Z  INFO 1 --- [gamedb] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-02-22T13:45:18.583Z  INFO 1 --- [gamedb] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-02-22T13:45:18.592Z ERROR 1 --- [gamedb] [           main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'applicationConfiguration' defined in URL [jar:nested:/app/app.jar/!BOOT-INF/classes/!/kev/gamedb/ApplicationConfiguration.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'userDetailsService' defined in class path resource [kev/gamedb/BeansConfig.class]: Unsatisfied dependency expressed through method 'userDetailsService' parameter 0: Error creating bean with name 'userRepository' defined in kev.gamedb.UserRepository defined in @EnableMongoRepositories declared on DataMongoRepositoriesRegistrar.EnableMongoRepositoriesConfiguration: Cannot resolve reference to bean 'mongoTemplate' while setting bean property 'mongoOperations'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1382) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1221) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1218) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1184) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:993) ~[spring-context-7.0.2.jar!/:7.0.2]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:620) ~[spring-context-7.0.2.jar!/:7.0.2]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.1.jar!/:4.0.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.0.1.jar!/:4.0.1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.0.1.jar!/:4.0.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.1.jar!/:4.0.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.0.1.jar!/:4.0.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.0.1.jar!/:4.0.1]
+	at kev.gamedb.GamedbApplication.main(GamedbApplication.java:14) ~[!/:0.0.1-SNAPSHOT]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:106) ~[app.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'userDetailsService' defined in class path resource [kev/gamedb/BeansConfig.class]: Unsatisfied dependency expressed through method 'userDetailsService' parameter 0: Error creating bean with name 'userRepository' defined in kev.gamedb.UserRepository defined in @EnableMongoRepositories declared on DataMongoRepositoriesRegistrar.EnableMongoRepositoriesConfiguration: Cannot resolve reference to bean 'mongoTemplate' while setting bean property 'mongoOperations'
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1362) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1194) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1704) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	... 26 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'userRepository' defined in kev.gamedb.UserRepository defined in @EnableMongoRepositories declared on DataMongoRepositoriesRegistrar.EnableMongoRepositoriesConfiguration: Cannot resolve reference to bean 'mongoTemplate' while setting bean property 'mongoOperations'
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:377) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:135) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:1712) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1461) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1704) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	... 40 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'mongoTemplate' defined in class path resource [org/springframework/boot/data/mongodb/autoconfigure/MongoDatabaseFactoryDependentConfiguration.class]: Failed to instantiate [org.springframework.data.mongodb.core.MongoTemplate]: Factory method 'mongoTemplate' threw exception with message: Timed out while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1362) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1194) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:365) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	... 54 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.data.mongodb.core.MongoTemplate]: Factory method 'mongoTemplate' threw exception with message: Timed out while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:183) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:72) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:152) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	... 64 common frames omitted
+Caused by: org.springframework.dao.DataAccessResourceFailureException: Timed out while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}]
+	at org.springframework.data.mongodb.core.MongoExceptionTranslator.doTranslateException(MongoExceptionTranslator.java:96) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.MongoExceptionTranslator.translateExceptionIfPossible(MongoExceptionTranslator.java:72) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.MongoTemplate.potentiallyConvertRuntimeException(MongoTemplate.java:3175) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.MongoTemplate.execute(MongoTemplate.java:628) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.DefaultIndexOperations.execute(DefaultIndexOperations.java:217) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.DefaultIndexOperations.createIndex(DefaultIndexOperations.java:121) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.index.IndexOperations.ensureIndex(IndexOperations.java:40) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.createIndex(MongoPersistentEntityIndexCreator.java:151) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.checkForAndCreateIndexes(MongoPersistentEntityIndexCreator.java:141) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.checkForIndexes(MongoPersistentEntityIndexCreator.java:125) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.<init>(MongoPersistentEntityIndexCreator.java:94) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.<init>(MongoPersistentEntityIndexCreator.java:71) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.MongoTemplate.<init>(MongoTemplate.java:281) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.boot.data.mongodb.autoconfigure.MongoDatabaseFactoryDependentConfiguration.mongoTemplate(MongoDatabaseFactoryDependentConfiguration.java:54) ~[spring-boot-data-mongodb-4.0.1.jar!/:4.0.1]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:155) ~[spring-beans-7.0.2.jar!/:7.0.2]
+	... 67 common frames omitted
+Caused by: com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches WritableServerSelector. Client view of cluster state is {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}]
+	at com.mongodb.internal.connection.BaseCluster.logAndThrowTimeoutException(BaseCluster.java:431) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.BaseCluster.lambda$selectServer$0(BaseCluster.java:166) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.time.Timeout.lambda$onExistsAndExpired$16(Timeout.java:238) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.time.Timeout.lambda$run$10(Timeout.java:203) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.time.TimePoint.checkedCall(TimePoint.java:99) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.time.Timeout.call(Timeout.java:176) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.time.Timeout.run(Timeout.java:196) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.time.Timeout.onExistsAndExpired(Timeout.java:235) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.time.Timeout.onExpired(Timeout.java:228) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.BaseCluster.selectServer(BaseCluster.java:165) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.SingleServerCluster.selectServer(SingleServerCluster.java:47) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.binding.ClusterBinding.getWriteConnectionSource(ClusterBinding.java:100) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.client.internal.ClientSessionBinding.getConnectionSource(ClientSessionBinding.java:108) ~[mongodb-driver-sync-5.6.2.jar!/:na]
+	at com.mongodb.client.internal.ClientSessionBinding.getWriteConnectionSource(ClientSessionBinding.java:98) ~[mongodb-driver-sync-5.6.2.jar!/:na]
+	at com.mongodb.internal.operation.SyncOperationHelper.withSuppliedResource(SyncOperationHelper.java:148) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.operation.SyncOperationHelper.withSourceAndConnection(SyncOperationHelper.java:129) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.operation.SyncOperationHelper.executeCommand(SyncOperationHelper.java:207) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.operation.CreateIndexesOperation.execute(CreateIndexesOperation.java:111) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.operation.CreateIndexesOperation.execute(CreateIndexesOperation.java:60) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.client.internal.MongoClusterImpl$OperationExecutorImpl.execute(MongoClusterImpl.java:448) ~[mongodb-driver-sync-5.6.2.jar!/:na]
+	at com.mongodb.client.internal.MongoCollectionImpl.executeCreateIndexes(MongoCollectionImpl.java:942) ~[mongodb-driver-sync-5.6.2.jar!/:na]
+	at com.mongodb.client.internal.MongoCollectionImpl.createIndexes(MongoCollectionImpl.java:924) ~[mongodb-driver-sync-5.6.2.jar!/:na]
+	at com.mongodb.client.internal.MongoCollectionImpl.createIndexes(MongoCollectionImpl.java:919) ~[mongodb-driver-sync-5.6.2.jar!/:na]
+	at com.mongodb.client.internal.MongoCollectionImpl.createIndex(MongoCollectionImpl.java:904) ~[mongodb-driver-sync-5.6.2.jar!/:na]
+	at org.springframework.data.mongodb.core.DefaultIndexOperations.lambda$createIndex$0(DefaultIndexOperations.java:131) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	at org.springframework.data.mongodb.core.MongoTemplate.execute(MongoTemplate.java:626) ~[spring-data-mongodb-5.0.1.jar!/:5.0.1]
+	... 80 common frames omitted
+
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.1)
+
+2026-02-22T13:45:19.805Z  INFO 1 --- [gamedb] [           main] kev.gamedb.GamedbApplication             : Starting GamedbApplication v0.0.1-SNAPSHOT using Java 21.0.10 with PID 1 (/app/app.jar started by root in /app)
+2026-02-22T13:45:19.809Z  INFO 1 --- [gamedb] [           main] kev.gamedb.GamedbApplication             : The following 1 profile is active: "prod"
+2026-02-22T13:45:20.345Z  INFO 1 --- [gamedb] [           main] o.s.b.f.s.DefaultListableBeanFactory     : Overriding bean definition for bean 'corsConfigurationSource' with a different definition: replacing [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=corsConfig; factoryMethodName=corsConfigurationSource; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [kev/gamedb/CorsConfig.class]] with [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=securityConfig; factoryMethodName=corsConfigurationSource; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [kev/gamedb/SecurityConfig.class]]
+2026-02-22T13:45:20.524Z  INFO 1 --- [gamedb] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2026-02-22T13:45:20.584Z  INFO 1 --- [gamedb] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 17 MongoDB repository interfaces.
+2026-02-22T13:45:20.992Z  INFO 1 --- [gamedb] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-02-22T13:45:21.008Z  INFO 1 --- [gamedb] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-02-22T13:45:21.008Z  INFO 1 --- [gamedb] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.15]
+2026-02-22T13:45:21.040Z  INFO 1 --- [gamedb] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1170 ms
+2026-02-22T13:45:21.254Z  INFO 1 --- [gamedb] [           main] org.mongodb.driver.client                : MongoClient with metadata {"driver": {"name": "mongo-java-driver|spring-boot|sync", "version": "5.6.2"}, "os": {"type": "Linux", "name": "Linux", "architecture": "amd64", "version": "6.6.87.2-microsoft-standard-WSL2"}, "platform": "Java/Eclipse Adoptium/21.0.10+7-LTS", "env": {"container": {"runtime": "docker"}}} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@21f7e537, com.mongodb.Jep395RecordCodecProvider@32ea16b7, com.mongodb.KotlinCodecProvider@62b6c045, EnumCodecProvider{}]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[localhost:27017], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverMonitoringMode=AUTO, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=UNSPECIFIED, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null, timeoutMS=null}
+2026-02-22T13:45:21.255Z  INFO 1 --- [gamedb] [localhost:27017] org.mongodb.driver.cluster               : Exception in monitor thread while connecting to server localhost:27017
+
+com.mongodb.MongoSocketOpenException: Exception opening socket
+	at com.mongodb.internal.connection.SocketStream.lambda$open$0(SocketStream.java:85) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at java.base/java.util.Optional.orElseThrow(Unknown Source) ~[na:na]
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:85) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.InternalStreamConnection.open(InternalStreamConnection.java:233) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.setupNewConnectionAndGetInitialDescription(DefaultServerMonitor.java:282) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.lookupServerDescription(DefaultServerMonitor.java:253) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitor.run(DefaultServerMonitor.java:203) ~[mongodb-driver-core-5.6.2.jar!/:na]
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.Net.pollConnectNow(Unknown Source) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.timedFinishConnect(Unknown Source) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.connect(Unknown Source) ~[na:na]
+	at java.base/java.net.SocksSocketImpl.connect(Unknown Source) ~[na:na]
+	at java.base/java.net.Socket.connect(Unknown Source) ~[na:na]
+	at com.mongodb.internal.connection.SocketStreamHelper.initialize(SocketStreamHelper.java:76) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.SocketStream.initializeSocket(SocketStream.java:104) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	at com.mongodb.internal.connection.SocketStream.open(SocketStream.java:79) ~[mongodb-driver-core-5.6.2.jar!/:na]
+	... 4 common frames omitted
+
+2026-02-22T13:45:21.549Z  INFO 1 --- [gamedb] [           main] org.mongodb.driver.cluster               : Waiting for server to become available for operation createIndexes with ID 3. Remaining time: 29994 ms. Selector: WritableServerSelector, topology description: {type=UNKNOWN, servers=[{address=localhost:27017, type=UNKNOWN, state=CONNECTING, exception={com.mongodb.MongoSocketOpenException: Exception opening socket}, caused by {java.net.ConnectException: Connection refused}}].

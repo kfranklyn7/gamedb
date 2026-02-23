@@ -141,7 +141,7 @@ const HomePage = () => {
         <div className="animate-fade-in pb-12">
             <header className="py-8 text-center sm:text-left">
                 <h1 className="text-4xl sm:text-5xl font-display font-bold text-text">
-                    Welcome back, <span className="text-accent-500">{user?.email?.split('@')[0] || 'Player'}</span>!
+                    Welcome back, <span className="text-accent-500">{user?.username || 'Player'}</span>!
                 </h1>
                 <p className="text-lg text-text-muted mt-2">
                     Here's an overview of your active quests and recent milestones.

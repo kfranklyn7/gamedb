@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         final String authHeader = request.getHeader("Authorization"); //
         final String jwt;
-        final String userEmail;
+        final String extractedUsername;
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         jwt = authHeader.substring(7);
         try {
-            userEmail = jwtService.extractUsername(jwt);
+            extractedUsername = jwtService.extractUsername(jwt);
         } catch (Exception e) {
             // If the token is malformed (like the placeholder "value"), don't crash the whole app with a 500.
             // Just let the filter continue; the user will simply be unauthenticated.
@@ -50,8 +50,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         // 2. If the user isn't already authenticated, validate the token
-        if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+        if (extractedUsername != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(extractedUsername);
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

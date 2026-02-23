@@ -39,7 +39,7 @@ class AuthenticationServiceTest {
     @BeforeEach
     void setUp() {
         user = User.builder()
-                .email("test@example.com")
+                .username("testUser")
                 .password("encodedPassword")
                 .role(Role.USER)
                 .build();
@@ -47,8 +47,8 @@ class AuthenticationServiceTest {
 
     @Test
     void register_ShouldSaveUserAndReturnToken() {
-        RegisterRequest request = new RegisterRequest("test@example.com", "password");
-        when(repository.findByEmail("test@example.com")).thenReturn(Optional.empty());
+        RegisterRequest request = new RegisterRequest("testUser", "password");
+        when(repository.findByUsername("testUser")).thenReturn(Optional.empty());
         when(passwordEncoder.encode("password")).thenReturn("encodedPassword");
         when(jwtService.generateToken(any(User.class))).thenReturn("testToken");
 
@@ -59,9 +59,9 @@ class AuthenticationServiceTest {
     }
 
     @Test
-    void register_ShouldThrowConflictWhenDuplicateEmail() {
-        RegisterRequest request = new RegisterRequest("test@example.com", "password");
-        when(repository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
+    void register_ShouldThrowConflictWhenDuplicateUsername() {
+        RegisterRequest request = new RegisterRequest("testUser", "password");
+        when(repository.findByUsername("testUser")).thenReturn(Optional.of(user));
 
         assertThrows(kev.gamedb.exception.ResourceAlreadyExistsException.class,
                 () -> authenticationService.register(request));
@@ -70,8 +70,8 @@ class AuthenticationServiceTest {
 
     @Test
     void authenticate_ShouldVerifyAndReturnToken() {
-        AuthenticationRequest request = new AuthenticationRequest("test@example.com", "password");
-        when(repository.findByEmail("test@example.com")).thenReturn(Optional.of(user));
+        AuthenticationRequest request = new AuthenticationRequest("testUser", "password");
+        when(repository.findByUsername("testUser")).thenReturn(Optional.of(user));
         when(jwtService.generateToken(user)).thenReturn("testToken");
 
         AuthenticationResponse response = authenticationService.authenticate(request);
@@ -82,8 +82,8 @@ class AuthenticationServiceTest {
 
     @Test
     void authenticate_ShouldThrowExceptionIfUserNotFound() {
-        AuthenticationRequest request = new AuthenticationRequest("notfound@example.com", "password");
-        when(repository.findByEmail("notfound@example.com")).thenReturn(Optional.empty());
+        AuthenticationRequest request = new AuthenticationRequest("notfoundUser", "password");
+        when(repository.findByUsername("notfoundUser")).thenReturn(Optional.empty());
 
         assertThrows(kev.gamedb.exception.ResourceNotFoundException.class, () -> authenticationService.authenticate(request));
     }

@@ -35,7 +35,7 @@ class AuthenticationControllerTest {
 
     @Test
     void register_ShouldReturnOkAndToken() throws Exception {
-        RegisterRequest request = new RegisterRequest("test@email.com", "password123");
+        RegisterRequest request = new RegisterRequest("testUser", "password123");
         AuthenticationResponse response = AuthenticationResponse.builder().token("mocked-token").build();
 
         when(authenticationService.register(any(RegisterRequest.class))).thenReturn(response);
@@ -49,7 +49,7 @@ class AuthenticationControllerTest {
 
     @Test
     void login_ShouldReturnOkAndToken() throws Exception {
-        AuthenticationRequest request = new AuthenticationRequest("test@email.com", "password123");
+        AuthenticationRequest request = new AuthenticationRequest("testUser", "password123");
         AuthenticationResponse response = AuthenticationResponse.builder().token("mocked-token").build();
 
         when(authenticationService.authenticate(any(AuthenticationRequest.class))).thenReturn(response);

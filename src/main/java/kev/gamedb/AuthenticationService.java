@@ -20,12 +20,12 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponse register(RegisterRequest request) {
-        if (repository.findByEmail(request.getEmail()).isPresent()) {
-            throw new ResourceAlreadyExistsException("A user with email '" + request.getEmail() + "' already exists");
+        if (repository.findByUsername(request.getUsername()).isPresent()) {
+            throw new ResourceAlreadyExistsException("A user with username '" + request.getUsername() + "' already exists");
         }
 
         var user = User.builder()
-                .email(request.getEmail())
+                .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .build();
@@ -37,10 +37,10 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
-        var user = repository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new ResourceNotFoundException("No account found for email '" + request.getEmail() + "'"));
+        var user = repository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("No account found for username '" + request.getUsername() + "'"));
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
