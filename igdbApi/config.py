@@ -123,9 +123,8 @@ ENDPOINTS = {
     },
     'games': {
         'collection': 'games',
-        # Exclude bundles/mods, prioritize main games and remakes
-        'fields': 'id, name, slug, summary, storyline, category, first_release_date, themes, genres, platforms, game_modes, keywords, involved_companies, cover, artworks, screenshots, franchises, franchise, collections, collection, total_rating, total_rating_count, hypes, parent_game, dlcs, expansions, remakes, remasters, similar_games, videos, websites, player_perspectives, game_engines, age_ratings, language_supports, multiplayer_modes;',
+        'fields': 'id, name, slug, summary, storyline, category, first_release_date, themes, genres, platforms, game_modes, keywords, involved_companies, cover, artworks, screenshots, franchises, franchise, collections, collection, total_rating, total_rating_count, hypes, parent_game, dlcs, expansions, remakes, remasters, similar_games, videos, websites, player_perspectives, game_engines, age_ratings, language_supports, multiplayer_modes',
         'limit': 500,
-        'where': 'where category = (0, 3, 4, 8, 9, 10, 11) & version_parent = null;'
+        'where': 'category = (0, 8, 9, 10, 11) & parent_game = null'
     }
 }

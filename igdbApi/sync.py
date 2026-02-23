@@ -22,7 +22,7 @@ class IGDBSync:
         self.client = MongoClient(MONGO_URI)
         self.db = self.client[DB_NAME]
         self.state = self.load_state()
-        self.session = requests.Session()  # Reuse TCP connections
+        self.session = requests.Session()
 
     def load_state(self):
         if os.path.exists(STATE_FILE):
@@ -45,7 +45,6 @@ class IGDBSync:
     def fetch_and_upsert(self, endpoint_name, offset, base_url, headers, body_template, coll):
         body = body_template.replace("OFFSET_PLACEHOLDER", str(offset))
         try:
-            # Use the shared session for faster requests
             response = self.session.post(base_url, headers=headers, data=body, timeout=30)
             
             if response.status_code == 429:
@@ -69,11 +68,13 @@ class IGDBSync:
                 )
             
             if ops:
-                # IMPORTANT: ordered=False is MUCH faster for bulk writes
                 coll.bulk_write(ops, ordered=False)
                 return len(ops)
         except Exception as e:
-            print(f"Error at offset {offset}: {e}")
+            msg = str(e)
+            if "response" in locals() and response is not None:
+                msg = f"{response.status_code} - {response.text[:100]}"
+            print(f"Error at offset {offset}: {msg}")
             return -1
         return 0
 
@@ -84,22 +85,24 @@ class IGDBSync:
         config = ENDPOINTS[endpoint_name]
         collection_name = config['collection']
         limit = config['limit']
-        fields = config['fields']
-        where = config.get('where', '')
+        fields = config['fields'].strip().rstrip(';')
+        where = config.get('where', '').strip().rstrip(';')
         coll = self.db[collection_name]
         
         offset = self.state.get(endpoint_name, 0)
-        print(f"\n>>> MAX TURBO: '{endpoint_name}' (Starting at {offset})")
+        print(f"\n>>> SUPER TURBO: '{endpoint_name}' (Starting at {offset})")
         
         base_url = f"https://api.igdb.com/v4/{endpoint_name}"
         
-        body_template = f"fields {fields}"
+        # Clean query construction
+        query_parts = [f"fields {fields}"]
         if where:
-            if not where.strip().startswith('where'):
-                body_template += f" where {where}"
-            else:
-                body_template += f" {where}"
-        body_template += f" limit {limit}; offset OFFSET_PLACEHOLDER;"
+            # Strip redundant 'where' keyword
+            clean_where = where.replace('where ', '', 1) if where.lower().startswith('where ') else where
+            query_parts.append(f"where {clean_where}")
+        
+        query_parts.append(f"limit {limit}; offset OFFSET_PLACEHOLDER;")
+        body_template = "; ".join(query_parts)
 
         while True:
             start_time = time.time()
@@ -114,18 +117,19 @@ class IGDBSync:
                     off = futures[future]
                     results_by_offset[off] = future.result()
                 
-                # Check for rate limiting or general errors
+                # Check for rate limiting
                 if any(r == -429 for r in results_by_offset.values()):
                     print("Rate limited! Sleeping 10s...")
                     time.sleep(10)
                     continue
                     
+                # Check for errors - only retry if it wasn't a 200 OK with 0 results
                 if any(r == -1 for r in results_by_offset.values()):
-                    print("Network error, retrying batch in 5s...")
+                    print("Batch had errors, retrying in 5s...")
                     time.sleep(5)
                     continue
 
-                # Break ONLY if the lowest requested offset returned nothing
+                # END OF DATA: Stop if the lowest offset returned 0 items
                 if results_by_offset[min(offsets_to_fetch)] == 0:
                     print(f"Reached end of {endpoint_name}.")
                     break
@@ -137,10 +141,9 @@ class IGDBSync:
                 self.state[endpoint_name] = offset
                 self.save_state()
                 
-                # Dynamically sleep to maintain exactly 4 requests per second
+                # Wait just enough to respect 4 req/sec
                 elapsed = time.time() - start_time
-                sleep_time = max(0.1, 1.05 - elapsed) 
-                time.sleep(sleep_time)
+                time.sleep(max(0.1, 1.1 - elapsed))
 
     def run_all(self):
         order = [
@@ -154,7 +157,7 @@ class IGDBSync:
         for ep in order:
             if ep in ENDPOINTS:
                 self.sync_endpoint(ep)
-        print("\n=== MAX TURBO SYNC COMPLETE ===")
+        print("\n=== SYNC PROGRESS COMPLETE ===")
 
 if __name__ == "__main__":
     sync = IGDBSync()
