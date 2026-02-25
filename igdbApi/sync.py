@@ -96,9 +96,13 @@ class IGDBSync:
             ops = []
             for item in data:
                 item = self.format_item(item, endpoint_name)
+                
+                # OPTIMIZATION: Use _id if available, otherwise igdbId
+                filter_query = {'_id': item['_id']} if '_id' in item else {'igdbId': item['igdbId']}
+                
                 ops.append(
                     UpdateOne(
-                        {'igdbId': item['igdbId']},
+                        filter_query,
                         {'$set': item},
                         upsert=True
                     )

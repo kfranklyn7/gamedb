@@ -87,7 +87,7 @@ ENDPOINTS = {
     },
     'websites': {
         'collection': 'websites',
-        'fields': 'id, game, category, trusted, url;',
+        'fields': 'id, game, category, trusted, url, checksum;',
         'limit': 500,
         'where': ''
     },
