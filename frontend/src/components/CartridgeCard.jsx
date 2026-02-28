@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getParsedCover } from '../utils/imageUtils';
 import { Edit3, Trash2 } from 'lucide-react';
 import StatusBadge from './StatusBadge';
 
 const CartridgeCard = ({ listItem, onEdit, onDelete }) => {
     const { game, status, personalRating } = listItem;
-    const coverUrl = game.cover
-        ? `https:${game.cover.replace('t_thumb', 't_cover_big')}`
-        : 'https://placehold.co/90x120?text=No+Cover';
+    const coverUrl = getParsedCover(game.cover);
 
     const genreTags = game.genreNames || [];
     const visibleGenres = genreTags.slice(0, 3);

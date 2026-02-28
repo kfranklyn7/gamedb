@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getParsedCover } from '../utils/imageUtils';
 import { STATUS_CONFIG } from './StatusBadge';
 
 const ChipCard = ({ listItem }) => {
     const { game, status, personalRating } = listItem;
-    const coverUrl = game.cover
-        ? `https:${game.cover.replace('t_thumb', 't_cover_big')}`
-        : 'https://placehold.co/264x374?text=No+Cover';
+    const coverUrl = getParsedCover(game.cover);
 
     const statusConfig = STATUS_CONFIG[status];
 

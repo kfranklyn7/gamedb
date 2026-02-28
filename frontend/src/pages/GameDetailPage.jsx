@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { getParsedCover } from '../utils/imageUtils';
 import { gamesApi } from '../api/games';
 import { userListApi } from '../api/userList';
 import { useAuth } from '../context/AuthContext';
@@ -80,7 +81,7 @@ const GameDetailPage = () => {
         }
     };
 
-    const coverUrl = game.cover ? `https:${game.cover.replace('t_thumb', 't_cover_big')}` : 'https://placehold.co/264x352?text=No+Cover';
+    const coverUrl = getParsedCover(game.cover);
     const year = game.releaseDate ? new Date(game.releaseDate).getFullYear() : 'TBA';
 
     return (
@@ -241,7 +242,7 @@ const GameDetailPage = () => {
                             <h3 className="text-2xl font-display font-bold text-text mb-4">Similar Games</h3>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                                 {game.similarGamesData.filter(Boolean).slice(0, 6).map(sg => {
-                                    const coverUrl = sg.cover ? (sg.cover.startsWith('//') ? `https:${sg.cover.replace('t_thumb', 't_cover_big')}` : sg.cover) : null;
+                                    const coverUrl = getParsedCover(sg.cover);
                                     return (
                                         <Link key={sg.igdbId} to={`/game/${sg.igdbId}`} className="group relative block aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border shadow-sm">
                                             {coverUrl ? (

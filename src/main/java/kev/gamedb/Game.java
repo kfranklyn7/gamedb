@@ -25,54 +25,68 @@ public class Game {
     private Integer igdbId;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Artwork> artworks;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private Cover cover;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonManagedReference
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private Franchise franchise;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
-    @JsonManagedReference
+    @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Franchise> franchises;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @Field("game_modes")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<GameModes> gameModes;
     @JsonIgnore
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Genre> genres;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Keyword> keywords;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonManagedReference
     @Field("involved_companies")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<InvolvedCompany> involvedCompanies;
     private String name;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Platform> platforms;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Screenshot> screenshots;
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnoreProperties({"involved_companies", "cover", "similarGames", "themes", "genres", "platforms", "artworks", "screenshots", "gameModes", "franchises", "franchise"})
     @Field("similar_games")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Game> similarGames;
     private String slug;
     private String summary;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Theme> themes;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
     @Field("collection")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private Collection collection;
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @Field("as_child_relations")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Game> asChildRelations;
     @Field("first_release_date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM dd, yyyy", timezone = "UTC")
@@ -101,35 +115,42 @@ public class Game {
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Video> videos;
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<Website> websites;
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
     @Field("player_perspectives")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<PlayerPerspective> playerPerspectives;
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
     @Field("game_engines")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<GameEngine> gameEngines;
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
     @Field("age_ratings")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<AgeRating> ageRatings;
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
     @Field("language_supports")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<LanguageSupport> languageSupports;
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
     @Field("multiplayer_modes")
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private List<MultiplayerMode> multiplayerModes;
 
     @Field("version_title")
@@ -141,7 +162,12 @@ public class Game {
     @JsonProperty("genreNames")
     public List<String> getGenreNames() {
         if (genres == null) return null;
-        return genres.stream().map(Genre::getName).distinct().toList();
+        return genres.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(g -> { try { return g.getName(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
     }
 
     public void setReleaseDate(Object date) {
@@ -155,48 +181,77 @@ public class Game {
     @JsonProperty("franchiseNames")
     public List<String> getFranchiseNames() {
         if (franchises == null) return java.util.Collections.emptyList();
-        return franchises.stream().map(Franchise::getName).toList();
+        return franchises.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(f -> { try { return f.getName(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .toList();
     }
 
     public String getFranchise() {
-        return (franchise != null) ? franchise.getName() : null;
+        if (franchise == null) return null;
+        try { return franchise.getName(); } catch (Exception e) { return null; }
     }
 
     @JsonProperty("gameModes")
     public List<String> getGameModes() {
         if (gameModes == null) return java.util.Collections.emptyList();
-        return gameModes.stream().map(GameModes::getName).distinct().toList();
+        return gameModes.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(gm -> { try { return gm.getName(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
     }
 
     @JsonProperty("themes")
+    @JsonIgnore
     public List<String> getThemes() {
         if (themes == null) return java.util.Collections.emptyList();
-        return themes.stream().map(Theme::getName).distinct().toList();
+        return themes.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(t -> { try { return t.getName(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
     }
 
     @JsonProperty("platforms")
     public List<String> getPlatforms() {
         if (platforms == null) return java.util.Collections.emptyList();
-        return platforms.stream().map(Platform::getName).distinct().toList();
+        return platforms.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(p -> { try { return p.getName(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
     }
 
     @JsonProperty("cover")
     public String getCover() {
-        return (cover != null) ? cover.getUrl() : null;
+        if (cover == null) return null;
+        try { return cover.getUrl(); } catch (Exception e) { return null; }
     }
 
     @JsonProperty("involved_companies")
+    @JsonIgnore
     public List<String> getInvolvedCompanies() {
         if (involvedCompanies == null) return java.util.Collections.emptyList();
-        return involvedCompanies.stream().map(InvolvedCompany::getCompany).toList();
+        return involvedCompanies.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(ic -> { try { return ic.getCompany(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .toList();
     }
 
     @JsonProperty("developers")
     public List<String> getDevelopers() {
         if (involvedCompanies == null) return java.util.Collections.emptyList();
         return involvedCompanies.stream()
-                .filter(ic -> Boolean.TRUE.equals(ic.getDeveloper()))
-                .map(InvolvedCompany::getCompany)
+                .filter(java.util.Objects::nonNull)
+                .filter(ic -> { try { return Boolean.TRUE.equals(ic.getDeveloper()); } catch (Exception e) { return false; } })
+                .map(ic -> { try { return ic.getCompany(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
                 .toList();
     }
 
@@ -204,19 +259,26 @@ public class Game {
     public List<String> getPublishers() {
         if (involvedCompanies == null) return java.util.Collections.emptyList();
         return involvedCompanies.stream()
-                .filter(ic -> Boolean.TRUE.equals(ic.getPublisher()))
-                .map(InvolvedCompany::getCompany)
+                .filter(java.util.Objects::nonNull)
+                .filter(ic -> { try { return Boolean.TRUE.equals(ic.getPublisher()); } catch (Exception e) { return false; } })
+                .map(ic -> { try { return ic.getCompany(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
                 .toList();
     }
 
     public String getSeriesName() {
-        return (collection != null) ? collection.getName() : null;
+        if (collection == null) return null;
+        try { return collection.getName(); } catch (Exception e) { return null; }
     }
 
     @JsonProperty("versionHistory")
     public List<String> getVersionHistory() {
         if (asChildRelations == null) return null;
-        return asChildRelations.stream().map(Game::getName).toList();
+        return asChildRelations.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(g -> { try { return g.getName(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .toList();
     }
 
     @JsonProperty("total_rating_count")
@@ -256,63 +318,100 @@ public class Game {
     public String getChecksum() { return checksum; }
 
     @JsonProperty("videos")
+    @JsonIgnore
     public List<String> getVideos() {
         if (videos == null) return java.util.Collections.emptyList();
-        return videos.stream().map(Video::getVideoId).distinct().toList();
+        return videos.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(v -> { try { return v.getVideoId(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
     }
 
     @JsonProperty("websites")
+    @JsonIgnore
     public List<String> getWebsites() {
         if (websites == null) return java.util.Collections.emptyList();
-        return websites.stream().map(Website::getUrl).distinct().toList();
+        return websites.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(w -> { try { return w.getUrl(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
     }
 
     @JsonProperty("playerPerspectives")
+    @JsonIgnore
     public List<String> getPlayerPerspectives() {
         if (playerPerspectives == null) return java.util.Collections.emptyList();
-        return playerPerspectives.stream().map(PlayerPerspective::getName).distinct().toList();
+        return playerPerspectives.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(pp -> { try { return pp.getName(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
     }
 
     @JsonProperty("gameEngines")
+    @JsonIgnore
     public List<String> getGameEngines() {
         if (gameEngines == null) return java.util.Collections.emptyList();
-        return gameEngines.stream().map(GameEngine::getName).distinct().toList();
+        return gameEngines.stream()
+                .filter(java.util.Objects::nonNull)
+                .map(ge -> { try { return ge.getName(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull)
+                .distinct()
+                .toList();
     }
 
     @JsonProperty("artworks")
+    @JsonIgnore
     public List<String> getArtworks() {
         if (artworks == null) return java.util.Collections.emptyList();
-        return artworks.stream().filter(java.util.Objects::nonNull).map(Artwork::getImageId).distinct().toList();
+        return artworks.stream().filter(java.util.Objects::nonNull)
+                .map(a -> { try { return a.getImageId(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull).distinct().toList();
     }
 
     @JsonProperty("screenshots")
+    @JsonIgnore
     public List<String> getScreenshots() {
         if (screenshots == null) return java.util.Collections.emptyList();
-        return screenshots.stream().filter(java.util.Objects::nonNull).map(Screenshot::getImageId).distinct().toList();
+        return screenshots.stream().filter(java.util.Objects::nonNull)
+                .map(s -> { try { return s.getImageId(); } catch (Exception e) { return null; } })
+                .filter(java.util.Objects::nonNull).distinct().toList();
     }
 
     @JsonProperty("ageRatings")
     public List<java.util.Map<String, Object>> getAgeRatings() {
         if (ageRatings == null) return java.util.Collections.emptyList();
         return ageRatings.stream()
-                .map(ar -> java.util.Map.<String, Object>of(
-                        "category", ar.getCategory(),
-                        "rating", ar.getRating()
-                )).toList();
+                .filter(java.util.Objects::nonNull)
+                .map(ar -> {
+                    java.util.Map<String, Object> map = new java.util.HashMap<>();
+                    map.put("category", ar.getCategory());
+                    map.put("rating", ar.getRating());
+                    return map;
+                }).toList();
     }
 
     @JsonProperty("similarGamesData")
+    @JsonIgnore
     public List<java.util.Map<String, Object>> getSimilarGamesData() {
         if (similarGames == null) return java.util.Collections.emptyList();
         return similarGames.stream()
                 .filter(java.util.Objects::nonNull)
                 .map(g -> {
-                    java.util.Map<String, Object> map = new java.util.HashMap<>();
-                    map.put("igdbId", g.getIgdbId());
-                    map.put("name", g.getName());
-                    if (g.getCover() != null) map.put("cover", g.getCover());
-                    return map;
+                    try {
+                        java.util.Map<String, Object> map = new java.util.HashMap<>();
+                        map.put("igdbId", g.getIgdbId());
+                        map.put("name", g.getName());
+                        if (g.getCover() != null) map.put("cover", g.getCover());
+                        return map;
+                    } catch (Exception e) { return null; }
                 })
+                .filter(java.util.Objects::nonNull)
                 .toList();
     }
 }

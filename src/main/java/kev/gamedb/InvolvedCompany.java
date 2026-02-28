@@ -20,9 +20,11 @@ public class InvolvedCompany {
     private Integer igdbId;
     @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private Company company;
     @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
+    @lombok.Getter(lombok.AccessLevel.NONE)
     private Game game;
     private Boolean developer;
     private Boolean porting;
@@ -30,10 +32,12 @@ public class InvolvedCompany {
     private Boolean supporting;
     @JsonProperty("game")
     public String getGame(){
-        return game.getName();
+        if (game == null) return null;
+        try { return game.getName(); } catch (Exception e) { return null; }
     }
     @JsonProperty("company")
     public String getCompany(){
-        return (company != null) ? company.getName() : null;
+        if (company == null) return null;
+        try { return company.getName(); } catch (Exception e) { return null; }
     }
 }

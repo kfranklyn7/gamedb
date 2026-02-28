@@ -232,12 +232,7 @@ class IGDBSync:
         self.ensure_indexes()
         
         order = [
-            'genres', 'themes', 'platforms', 'keywords', 'game_modes',
-            'companies', 'franchises', 'collections', 'release_dates',
-            'covers', 'artworks', 'screenshots', 'involved_companies',
-            'game_videos', 'websites', 'player_perspectives', 'game_engines',
-            'age_ratings', 'language_supports', 'multiplayer_modes',
-            'games'
+            'covers', 'games'
         ]
         for ep in order:
             if ep in ENDPOINTS:

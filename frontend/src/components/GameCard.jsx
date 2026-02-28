@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getParsedCover } from '../utils/imageUtils';
 import RatingBadge from './RatingBadge';
 import CategoryTag from './CategoryTag';
 
 const GameCard = ({ game }) => {
-    const coverUrl = game.cover ? `https:${game.cover.replace('t_thumb', 't_cover_big')}` : 'https://placehold.co/264x352?text=No+Cover';
+    const coverUrl = getParsedCover(game.cover);
     const year = game.releaseDate ? new Date(game.releaseDate).getFullYear() : 'TBA';
 
     const genreTags = game.genreNames || [];

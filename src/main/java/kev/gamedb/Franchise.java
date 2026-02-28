@@ -21,6 +21,7 @@ public class Franchise {
     @Field("igdbId")
     private Integer igdbId;
     @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private List<Game> games;
     private String name;
     private String slug;

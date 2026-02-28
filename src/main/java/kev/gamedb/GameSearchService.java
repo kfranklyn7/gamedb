@@ -37,21 +37,29 @@ public class GameSearchService {
 
         // 2. CONSTRUCT FILTERS
         List<Criteria> filters = new ArrayList<>();
-        if (criteria.getGenres() != null && !criteria.getGenres().isEmpty()) filters.add(Criteria.where("genres").in(criteria.getGenres()));
-        if (criteria.getPlatforms() != null && !criteria.getPlatforms().isEmpty()) filters.add(Criteria.where("platforms").in(criteria.getPlatforms()));
-        if (criteria.getThemes() != null && !criteria.getThemes().isEmpty()) filters.add(Criteria.where("themes").in(criteria.getThemes()));
-        if (criteria.getGameModes() != null && !criteria.getGameModes().isEmpty()) filters.add(Criteria.where("game_modes").in(criteria.getGameModes()));
-        if (criteria.getInvolvedCompanies() != null && !criteria.getInvolvedCompanies().isEmpty()) filters.add(Criteria.where("involved_companies").in(criteria.getInvolvedCompanies()));
-        if (criteria.getMinTotalRating() != null) filters.add(Criteria.where("total_rating").gte(criteria.getMinTotalRating()));
-        
+        if (criteria.getGenres() != null && !criteria.getGenres().isEmpty())
+            filters.add(Criteria.where("genres").in(criteria.getGenres()));
+        if (criteria.getPlatforms() != null && !criteria.getPlatforms().isEmpty())
+            filters.add(Criteria.where("platforms").in(criteria.getPlatforms()));
+        if (criteria.getThemes() != null && !criteria.getThemes().isEmpty())
+            filters.add(Criteria.where("themes").in(criteria.getThemes()));
+        if (criteria.getGameModes() != null && !criteria.getGameModes().isEmpty())
+            filters.add(Criteria.where("game_modes").in(criteria.getGameModes()));
+        if (criteria.getInvolvedCompanies() != null && !criteria.getInvolvedCompanies().isEmpty())
+            filters.add(Criteria.where("involved_companies").in(criteria.getInvolvedCompanies()));
+        if (criteria.getMinTotalRating() != null)
+            filters.add(Criteria.where("total_rating").gte(criteria.getMinTotalRating()));
+
         if (criteria.getMinReleaseYear() != null || criteria.getMaxReleaseYear() != null) {
             Criteria dateCriteria = Criteria.where("first_release_date");
             if (criteria.getMinReleaseYear() != null) {
-                java.time.Instant start = java.time.Year.of(criteria.getMinReleaseYear()).atDay(1).atStartOfDay(java.time.ZoneOffset.UTC).toInstant();
+                java.time.Instant start = java.time.Year.of(criteria.getMinReleaseYear()).atDay(1)
+                        .atStartOfDay(java.time.ZoneOffset.UTC).toInstant();
                 dateCriteria.gte(start);
             }
             if (criteria.getMaxReleaseYear() != null) {
-                java.time.Instant end = java.time.Year.of(criteria.getMaxReleaseYear()).atMonth(12).atDay(31).atTime(23, 59, 59).toInstant(java.time.ZoneOffset.UTC);
+                java.time.Instant end = java.time.Year.of(criteria.getMaxReleaseYear()).atMonth(12).atDay(31)
+                        .atTime(23, 59, 59).toInstant(java.time.ZoneOffset.UTC);
                 dateCriteria.lte(end);
             }
             filters.add(dateCriteria);
@@ -66,7 +74,8 @@ public class GameSearchService {
         if (sortByField == null || sortByField.isEmpty()) {
             sortByField = (criteria.getSearchTerm() != null) ? "score" : "total_rating";
         }
-        Sort.Direction dir = (criteria.getSortDirection() != null && criteria.getSortDirection().equalsIgnoreCase("asc")) ? Sort.Direction.ASC : Sort.Direction.DESC;
+        Sort.Direction dir = (criteria.getSortDirection() != null
+                && criteria.getSortDirection().equalsIgnoreCase("asc")) ? Sort.Direction.ASC : Sort.Direction.DESC;
         pipeline.add(Aggregation.sort(dir, sortByField));
         pipeline.add(Aggregation.skip((long) criteria.getPage() * criteria.getSize()));
         pipeline.add(Aggregation.limit(criteria.getSize()));
@@ -78,29 +87,47 @@ public class GameSearchService {
                 "\"if\": { \"$isArray\": \"$%s\" }, " +
                 "\"then\": \"$%s\", " +
                 "\"else\": { \"$cond\": { " +
-                    "\"if\": { \"$and\": [ { \"$eq\": [{ \"$type\": \"$%s\" }, \"string\"] }, { \"$ne\": [\"$%s\", \"\"] } ] }, " +
-                    "\"then\": { \"$filter\": { " +
-                        "\"input\": { \"$map\": { " +
-                            "\"input\": { \"$split\": [ { \"$replaceAll\": { \"input\": { \"$replaceAll\": { \"input\": \"$%s\", \"find\": \"[\", \"replacement\": \"\" } }, \"find\": \"]\", \"replacement\": \"\" } }, \",\" ] }, " +
-                            "\"as\": \"id\", " +
-                            "\"in\": { \"$convert\": { \"input\": { \"$trim\": { \"input\": \"$$id\" } }, \"to\": \"int\", \"onError\": null, \"onNull\": null } } " +
-                        "} }, " +
-                        "\"as\": \"val\", " +
-                        "\"cond\": { \"$ne\": [\"$$val\", null] } " +
-                    "} }, " +
-                    "\"else\": [] " +
+                "\"if\": { \"$and\": [ { \"$eq\": [{ \"$type\": \"$%s\" }, \"string\"] }, { \"$ne\": [\"$%s\", \"\"] } ] }, "
+                +
+                "\"then\": { \"$filter\": { " +
+                "\"input\": { \"$map\": { " +
+                "\"input\": { \"$split\": [ { \"$replaceAll\": { \"input\": { \"$replaceAll\": { \"input\": \"$%s\", \"find\": \"[\", \"replacement\": \"\" } }, \"find\": \"]\", \"replacement\": \"\" } }, \",\" ] }, "
+                +
+                "\"as\": \"id\", " +
+                "\"in\": { \"$convert\": { \"input\": { \"$trim\": { \"input\": \"$$id\" } }, \"to\": \"int\", \"onError\": null, \"onNull\": null } } "
+                +
+                "} }, " +
+                "\"as\": \"val\", " +
+                "\"cond\": { \"$ne\": [\"$$val\", null] } " +
+                "} }, " +
+                "\"else\": [] " +
                 "} } " +
-            "} } ";
+                "} } ";
 
         pipeline.add(Aggregation.addFields()
-                .addFieldWithValue("cleanPlatforms", MongoExpression.create(String.format(cleanArrayExp, "platforms", "platforms", "platforms", "platforms", "platforms")))
-                .addFieldWithValue("cleanGenres", MongoExpression.create(String.format(cleanArrayExp, "genres", "genres", "genres", "genres", "genres")))
-                .addFieldWithValue("cleanThemes", MongoExpression.create(String.format(cleanArrayExp, "themes", "themes", "themes", "themes", "themes")))
-                .addFieldWithValue("cleanModes", MongoExpression.create(String.format(cleanArrayExp, "game_modes", "game_modes", "game_modes", "game_modes", "game_modes")))
-                .addFieldWithValue("cleanInvolved", MongoExpression.create(String.format(cleanArrayExp, "involved_companies", "involved_companies", "involved_companies", "involved_companies", "involved_companies")))
-                .addFieldWithValue("cleanFranchises", MongoExpression.create(String.format(cleanArrayExp, "franchises", "franchises", "franchises", "franchises", "franchises")))
-                .addFieldWithValue("cleanCollections", MongoExpression.create(String.format(cleanArrayExp, "collections", "collections", "collections", "collections", "collections")))
-                .addFieldWithValue("first_release_date", MongoExpression.create("{ \"$cond\": { \"if\": { \"$eq\": [\"$first_release_date\", \"\"] }, \"then\": null, \"else\": \"$first_release_date\" } }"))
+                .addFieldWithValue("cleanPlatforms",
+                        MongoExpression.create(String.format(cleanArrayExp, "platforms", "platforms", "platforms",
+                                "platforms", "platforms")))
+                .addFieldWithValue("cleanGenres",
+                        MongoExpression
+                                .create(String.format(cleanArrayExp, "genres", "genres", "genres", "genres", "genres")))
+                .addFieldWithValue("cleanThemes",
+                        MongoExpression
+                                .create(String.format(cleanArrayExp, "themes", "themes", "themes", "themes", "themes")))
+                .addFieldWithValue("cleanModes",
+                        MongoExpression.create(String.format(cleanArrayExp, "game_modes", "game_modes", "game_modes",
+                                "game_modes", "game_modes")))
+                .addFieldWithValue("cleanInvolved",
+                        MongoExpression.create(String.format(cleanArrayExp, "involved_companies", "involved_companies",
+                                "involved_companies", "involved_companies", "involved_companies")))
+                .addFieldWithValue("cleanFranchises",
+                        MongoExpression.create(String.format(cleanArrayExp, "franchises", "franchises", "franchises",
+                                "franchises", "franchises")))
+                .addFieldWithValue("cleanCollections",
+                        MongoExpression.create(String.format(cleanArrayExp, "collections", "collections", "collections",
+                                "collections", "collections")))
+                .addFieldWithValue("first_release_date", MongoExpression.create(
+                        "{ \"$cond\": { \"if\": { \"$eq\": [\"$first_release_date\", \"\"] }, \"then\": null, \"else\": \"$first_release_date\" } }"))
                 .build());
 
         // 5. LOOKUPS
@@ -109,16 +136,19 @@ public class GameSearchService {
         pipeline.add(Aggregation.lookup("themes", "cleanThemes", "igdbId", "themes"));
         pipeline.add(Aggregation.lookup("game_modes", "cleanModes", "igdbId", "game_modes"));
         pipeline.add(Aggregation.lookup("franchises", "cleanFranchises", "igdbId", "franchises"));
-        pipeline.add(Aggregation.lookup("collections", "cleanCollections", "id", "collectionObjects"));
-        
+        pipeline.add(Aggregation.lookup("collections", "cleanCollections", "igdbId", "collectionObjects"));
+
         // Complex lookup for involved_companies to get company data
         pipeline.add(Aggregation.lookup("involved_companies", "cleanInvolved", "igdbId", "involved_companies"));
 
         // 6. FINAL MAPPING & NAME EXTRACTION
         pipeline.add(Aggregation.addFields()
-                .addFieldWithValue("franchiseName", MongoExpression.create("{\"$arrayElemAt\": [\"$franchises.name\", 0]}"))
-                .addFieldWithValue("seriesName", MongoExpression.create("{\"$arrayElemAt\": [\"$collectionObjects.name\", 0]}"))
-                .addFieldWithValue("collection", MongoExpression.create("{\"$arrayElemAt\": [\"$collectionObjects\", 0]}"))
+                .addFieldWithValue("franchiseName",
+                        MongoExpression.create("{\"$arrayElemAt\": [\"$franchises.name\", 0]}"))
+                .addFieldWithValue("seriesName",
+                        MongoExpression.create("{\"$arrayElemAt\": [\"$collectionObjects.name\", 0]}"))
+                .addFieldWithValue("collection",
+                        MongoExpression.create("{\"$arrayElemAt\": [\"$collectionObjects\", 0]}"))
                 .build());
 
         return mongoTemplate.aggregate(Aggregation.newAggregation(pipeline), "games", Game.class).getMappedResults();

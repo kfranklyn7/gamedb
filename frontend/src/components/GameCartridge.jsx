@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getParsedCover } from '../utils/imageUtils';
 import StatusBadge, { STATUS_CONFIG } from './StatusBadge';
 import { Edit3, Trash2 } from 'lucide-react';
 
 const GameCartridge = ({ listItem, onEdit, onDelete }) => {
     const { game, status, personalRating, lastUpdated } = listItem;
-    const coverUrl = game.cover ? `https:${game.cover}` : 'https://placehold.co/90x120?text=No+Cover';
+    const coverUrl = getParsedCover(game.cover);
 
     const config = STATUS_CONFIG[status];
     const borderStyle = config ? config.colorBorder : 'border-border';

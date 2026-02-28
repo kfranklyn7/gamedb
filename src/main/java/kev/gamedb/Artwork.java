@@ -17,6 +17,7 @@ public class Artwork {
     private ObjectId id;
     private Integer igdbId;
     @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
+    @com.fasterxml.jackson.annotation.JsonIgnore
     private Game game;
     @org.springframework.data.mongodb.core.mapping.Field("image_id")
     private String imageId;

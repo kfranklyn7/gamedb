@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { getParsedCover } from '../utils/imageUtils';
 import { Edit3, Trash2, CalendarDays, RefreshCw } from 'lucide-react';
 import ScoreBox from './ScoreBox';
 import CategoryTag from './CategoryTag';
@@ -18,9 +19,7 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
         replayCount, startedAt, completedAt, priority
     } = listItem;
 
-    const coverUrl = game.cover
-        ? `https:${game.cover.replace('t_thumb', 't_cover_big')}`
-        : 'https://placehold.co/264x374?text=No+Cover';
+    const coverUrl = getParsedCover(game.cover);
 
     const publisher = game.publishers?.[0] || '';
     const developer = game.developers?.[0] || '';
