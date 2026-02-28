@@ -18,11 +18,11 @@ public class InvolvedCompany {
     @Id
     private ObjectId id;
     private Integer igdbId;
-    @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
     @lombok.Getter(lombok.AccessLevel.NONE)
     private Company company;
-    @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore
     @lombok.Getter(lombok.AccessLevel.NONE)
     private Game game;
@@ -30,14 +30,37 @@ public class InvolvedCompany {
     private Boolean porting;
     private Boolean publisher;
     private Boolean supporting;
+
     @JsonProperty("game")
-    public String getGame(){
-        if (game == null) return null;
-        try { return game.getName(); } catch (Exception e) { return null; }
+    public String getGame() {
+        if (game == null)
+            return null;
+        try {
+            return game.getName();
+        } catch (Exception e) {
+            return null;
+        }
     }
+
     @JsonProperty("company")
-    public String getCompany(){
-        if (company == null) return null;
-        try { return company.getName(); } catch (Exception e) { return null; }
+    public String getCompany() {
+        if (company == null)
+            return null;
+        try {
+            return company.getName();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @JsonProperty("companyId")
+    public Integer getCompanyId() {
+        if (company == null)
+            return null;
+        try {
+            return company.getIgdbId();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

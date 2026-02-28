@@ -40,12 +40,14 @@ public class UserListService {
 
         // Check if game exists in the database
         if (gameRepository.findByIgdbId(request.getGameId()).isEmpty()) {
-            throw new ResourceNotFoundException("Game with ID " + request.getGameId() + " does not exist in the database");
+            throw new ResourceNotFoundException(
+                    "Game with ID " + request.getGameId() + " does not exist in the database");
         }
 
         // Check if game already in user's list
         if (itemRepository.findByUserIdAndGameId(userId, request.getGameId()).isPresent()) {
-            throw new ResourceAlreadyExistsException("Game with ID " + request.getGameId() + " is already in your list. Use PATCH to update it.");
+            throw new ResourceAlreadyExistsException(
+                    "Game with ID " + request.getGameId() + " is already in your list. Use PATCH to update it.");
         }
 
         UserGameListItem item = new UserGameListItem();
@@ -63,16 +65,24 @@ public class UserListService {
 
     public UserGameListItem updateItem(String userId, UserListItemRequestDTO request) {
         UserGameListItem item = itemRepository.findByUserIdAndGameId(userId, request.getGameId())
-                .orElseThrow(() -> new ResourceNotFoundException("Game with ID " + request.getGameId() + " is not in your list"));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Game with ID " + request.getGameId() + " is not in your list"));
 
-        if (request.getStatus() != null) item.setStatus(request.getStatus());
-        if (request.getPersonalRating() != null) item.setPersonalRating(request.getPersonalRating());
-        if (request.getReview() != null) item.setReview(request.getReview());
+        if (request.getStatus() != null)
+            item.setStatus(request.getStatus());
+        if (request.getPersonalRating() != null)
+            item.setPersonalRating(request.getPersonalRating());
+        if (request.getReview() != null)
+            item.setReview(request.getReview());
         // Quest Journal v2 fields
-        if (request.getReplayCount() != null) item.setReplayCount(request.getReplayCount());
-        if (request.getStartedAt() != null) item.setStartedAt(request.getStartedAt());
-        if (request.getCompletedAt() != null) item.setCompletedAt(request.getCompletedAt());
-        if (request.getPriority() != null) item.setPriority(request.getPriority());
+        if (request.getReplayCount() != null)
+            item.setReplayCount(request.getReplayCount());
+        if (request.getStartedAt() != null)
+            item.setStartedAt(request.getStartedAt());
+        if (request.getCompletedAt() != null)
+            item.setCompletedAt(request.getCompletedAt());
+        if (request.getPriority() != null)
+            item.setPriority(request.getPriority());
         item.setLastUpdated(Instant.now());
 
         return itemRepository.save(item);
@@ -222,7 +232,8 @@ public class UserListService {
             } else {
                 // Custom list
                 Optional<UserList> customList = listRepository.findByUserId(userId).stream()
-                        .filter(l -> l.getId().toHexString().equals(listIdOrName) || l.getName().equalsIgnoreCase(listIdOrName))
+                        .filter(l -> l.getId().toHexString().equals(listIdOrName)
+                                || l.getName().equalsIgnoreCase(listIdOrName))
                         .findFirst();
 
                 if (customList.isPresent()) {
@@ -267,7 +278,8 @@ public class UserListService {
 
     private List<String> extractGroupKeys(UserGameListItemDTO item, String groupBy) {
         Game game = item.getGame();
-        if (game == null) return List.of("Unknown");
+        if (game == null)
+            return List.of("Unknown");
 
         return switch (groupBy.toLowerCase()) {
             case "genre" -> nullSafe(game.getGenreNames());
@@ -282,8 +294,8 @@ public class UserListService {
                 String s = game.getSeriesName();
                 yield s != null ? List.of(s) : List.of("No Series");
             }
-            case "developer" -> nullSafe(game.getDevelopers());
-            case "publisher" -> nullSafe(game.getPublishers());
+            case "developer" -> extractCompanyNames(game.getDevelopers());
+            case "publisher" -> extractCompanyNames(game.getPublishers());
             case "status" -> {
                 yield item.getStatus() != null ? List.of(item.getStatus().name()) : List.of("No Status");
             }
@@ -292,8 +304,17 @@ public class UserListService {
     }
 
     private List<String> nullSafe(List<String> list) {
-        if (list == null || list.isEmpty()) return List.of("Unknown");
+        if (list == null || list.isEmpty())
+            return List.of("Unknown");
         return list;
+    }
+
+    private List<String> extractCompanyNames(List<Map<String, Object>> companies) {
+        if (companies == null || companies.isEmpty())
+            return List.of("Unknown");
+        return companies.stream()
+                .map(c -> c.get("name") != null ? c.get("name").toString() : "Unknown")
+                .toList();
     }
 
     // ─── Sorting Helpers ─────────────────────────────────────────────
@@ -312,7 +333,8 @@ public class UserListService {
     }
 
     private boolean isGameProperty(String sortBy) {
-        if (sortBy == null) return false;
+        if (sortBy == null)
+            return false;
         return switch (sortBy.toLowerCase()) {
             case "gamename", "total_rating" -> true;
             default -> false;
@@ -320,7 +342,8 @@ public class UserListService {
     }
 
     private void sortItems(List<UserGameListItemDTO> items, String sortBy, String sortDirection) {
-        if (sortBy == null) return;
+        if (sortBy == null)
+            return;
         boolean asc = "asc".equalsIgnoreCase(sortDirection);
 
         Comparator<UserGameListItemDTO> comparator = switch (sortBy.toLowerCase()) {
@@ -414,9 +437,12 @@ public class UserListService {
 
     private GameSearchDTO mapCriteriaToSearch(ListCriteria criteria) {
         GameSearchDTO search = new GameSearchDTO();
-        if (criteria.getGenres() != null) search.setGenres(criteria.getGenres().stream().map(String::valueOf).toList());
-        if (criteria.getPlatforms() != null) search.setPlatforms(criteria.getPlatforms().stream().map(String::valueOf).toList());
-        if (criteria.getGameModes() != null) search.setGameModes(criteria.getGameModes());
+        if (criteria.getGenres() != null)
+            search.setGenres(criteria.getGenres().stream().map(String::valueOf).toList());
+        if (criteria.getPlatforms() != null)
+            search.setPlatforms(criteria.getPlatforms().stream().map(String::valueOf).toList());
+        if (criteria.getGameModes() != null)
+            search.setGameModes(criteria.getGameModes());
         search.setSearchTerm(criteria.getSearchKeyword());
         search.setSize(100);
         return search;

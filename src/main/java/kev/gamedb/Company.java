@@ -21,28 +21,37 @@ public class Company {
     private ObjectId id;
     private Integer igdbId;
     private String description;
-    @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
-    @JsonIgnore
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({ "similarGamesData", "genres", "platforms", "themes",
+            "gameModes", "playerPerspectives", "involvedCompanies", "gameEngines", "keywords", "franchises",
+            "collections", "videos", "screenshots", "artworks" })
     private List<Game> developed;
     private String name;
-    @DocumentReference(lazy = true,lookup = "{ 'igdbId' : ?#{#target} }")
-    @JsonIgnore
+    @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties({ "similarGamesData", "genres", "platforms", "themes",
+            "gameModes", "playerPerspectives", "involvedCompanies", "gameEngines", "keywords", "franchises",
+            "collections", "videos", "screenshots", "artworks" })
     private List<Game> published;
     private String slug;
-    @JsonProperty("developed")
-    public List<String> getDeveloped(){
+
+    @JsonProperty("developedNames")
+    public List<String> getDevelopedNames() {
         try {
-            if (developed == null) return null;
+            if (developed == null)
+                return null;
             return developed.stream().filter(java.util.Objects::nonNull).map(Game::getName).toList();
-        } catch(Exception e){
+        } catch (Exception e) {
             return java.util.Collections.singletonList("Data Resolution error");
         }
     }
-    @JsonProperty("published")
-    public List<String> getPublished(){
-        try{
-        if(published == null) return null;
-        return published.stream().filter(java.util.Objects::nonNull).map(Game::getName).toList();} catch (Exception e) {
+
+    @JsonProperty("publishedNames")
+    public List<String> getPublishedNames() {
+        try {
+            if (published == null)
+                return null;
+            return published.stream().filter(java.util.Objects::nonNull).map(Game::getName).toList();
+        } catch (Exception e) {
             return java.util.Collections.singletonList("Data Resolution error");
         }
     }
