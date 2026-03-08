@@ -59,7 +59,7 @@ const GameCartridge = ({ listItem, onEdit, onDelete }) => {
                     <div className="flex flex-col items-center">
                         <span className="text-xs text-text-muted uppercase tracking-wider mb-0.5 font-bold">Your XP</span>
                         <div className="font-display text-lg font-bold text-accent-600 dark:text-accent-400">
-                            {personalRating ? `${personalRating}/10` : '--/10'}
+                            {personalRating ? `${personalRating.toFixed(1)}/10` : '--/10'}
                         </div>
                     </div>
 

@@ -110,16 +110,16 @@ const QuestModal = ({
                         <label className="flex justify-between text-sm font-bold text-text mb-2">
                             <span>XP Earned (Rating)</span>
                             <span className="font-display text-accent-600">
-                                {personalRating > 0 ? `${personalRating} / 10 — ${SCORE_LABELS[personalRating]}` : SCORE_LABELS[0]}
+                                {personalRating > 0 ? `${personalRating.toFixed(1)} / 10 — ${SCORE_LABELS[Math.floor(personalRating)] || ''}` : SCORE_LABELS[0]}
                             </span>
                         </label>
                         <input
                             type="range"
                             min="0"
                             max="10"
-                            step="1"
+                            step="0.5"
                             value={personalRating}
-                            onChange={(e) => setPersonalRating(parseInt(e.target.value))}
+                            onChange={(e) => setPersonalRating(parseFloat(e.target.value))}
                             className="w-full h-2 bg-border rounded-lg appearance-none cursor-pointer accent-accent-500"
                         />
                         <div className="flex justify-between text-xs text-text-muted mt-1 font-medium">

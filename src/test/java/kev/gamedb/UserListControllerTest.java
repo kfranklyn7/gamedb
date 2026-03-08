@@ -43,7 +43,7 @@ class UserListControllerTest {
         UserListItemRequestDTO request = new UserListItemRequestDTO();
         request.setGameId(472);
         request.setStatus(GameStatus.PLAYING);
-        request.setPersonalRating(15);
+        request.setPersonalRating(15.0);
 
         mockMvc.perform(post("/api/v1/user/list")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -56,7 +56,7 @@ class UserListControllerTest {
         UserListItemRequestDTO request = new UserListItemRequestDTO();
         request.setGameId(472);
         request.setStatus(GameStatus.PLAYING);
-        request.setPersonalRating(0);
+        request.setPersonalRating(0.0);
 
         mockMvc.perform(post("/api/v1/user/list")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -67,7 +67,7 @@ class UserListControllerTest {
     @Test
     void updateItem_ShouldReturn400WhenGameIdMissing() throws Exception {
         UserListItemRequestDTO request = new UserListItemRequestDTO();
-        request.setPersonalRating(8);
+        request.setPersonalRating(8.0);
 
         mockMvc.perform(put("/api/v1/user/list")
                         .contentType(MediaType.APPLICATION_JSON)

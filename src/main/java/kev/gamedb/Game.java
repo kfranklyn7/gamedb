@@ -193,8 +193,9 @@ public class Game {
     private List<AgeRating> ageRatings;
 
     @Field("language_supports")
+    @JsonIgnore
     @lombok.Getter(lombok.AccessLevel.NONE)
-    private List<LanguageSupport> languageSupports;
+    private List<Integer> languageSupports;
 
     @DocumentReference(lazy = true, lookup = "{ 'igdbId' : ?#{#target} }")
     @JsonIgnore

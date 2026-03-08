@@ -60,10 +60,12 @@
     --color-border: rgba(255, 255, 255, 0.08);
     /* subtle outline instead of slate-700 */
   }
+}
 
-  /* Preset Palettes (can switch by adding class to html) */
-  html.palette-emerald,
-  .palette-emerald {
+/* Preset Palettes (can switch by adding class to html) */
+/* Moved outside of @layer base to prevent Tailwind PurgeCSS from stripping them */
+html.palette-emerald,
+.palette-emerald {
     --color-accent-50: #ecfdf5;
     --color-accent-100: #d1fae5;
     --color-accent-200: #a7f3d0;
@@ -258,6 +260,37 @@
     --color-accent-950: #020617;
   }
 
+  html.palette-teal,
+  .palette-teal {
+    --color-accent-50: #f0fdfa;
+    --color-accent-100: #ccfbf1;
+    --color-accent-200: #99f6e4;
+    --color-accent-300: #5eead4;
+    --color-accent-400: #2dd4bf;
+    --color-accent-500: #14b8a6;
+    --color-accent-600: #0d9488;
+    --color-accent-700: #0f766e;
+    --color-accent-800: #115e59;
+    --color-accent-900: #134e4a;
+    --color-accent-950: #042f2e;
+  }
+
+  html.palette-lime,
+  .palette-lime {
+    --color-accent-50: #f7fee7;
+    --color-accent-100: #ecfccb;
+    --color-accent-200: #d9f99d;
+    --color-accent-300: #bef264;
+    --color-accent-400: #a3e635;
+    --color-accent-500: #84cc16;
+    --color-accent-600: #65a30d;
+    --color-accent-700: #4d7c0f;
+    --color-accent-800: #3f6212;
+    --color-accent-900: #365314;
+    --color-accent-950: #1a2e05;
+  }
+
+@layer base {
   body {
     @apply bg-background text-text font-sans antialiased;
   }

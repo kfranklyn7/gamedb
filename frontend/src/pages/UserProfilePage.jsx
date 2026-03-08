@@ -19,12 +19,22 @@ const UserProfilePage = () => {
     const isOwnProfile = currentUser?.username === username;
 
     const palettes = [
-        { id: 'indigo', name: 'Indigo Core', color: '#6366f1' },
-        { id: 'emerald', name: 'Emerald Forest', color: '#10b981' },
-        { id: 'rose', name: 'Rose Petal', color: '#f43f5e' },
-        { id: 'amber', name: 'Amber Glow', color: '#f59e0b' },
-        { id: 'cyan', name: 'Cyan Neon', color: '#06b6d4' },
-        { id: 'violet', name: 'Violet Night', color: '#8b5cf6' },
+        { id: 'indigo', name: 'Indigo', color: '#6366f1' },
+        { id: 'violet', name: 'Violet', color: '#8b5cf6' },
+        { id: 'ocean', name: 'Ocean', color: '#3b82f6' },
+        { id: 'cyan', name: 'Cyan', color: '#06b6d4' },
+        { id: 'teal', name: 'Teal', color: '#14b8a6' },
+        { id: 'emerald', name: 'Emerald', color: '#10b981' },
+        { id: 'forest', name: 'Forest', color: '#22c55e' },
+        { id: 'lime', name: 'Lime', color: '#84cc16' },
+        { id: 'amber', name: 'Amber', color: '#f59e0b' },
+        { id: 'sunset', name: 'Sunset', color: '#f97316' },
+        { id: 'rose', name: 'Rose', color: '#f43f5e' },
+        { id: 'crimson', name: 'Crimson', color: '#dc2626' },
+        { id: 'slayer', name: 'Slayer', color: '#e11d48' },
+        { id: 'neon', name: 'Neon', color: '#d946ef' },
+        { id: 'ghost', name: 'Ghost', color: '#64748b' },
+        { id: 'void', name: 'Void', color: '#8b5cf6' },
     ];
 
     useEffect(() => {

@@ -164,6 +164,7 @@ export const ALIAS_MAP = {
     // Nintendo
     'n64': 'nintendo 64',
     'gamecube': 'nintendo gamecube',
+    'wii': 'nintendo wii',
     'wii u': 'nintendo wii u',
     'switch': 'nintendo switch',
     'switch 2': 'nintendo switch 2',

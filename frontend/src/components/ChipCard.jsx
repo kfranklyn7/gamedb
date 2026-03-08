@@ -53,7 +53,7 @@ const ChipCard = ({ listItem }) => {
 
                     <div className="flex items-center justify-between w-full px-1.5 opacity-95 relative z-10 mt-auto">
                         <span className="text-white font-bold text-[8.5px] tracking-widest flex items-center gap-0.5 drop-shadow">⭐ {game.total_rating ? Math.round(game.total_rating) : '-'}</span>
-                        <span className="text-white font-bold text-[8.5px] tracking-widest flex items-center gap-0.5 drop-shadow">🏆 {personalRating || '-'}</span>
+                        <span className="text-white font-bold text-[8.5px] tracking-widest flex items-center gap-0.5 drop-shadow">🏆 {personalRating ? personalRating.toFixed(1) : '-'}</span>
                     </div>
                 </div>
             </div>

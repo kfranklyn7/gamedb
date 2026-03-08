@@ -3,7 +3,7 @@ import client from './client';
 export const authApi = {
     login: async (credentials) => {
         // credentials: { username, password }
-        const response = await client.post('/auth/authenticate', credentials);
+        const response = await client.post('/auth/login', credentials);
         return response.data;
     },
 

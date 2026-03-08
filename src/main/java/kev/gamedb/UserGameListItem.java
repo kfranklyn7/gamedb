@@ -19,7 +19,7 @@ public class UserGameListItem {
     private String userId;
     private Integer gameId;
     private GameStatus status;
-    private Integer personalRating; // 1-10
+    private Double personalRating; // 0.0-10.0
     private String review;
     private Instant lastUpdated;
 

@@ -47,7 +47,7 @@ class UserListServiceTest {
         UserListItemRequestDTO request = new UserListItemRequestDTO();
         request.setGameId(472);
         request.setStatus(GameStatus.PLAYING);
-        request.setPersonalRating(9);
+        request.setPersonalRating(9.0);
 
         when(gameRepository.findByIgdbId(472)).thenReturn(Optional.of(new Game()));
         when(itemRepository.findByUserIdAndGameId(userId, 472)).thenReturn(Optional.empty());
@@ -105,13 +105,13 @@ class UserListServiceTest {
     void updateItem_ShouldUpdateFieldsAndSave() {
         UserListItemRequestDTO request = new UserListItemRequestDTO();
         request.setGameId(472);
-        request.setPersonalRating(8);
+        request.setPersonalRating(8.0);
         request.setReview("Updated review");
 
         UserGameListItem existing = new UserGameListItem();
         existing.setGameId(472);
         existing.setStatus(GameStatus.PLAYING);
-        existing.setPersonalRating(9);
+        existing.setPersonalRating(9.0);
 
         when(itemRepository.findByUserIdAndGameId(userId, 472)).thenReturn(Optional.of(existing));
         when(itemRepository.save(any(UserGameListItem.class))).thenAnswer(inv -> inv.getArgument(0));
@@ -162,7 +162,7 @@ class UserListServiceTest {
         UserGameListItem item = new UserGameListItem();
         item.setGameId(472);
         item.setStatus(GameStatus.PLAYING);
-        item.setPersonalRating(9);
+        item.setPersonalRating(9.0);
 
         when(itemRepository.findByUserIdAndGameId(userId, 472)).thenReturn(Optional.of(item));
         when(itemRepository.save(any(UserGameListItem.class))).thenAnswer(inv -> inv.getArgument(0));

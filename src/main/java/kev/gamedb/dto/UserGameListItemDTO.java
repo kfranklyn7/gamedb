@@ -10,7 +10,7 @@ import java.time.Instant;
 public class UserGameListItemDTO {
     private Game game;
     private GameStatus status;
-    private Integer personalRating;
+    private Double personalRating;
     private String review;
     private Instant lastUpdated;
 

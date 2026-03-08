@@ -1,7 +1,6 @@
 package kev.gamedb.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -19,10 +18,8 @@ public class UserListItemRequestDTO {
     @Schema(description = "The user's current status for the game", example = "PLAYING")
     private GameStatus status;
     
-    @Min(value = 1, message = "'personalRating' must be between 1 and 10")
-    @Max(value = 10, message = "'personalRating' must be between 1 and 10")
-    @Schema(description = "The user's personal rating out of 10", example = "8")
-    private Integer personalRating;
+    @Schema(description = "The user's personal rating out of 10", example = "8.5")
+    private Double personalRating;
     private String review;
 
     // Quest Journal v2 fields

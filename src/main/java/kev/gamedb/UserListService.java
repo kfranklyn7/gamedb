@@ -489,7 +489,7 @@ public class UserListService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + username));
 
-        List<UserGameListItem> allItems = itemRepository.findByUserId(user.getId().toHexString());
+        List<UserGameListItem> allItems = itemRepository.findByUserId(user.getUsername());
 
         // Stats
         Map<String, Long> stats = allItems.stream()
@@ -518,7 +518,7 @@ public class UserListService {
         List<UserProfileDTO> community = new ArrayList<>();
         
         for (User user : users) {
-            List<UserGameListItem> allItems = itemRepository.findByUserId(user.getId().toHexString());
+            List<UserGameListItem> allItems = itemRepository.findByUserId(user.getUsername());
             Map<String, Long> stats = allItems.stream()
                     .filter(i -> i.getStatus() != null)
                     .collect(Collectors.groupingBy(i -> i.getStatus().name(), Collectors.counting()));
@@ -561,7 +561,7 @@ public class UserListService {
         java.util.concurrent.CompletableFuture.runAsync(() -> {
             try {
                 List<UserGameListItem> items = itemRepository.findByGameId(gameId);
-                List<Integer> ratings = items.stream()
+                List<Double> ratings = items.stream()
                         .map(UserGameListItem::getPersonalRating)
                         .filter(Objects::nonNull)
                         .toList();
@@ -571,7 +571,7 @@ public class UserListService {
                 }
 
                 int count = ratings.size();
-                double average = ratings.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+                double average = ratings.stream().mapToDouble(Double::doubleValue).average().orElse(0.0);
 
                 Game game = gameRepository.findByIgdbId(gameId).orElse(null);
                 if (game != null) {

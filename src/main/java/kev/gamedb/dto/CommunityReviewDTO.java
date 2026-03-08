@@ -13,7 +13,7 @@ import java.time.Instant;
 @NoArgsConstructor
 public class CommunityReviewDTO {
     private String username;
-    private Integer personalRating;
+    private Double personalRating;
     private String review;
     private Instant lastUpdated;
 }

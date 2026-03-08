@@ -1,0 +1,37 @@
+commit e16fc0561e90d488474abb0bc21a59416c0b460b
+Author: Kevon Franklyn <kevonfranklyn@yahoo.com>
+Date:   Sun Mar 8 06:12:17 2026 -0400
+
+    MVP launch fixes: Theme settings, Rating decimals, Tailwind fix, and exclude logos.zip
+
+ .gitignore                                         |   1 +
+ frontend/src/api/auth.js                           |   2 +-
+ frontend/src/components/CartridgeCard.jsx          |   7 ++--
+ frontend/src/components/CategoryTagConfig.js       |   1 +
+ frontend/src/components/ChipCard.jsx               |   2 +-
+ frontend/src/components/GameCartridge.jsx          |   2 +-
+ frontend/src/components/Navbar.jsx                 |  39 ++++++++++++---------
+ frontend/src/components/QuestModal.jsx             |   6 ++--
+ frontend/src/index.css                             |  39 +++++++++++++++++++--
+ frontend/src/pages/UserProfilePage.jsx             |  22 ++++++++----
+ frontend/tailwind.config.js                        |   3 +-
+ logos.zip                                          | Bin 1636506606 -> 0 bytes
+ src/main/java/kev/gamedb/Game.java                 |   2 +-
+ src/main/java/kev/gamedb/UserGameListItem.java     |   2 +-
+ src/main/java/kev/gamedb/UserListService.java      |   8 ++---
+ .../java/kev/gamedb/dto/CommunityReviewDTO.java    |   2 +-
+ .../java/kev/gamedb/dto/UserGameListItemDTO.java   |   2 +-
+ .../kev/gamedb/dto/UserListItemRequestDTO.java     |   7 ++--
+ .../java/kev/gamedb/UserListControllerTest.java    |   6 ++--
+ src/test/java/kev/gamedb/UserListServiceTest.java  |   8 ++---
+ 20 files changed, 105 insertions(+), 56 deletions(-)
+
+commit 8b7a0e0576c67ceca62cb5e16dfb78d159ee2b14
+Author: Kevon Franklyn <kevonfranklyn@yahoo.com>
+Date:   Sun Mar 8 03:10:48 2026 -0400
+
+    fix: add @JsonIgnore to languageSupports to prevent serialization error on game detail pages
+
+ logos.zip                          | Bin 0 -> 1636506606 bytes
+ src/main/java/kev/gamedb/Game.java |   1 +
+ 2 files changed, 1 insertion(+)

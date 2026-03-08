@@ -1,0 +1,20 @@
+ .gitignore                                         |  1 +
+ frontend/src/api/auth.js                           |  2 +-
+ frontend/src/components/CartridgeCard.jsx          |  7 ++--
+ frontend/src/components/CategoryTagConfig.js       |  1 +
+ frontend/src/components/ChipCard.jsx               |  2 +-
+ frontend/src/components/GameCartridge.jsx          |  2 +-
+ frontend/src/components/Navbar.jsx                 | 39 ++++++++++++----------
+ frontend/src/components/QuestModal.jsx             |  6 ++--
+ frontend/src/index.css                             | 39 ++++++++++++++++++++--
+ frontend/src/pages/UserProfilePage.jsx             | 22 ++++++++----
+ frontend/tailwind.config.js                        |  3 +-
+ src/main/java/kev/gamedb/Game.java                 |  3 +-
+ src/main/java/kev/gamedb/UserGameListItem.java     |  2 +-
+ src/main/java/kev/gamedb/UserListService.java      |  8 ++---
+ .../java/kev/gamedb/dto/CommunityReviewDTO.java    |  2 +-
+ .../java/kev/gamedb/dto/UserGameListItemDTO.java   |  2 +-
+ .../kev/gamedb/dto/UserListItemRequestDTO.java     |  7 ++--
+ .../java/kev/gamedb/UserListControllerTest.java    |  6 ++--
+ src/test/java/kev/gamedb/UserListServiceTest.java  |  8 ++---
+ 19 files changed, 106 insertions(+), 56 deletions(-)

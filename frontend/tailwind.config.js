@@ -8,7 +8,8 @@ export default {
     'palette-indigo', 'palette-emerald', 'palette-rose',
     'palette-amber', 'palette-cyan', 'palette-violet',
     'palette-crimson', 'palette-neon', 'palette-void', 'palette-slayer',
-    'palette-terminal', 'palette-hacker', 'palette-retro', 'palette-archive'
+    'palette-ocean', 'palette-teal', 'palette-lime', 'palette-forest',
+    'palette-sunset', 'palette-ghost'
   ],
   darkMode: 'class',
   theme: {

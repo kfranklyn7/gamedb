@@ -10,8 +10,9 @@ const CartridgeCard = ({ listItem, onEdit, onDelete }) => {
 
     const genreTags = game.genreNames || game.genres || [];
     const visibleGenres = genreTags.slice(0, 3);
-    const publisher = game.publishers?.[0] || '';
-    const developer = game.developers?.[0] || '';
+    const extractName = (v) => (typeof v === 'object' && v !== null ? v.name || v.value || '' : v || '');
+    const publisher = extractName(game.publishers?.[0]);
+    const developer = extractName(game.developers?.[0]);
     const pubDev = [publisher, developer].filter(Boolean).join(' · ');
 
     return (
@@ -60,7 +61,7 @@ const CartridgeCard = ({ listItem, onEdit, onDelete }) => {
                         <div className="flex items-center gap-3 border-t border-white/10 pt-2 relative z-40">
                             {/* Score badges */}
                             <span className="bg-black/80 px-1.5 py-0.5 rounded shadow-inner text-amber-500 font-bold text-xs flex items-center gap-1 border border-white/5">⭐ {game.total_rating ? Math.round(game.total_rating) : '-'}</span>
-                            <span className="bg-black/80 px-1.5 py-0.5 rounded shadow-inner text-accent-400 font-bold text-xs flex items-center gap-1 border border-white/5">🏆 {personalRating || '-'}</span>
+                            <span className="bg-black/80 px-1.5 py-0.5 rounded shadow-inner text-accent-400 font-bold text-xs flex items-center gap-1 border border-white/5">🏆 {personalRating ? personalRating.toFixed(1) : '-'}</span>
 
                             {/* Actions (with pointer-events-auto to override the Link above) */}
                             {onEdit && onDelete && (

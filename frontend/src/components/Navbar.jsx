@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
@@ -20,19 +21,22 @@ const Navbar = () => {
     };
 
     const palettes = [
-        { id: 'terminal', name: 'Terminal (Green)', color: '#22c55e' },
-        { id: 'hacker', name: 'Hacker (Cyan)', color: '#06b6d4' },
-        { id: 'retro', name: 'Retro (Amber)', color: '#f59e0b' },
-        { id: 'archive', name: 'Archive (Indigo)', color: '#6366f1' },
-        { id: 'rose', name: 'Rose (Pink)', color: '#f43f5e' },
-        { id: 'crimson', name: 'Crimson (Blood)', color: '#dc2626' },
-        { id: 'neon', name: 'Neon (Magenta)', color: '#d946ef' },
-        { id: 'void', name: 'Void (Purple)', color: '#8b5cf6' },
-        { id: 'slayer', name: 'Slayer (Red)', color: '#e11d48' },
-        { id: 'ocean', name: 'Ocean (Blue)', color: '#3b82f6' },
-        { id: 'forest', name: 'Forest (Emerald)', color: '#10b981' },
-        { id: 'sunset', name: 'Sunset (Orange)', color: '#f97316' },
-        { id: 'ghost', name: 'Ghost (Slate)', color: '#64748b' }
+        { id: 'indigo', name: 'Indigo', color: '#6366f1' },
+        { id: 'violet', name: 'Violet', color: '#8b5cf6' },
+        { id: 'ocean', name: 'Ocean', color: '#3b82f6' },
+        { id: 'cyan', name: 'Cyan', color: '#06b6d4' },
+        { id: 'teal', name: 'Teal', color: '#14b8a6' },
+        { id: 'emerald', name: 'Emerald', color: '#10b981' },
+        { id: 'forest', name: 'Forest', color: '#22c55e' },
+        { id: 'lime', name: 'Lime', color: '#84cc16' },
+        { id: 'amber', name: 'Amber', color: '#f59e0b' },
+        { id: 'sunset', name: 'Sunset', color: '#f97316' },
+        { id: 'rose', name: 'Rose', color: '#f43f5e' },
+        { id: 'crimson', name: 'Crimson', color: '#dc2626' },
+        { id: 'slayer', name: 'Slayer', color: '#e11d48' },
+        { id: 'neon', name: 'Neon', color: '#d946ef' },
+        { id: 'ghost', name: 'Ghost', color: '#64748b' },
+        { id: 'void', name: 'Void', color: '#8b5cf6' },
     ];
 
     return (
@@ -118,8 +122,8 @@ const Navbar = () => {
                 </div>
             </div>
 
-            {/* Settings Modal */}
-            {isSettingsOpen && (
+            {/* Settings Modal - Portaled to document.body to avoid sticky nav stacking issues */}
+            {isSettingsOpen && createPortal(
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fade-in">
                     <div className="bg-surface border-2 border-accent-500 rounded-dynamic shadow-2xl w-full max-w-lg md:max-w-xl animate-scale-in flex flex-col max-h-[85vh] overflow-hidden">
                         <div className="p-4 bg-accent-500 text-white flex justify-between items-center shrink-0">
@@ -143,7 +147,7 @@ const Navbar = () => {
                                             key={p.id}
                                             onClick={() => setPalette(p.id)}
                                             className={`flex items-center gap-3 p-3 rounded-dynamic-btn border-2 transition-all ${palette === p.id
-                                                ? 'border-accent-500 bg-accent-50'
+                                                ? 'border-accent-500 bg-accent-50 text-accent-900 dark:bg-accent-950 dark:text-accent-100'
                                                 : 'border-border hover:border-accent-300'
                                                 }`}
                                         >
@@ -229,7 +233,8 @@ const Navbar = () => {
                             </button>
                         </div>
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </nav>
     );
