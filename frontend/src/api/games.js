@@ -20,12 +20,17 @@ export const gamesApi = {
 
     // Reference data
     getGenres: async () => {
-        const response = await client.get('/genres');
-        return response.data;
+        const response = await client.get('/genres', { params: { size: 100, sortBy: 'name', ascending: true } });
+        return response.data.content;
     },
 
     getPlatforms: async () => {
-        const response = await client.get('/platforms');
-        return response.data;
+        const response = await client.get('/platforms', { params: { size: 500, sortBy: 'name', ascending: true } });
+        return response.data.content;
+    },
+
+    getThemes: async () => {
+        const response = await client.get('/themes', { params: { size: 100, sortBy: 'name', ascending: true } });
+        return response.data.content;
     }
 };

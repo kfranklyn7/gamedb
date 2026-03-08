@@ -26,6 +26,7 @@ const GameDetailPage = () => {
         const loadGame = async () => {
             try {
                 const data = await gamesApi.getGameById(id);
+                console.log('API RESOLVED GAME DATA:', data);
                 setGame(data);
             } catch (err) {
                 console.error('Failed to load game details', err);
@@ -114,14 +115,14 @@ const GameDetailPage = () => {
                             <span className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full backdrop-blur-md">
                                 <Calendar size={14} /> {year}
                             </span>
-                            {game.developers?.length > 0 && (
+                            {(game.developers || []).length > 0 && (
                                 <span className="bg-white/10 px-3 py-1 rounded-full backdrop-blur-md">
-                                    {game.developers.join(', ')}
+                                    {(game.developers || []).map(d => typeof d === 'object' ? d.name : d).join(', ')}
                                 </span>
                             )}
-                            {game.publishers?.length > 0 && (
+                            {(game.publishers || []).length > 0 && (
                                 <span className="bg-white/10 px-3 py-1 rounded-full backdrop-blur-md">
-                                    📢 {game.publishers.join(', ')}
+                                    📢 {(game.publishers || []).map(p => typeof p === 'object' ? p.name : p).join(', ')}
                                 </span>
                             )}
                         </div>
@@ -202,69 +203,97 @@ const GameDetailPage = () => {
                     )}
 
                     {/* Media */}
-                    {(game.videos?.length > 0 || game.screenshots?.length > 0 || game.artworks?.length > 0) && (
+                    {((game.videos || []).length > 0 || (game.screenshots || []).length > 0 || (game.artworks || []).length > 0) && (
                         <section>
                             <h3 className="text-2xl font-display font-bold text-text mb-4">Media</h3>
                             <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar">
-                                {game.videos?.filter(Boolean).map(vid => (
-                                    <iframe
-                                        key={vid}
-                                        className="w-72 md:w-80 aspect-video rounded-xl flex-shrink-0 bg-black/50 border border-border shadow-sm"
-                                        src={`https://www.youtube.com/embed/${vid}`}
-                                        title="YouTube video player"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    ></iframe>
-                                ))}
-                                {game.screenshots?.filter(Boolean).map(imgId => (
-                                    <img
-                                        key={imgId}
-                                        src={`https://images.igdb.com/igdb/image/upload/t_screenshot_med/${imgId}.jpg`}
-                                        alt="Screenshot"
-                                        className="h-40 md:h-44 object-cover rounded-xl flex-shrink-0 border border-border shadow-sm"
-                                    />
-                                ))}
-                                {game.artworks?.filter(Boolean).map(imgId => (
-                                    <img
-                                        key={imgId}
-                                        src={`https://images.igdb.com/igdb/image/upload/t_screenshot_med/${imgId}.jpg`}
-                                        alt="Artwork"
-                                        className="h-40 md:h-44 object-cover rounded-xl flex-shrink-0 border border-border shadow-sm"
-                                    />
-                                ))}
-                            </div>
-                        </section>
-                    )}
-
-                    {/* Similar Games */}
-                    {game.similarGamesData?.length > 0 && (
-                        <section>
-                            <h3 className="text-2xl font-display font-bold text-text mb-4">Similar Games</h3>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                                {game.similarGamesData.filter(Boolean).slice(0, 6).map(sg => {
-                                    const coverUrl = getParsedCover(sg.cover);
+                                {(game.videos || []).filter(Boolean).map(vid => {
+                                    const vidId = typeof vid === 'object' ? vid.video_id || vid.videoId : vid;
                                     return (
-                                        <Link key={sg.igdbId} to={`/game/${sg.igdbId}`} className="group relative block aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border shadow-sm">
-                                            {coverUrl ? (
-                                                <img
-                                                    src={coverUrl}
-                                                    alt={sg.name}
-                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full flex items-center justify-center p-4 text-center bg-surface-hover">
-                                                    <span className="font-bold text-sm text-text-muted">{sg.name}</span>
-                                                </div>
-                                            )}
-                                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-3 pt-6">
-                                                <span className="text-white font-bold text-sm leading-tight truncate block">{sg.name}</span>
-                                            </div>
-                                        </Link>
+                                        <iframe
+                                            key={vidId}
+                                            className="w-72 md:w-80 aspect-video rounded-xl flex-shrink-0 bg-black/50 border border-border shadow-sm"
+                                            src={`https://www.youtube.com/embed/${vidId}`}
+                                            title="YouTube video player"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        ></iframe>
+                                    );
+                                })}
+                                {(game.screenshots || []).filter(Boolean).map((img, i) => {
+                                    const imgId = typeof img === 'object' ? img.image_id || img.imageId : img;
+                                    return (
+                                        <img
+                                            key={imgId || i}
+                                            src={`https://images.igdb.com/igdb/image/upload/t_screenshot_med/${imgId}.jpg`}
+                                            alt="Screenshot"
+                                            className="h-40 md:h-44 object-cover rounded-xl flex-shrink-0 border border-border shadow-sm"
+                                        />
+                                    );
+                                })}
+                                {(game.artworks || []).filter(Boolean).map((img, i) => {
+                                    const imgId = typeof img === 'object' ? img.image_id || img.imageId : img;
+                                    return (
+                                        <img
+                                            key={imgId || i}
+                                            src={`https://images.igdb.com/igdb/image/upload/t_screenshot_med/${imgId}.jpg`}
+                                            alt="Artwork"
+                                            className="h-40 md:h-44 object-cover rounded-xl flex-shrink-0 border border-border shadow-sm"
+                                        />
                                     );
                                 })}
                             </div>
                         </section>
                     )}
+
+                    {/* Related Games Ecosystem */}
+                    {[
+                        { title: 'DLCs & Addons', data: game.dlcsData || game.dlcs },
+                        { title: 'Expansions', data: game.expansionsData || game.expansions },
+                        { title: 'Remakes', data: game.remakesData || game.remakes },
+                        { title: 'Remasters', data: game.remastersData || game.remasters },
+                        { title: 'Similar Games', data: game.similarGamesData || game.similarGames }
+                    ].map(({ title, data }, sectionIndex) => {
+                        if (!data || data.length === 0) return null;
+                        
+                        return (
+                            <section key={sectionIndex}>
+                                <h3 className="text-2xl font-display font-bold text-text mb-4">{title}</h3>
+                                <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar snap-x">
+                                    {data.filter(Boolean).map((sg, i) => {
+                                        // Handle cases where sg might just be an ID instead of an object
+                                        if (typeof sg !== 'object') return null;
+
+                                        // Extract cover gracefully 
+                                        const coverUrl = sg.cover ? getParsedCover(sg.cover) : null;
+                                        const gameId = sg.igdbId || sg.id;
+                                        const gameName = sg.name || 'Unknown Game';
+
+                                        if (!gameId) return null;
+
+                                        return (
+                                            <Link key={`${gameId}-${i}`} to={`/game/${gameId}`} className="group relative block w-32 sm:w-40 aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border shadow-sm flex-shrink-0 snap-start">
+                                                {coverUrl ? (
+                                                    <img
+                                                        src={coverUrl}
+                                                        alt={gameName}
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full flex items-center justify-center p-4 text-center bg-surface-hover">
+                                                        <span className="font-bold text-xs text-text-muted">{gameName}</span>
+                                                    </div>
+                                                )}
+                                                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-2 pt-6">
+                                                    <span className="text-white font-bold text-xs leading-tight truncate block">{gameName}</span>
+                                                </div>
+                                            </Link>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+                        );
+                    })}
                 </div>
 
                 <div className="space-y-6">
@@ -273,33 +302,39 @@ const GameDetailPage = () => {
                         <div className="bg-surface p-5 rounded-2xl border border-border shadow-sm">
                             <h4 className="font-bold text-text uppercase tracking-wider text-xs mb-3">Platforms</h4>
                             <div className="flex flex-wrap gap-1.5">
-                                {game.platforms.map(p => (
-                                    <CategoryTag key={p} category="platform" value={p} size="sm" />
-                                ))}
+                                {game.platforms.map((p, idx) => {
+                                    const val = typeof p === 'object' && p !== null ? p.name || p.value : p;
+                                    const key = typeof p === 'object' && p !== null ? p.igdbId || p.id || val : p;
+                                    return <CategoryTag key={key || idx} category="platform" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
 
                     {/* Genres — CategoryTag pills */}
-                    {game.genreNames?.length > 0 && (
+                    {(game.genreNames || game.genres)?.length > 0 && (
                         <div className="bg-surface p-5 rounded-2xl border border-border shadow-sm">
                             <h4 className="font-bold text-text uppercase tracking-wider text-xs mb-3">Genres</h4>
                             <div className="flex flex-wrap gap-1.5">
-                                {game.genreNames.map(g => (
-                                    <CategoryTag key={g} category="genre" value={g} size="sm" />
-                                ))}
+                                {(game.genreNames || game.genres).map((g, idx) => {
+                                    const val = typeof g === 'object' && g !== null ? g.name || g.value : g;
+                                    const key = typeof g === 'object' && g !== null ? g.igdbId || g.id || val : g;
+                                    return <CategoryTag key={key || idx} category="genre" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
 
                     {/* Themes — CategoryTag pills */}
-                    {game.themes?.length > 0 && (
+                    {(game.themes || game.themeNames)?.length > 0 && (
                         <div className="bg-surface p-5 rounded-2xl border border-border shadow-sm">
                             <h4 className="font-bold text-text uppercase tracking-wider text-xs mb-3">Themes</h4>
                             <div className="flex flex-wrap gap-1.5">
-                                {game.themes.map(t => (
-                                    <CategoryTag key={t} category="theme" value={t} size="sm" />
-                                ))}
+                                {(game.themes || game.themeNames).map((t, idx) => {
+                                    const val = typeof t === 'object' && t !== null ? t.name || t.value : t;
+                                    const key = typeof t === 'object' && t !== null ? t.igdbId || t.id || val : t;
+                                    return <CategoryTag key={key || idx} category="theme" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
@@ -309,9 +344,11 @@ const GameDetailPage = () => {
                         <div className="bg-surface p-5 rounded-2xl border border-border shadow-sm">
                             <h4 className="font-bold text-text uppercase tracking-wider text-xs mb-3">Game Modes</h4>
                             <div className="flex flex-wrap gap-1.5">
-                                {game.gameModes.map(m => (
-                                    <CategoryTag key={m} category="gameMode" value={m} size="sm" />
-                                ))}
+                                {game.gameModes.map((m, idx) => {
+                                    const val = typeof m === 'object' && m !== null ? m.name || m.value : m;
+                                    const key = typeof m === 'object' && m !== null ? m.igdbId || m.id || val : m;
+                                    return <CategoryTag key={key || idx} category="gameMode" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
@@ -321,37 +358,43 @@ const GameDetailPage = () => {
                         <div className="bg-surface p-5 rounded-2xl border border-border shadow-sm">
                             <h4 className="font-bold text-text uppercase tracking-wider text-xs mb-3">Player Perspectives</h4>
                             <div className="flex flex-wrap gap-1.5">
-                                {game.playerPerspectives.filter(Boolean).map(p => (
-                                    <CategoryTag key={p} category="theme" value={p} size="sm" />
-                                ))}
+                                {game.playerPerspectives.filter(Boolean).map((p, idx) => {
+                                    const val = typeof p === 'object' && p !== null ? p.name || p.value : p;
+                                    const key = typeof p === 'object' && p !== null ? p.igdbId || p.id || val : p;
+                                    return <CategoryTag key={key || idx} category="theme" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
 
                     {/* Game Engines — CategoryTag pills */}
-                    {game.gameEngines?.length > 0 && (
+                    {(game.gameEngines || game.game_engines)?.length > 0 && (
                         <div className="bg-surface p-5 rounded-2xl border border-border shadow-sm">
                             <h4 className="font-bold text-text uppercase tracking-wider text-xs mb-3">Engine</h4>
                             <div className="flex flex-wrap gap-1.5">
-                                {game.gameEngines.filter(Boolean).map(e => (
-                                    <CategoryTag key={e} category="developer" value={e} size="sm" />
-                                ))}
+                                {(game.gameEngines || game.game_engines).filter(Boolean).map((e, idx) => {
+                                    const val = typeof e === 'object' && e !== null ? e.name || e.value : e;
+                                    const key = typeof e === 'object' && e !== null ? e.igdbId || e.id || val : e;
+                                    return <CategoryTag key={key || idx} category="developer" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
 
 
                     {/* Keywords — CategoryTag pills */}
-                    {game.keywordNames?.length > 0 && (
+                    {(game.keywordNames || game.keywords)?.length > 0 && (
                         <div className="bg-surface p-5 rounded-2xl border border-border shadow-sm">
                             <h4 className="font-bold text-text uppercase tracking-wider text-xs mb-3">Keywords</h4>
                             <div className="flex flex-wrap gap-1.5">
-                                {game.keywordNames.slice(0, 10).map(k => (
-                                    <CategoryTag key={k} category="keyword" value={k} size="sm" />
-                                ))}
-                                {game.keywordNames.length > 10 && (
+                                {(game.keywordNames || game.keywords).slice(0, 10).map((k, idx) => {
+                                    const val = typeof k === 'object' && k !== null ? k.name || k.value : k;
+                                    const key = typeof k === 'object' && k !== null ? k.igdbId || k.id || val : k;
+                                    return <CategoryTag key={key || idx} category="keyword" value={val} size="sm" />;
+                                })}
+                                {(game.keywordNames || game.keywords).length > 10 && (
                                     <span className="text-[11px] font-bold text-text-muted px-2 py-0.5 rounded border border-dashed border-border bg-background">
-                                        +{game.keywordNames.length - 10} more
+                                        +{(game.keywordNames || game.keywords).length - 10} more
                                     </span>
                                 )}
                             </div>

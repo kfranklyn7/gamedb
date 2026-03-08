@@ -16,11 +16,28 @@ import {
     Shield, AlertTriangle
 } from 'lucide-react';
 import {
-    SiNintendo, SiSega, SiAtari
+    SiNintendo, SiSega, SiAtari, SiMeta, SiOculus
 } from 'react-icons/si';
 import {
     FaWindows, FaApple, FaLinux, FaAndroid, FaXbox, FaPlaystation, FaSteam
 } from 'react-icons/fa';
+
+import logoMapData from '../assets/logoMap.json';
+
+export const DYNAMIC_LOGOS_LIGHT = {};
+export const DYNAMIC_LOGOS_DARK = {};
+
+if (logoMapData.light) {
+    for (const [key, relPath] of Object.entries(logoMapData.light)) {
+        DYNAMIC_LOGOS_LIGHT[key] = `/logos/${relPath}`;
+    }
+}
+
+if (logoMapData.dark) {
+    for (const [key, relPath] of Object.entries(logoMapData.dark)) {
+        DYNAMIC_LOGOS_DARK[key] = `/logos/${relPath}`;
+    }
+}
 
 // ──────────────────────────────────────────────────────────
 //  Per-Genre Icon Map (23 genres → thematically fitting)
@@ -127,13 +144,109 @@ export const PLATFORM_ICONS = {
     'Android': FaAndroid,
     'Sega': SiSega,
     'Atari': SiAtari,
+    'Meta': SiMeta,
+    'Oculus': SiOculus,
 };
+
+export const ALIAS_MAP = {
+    // PlayStation
+    'ps1': 'playstation',
+    'ps2': 'playstation 2',
+    'ps3': 'playstation 3',
+    'ps4': 'playstation 4',
+    'ps5': 'playstation 5',
+    'psp': 'playstation portable',
+    'ps vita': 'playstation vita',
+
+    // Xbox
+    'xbox series x|s': 'xbox series',
+
+    // Nintendo
+    'n64': 'nintendo 64',
+    'gamecube': 'nintendo gamecube',
+    'wii u': 'nintendo wii u',
+    'switch': 'nintendo switch',
+    'switch 2': 'nintendo switch 2',
+    'gba': 'game boy advance',
+    'ds': 'nintendo ds',
+    '3ds': 'nintendo 3ds',
+
+    // Sega
+    'genesis': 'sega genesis',
+    'mega drive': 'sega mega drive',
+    'saturn': 'sega saturn',
+
+    // PC / Mobile
+    'pc': 'windows',
+    'pc (microsoft windows)': 'windows',
+    'mac': 'apple mac os',
+    'macos': 'apple mac os',
+
+    // VR
+    'meta quest': 'meta',
+    'meta quest 2': 'meta',
+    'meta quest 3': 'meta',
+    'meta quest pro': 'meta',
+    'oculus quest': 'oculus',
+    'oculus quest 2': 'oculus',
+    'oculus rift': 'oculus',
+
+    // Other
+    'web browser': 'controller',
+};
+
+export const FAMILY_ICONS = {
+    1: FaPlaystation, // PlayStation
+    2: FaXbox,        // Xbox
+    3: SiNintendo,    // Nintendo
+    4: SiSega,        // Sega
+    5: FaWindows,     // Linux/PC
+    6: SiAtari,       // Atari
+    7: FaApple,       // Apple
+};
+
+export const POPULAR_PLATFORMS = [
+    'PC (Microsoft Windows)',
+    'PlayStation 5',
+    'Xbox Series X|S',
+    'Nintendo Switch',
+    'PlayStation 4',
+    'Xbox One',
+    'PlayStation 3',
+    'Xbox 360'
+];
+
+export function getBrandLogo(value, family = null, isDark = false) {
+    if (!value) return null;
+    let lookup = value.toLowerCase();
+
+    // 1. Check alias map
+    if (ALIAS_MAP[lookup]) lookup = ALIAS_MAP[lookup];
+
+    // Light colored logos for Dark mode, Dark colored logos for Light mode
+    const targetDict = isDark ? DYNAMIC_LOGOS_LIGHT : DYNAMIC_LOGOS_DARK;
+
+    // 2. Exact match in targetDict
+    if (targetDict[lookup]) return targetDict[lookup];
+
+    // 3. Substring match
+    const key = Object.keys(targetDict).find(k => lookup.includes(k) || k.includes(lookup));
+    if (key) return targetDict[key];
+
+    // 4. Family match fallback
+    const familyMap = { 1: 'playstation', 2: 'xbox', 3: 'nintendo', 4: 'sega', 5: 'windows', 6: 'atari', 7: 'apple' };
+    if (family && familyMap[family] && targetDict[familyMap[family]]) {
+        return targetDict[familyMap[family]];
+    }
+
+    return null;
+}
 
 /**
  * Resolve the icon for a tag given category + value.
  * Genres/Platforms/Themes get per-value icons; other categories use CATEGORY_ICONS.
  */
-export function getTagIcon(category, value) {
+export function getTagIcon(category, value, family = null) {
     if (category === 'genre') {
         return GENRE_ICONS[value] || DEFAULT_GENRE_ICON;
     }
@@ -141,7 +254,11 @@ export function getTagIcon(category, value) {
         return THEME_ICONS[value] || CATEGORY_ICONS.theme;
     }
     if (category === 'platform') {
+        // 1. Try name match
         if (PLATFORM_ICONS[value]) return PLATFORM_ICONS[value];
+        // 2. Try family match (if provided)
+        if (family && FAMILY_ICONS[family]) return FAMILY_ICONS[family];
+        // 3. Try substring match on name
         const key = Object.keys(PLATFORM_ICONS).find(k => value.includes(k));
         return key ? PLATFORM_ICONS[key] : CATEGORY_ICONS.platform;
     }
@@ -227,6 +344,7 @@ export const PLATFORM_COLORS = {
     'Wii': '#e60012',
     'Wii U': '#e60012',
     'Game Boy': '#e60012',
+    'GameBoy': '#e60012',
     'Nintendo DS': '#e60012',
     'Nintendo 3DS': '#e60012',
     'Nintendo 64': '#e60012',
@@ -251,9 +369,17 @@ export const PLATFORM_COLORS = {
     'Genesis': '#17569b',
     'Dreamcast': '#17569b',
     'Saturn': '#17569b',
+    'Master System': '#17569b',
+    'Game Gear': '#17569b',
     'Atari': '#e4202e',
     'Neo Geo': '#003da5',
     'Amiga': '#e85d0c',
+    'Commodore': '#e85d0c',
+    '3DO': '#dc2626',
+    'Amstrad': '#1e40af',
+    'Intellivision': '#15803d',
+    'ColecoVision': '#7e22ce',
+    'Magnavox Odyssey': '#4b5563',
 };
 
 // ──────────────────────────────────────────────────────────
@@ -322,13 +448,14 @@ export function getTagColor(category, value) {
 export function getTagStyles(hexColor, isDark = false) {
     if (isDark) {
         return {
-            background: `${hexColor}26`,  // 15% opacity
+            background: `linear-gradient(135deg, ${hexColor}33 0%, ${hexColor}1a 100%)`, // 20% to 10%
             borderColor: `${hexColor}66`, // 40% opacity
-            color: hexColor,              // full color (lightened by nature of dark bg)
+            color: hexColor,              // full color
+            boxShadow: `0 0 10px ${hexColor}1a`, // subtle glow
         };
     }
     return {
-        background: `${hexColor}1a`,    // 10% opacity
+        background: `linear-gradient(135deg, ${hexColor}26 0%, ${hexColor}0d 100%)`, // 15% to 5%
         borderColor: `${hexColor}4d`,   // 30% opacity
         color: hexColor,
     };

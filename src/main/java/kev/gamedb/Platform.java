@@ -16,6 +16,9 @@ public class Platform {
     private ObjectId id;
     private Integer igdbId;
     private Integer generation;
+    private Integer category;
+    private Integer platformFamily;
+    private String platformLogoUrl;
     private String name;
     private String slug;
     private String summary;

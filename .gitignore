@@ -39,3 +39,10 @@ out/
 ### ENV file ###
 .env
 /src/main/resources/database/
+
+### Debug artifacts ###
+*.log
+keys.json
+sync_state.json
+frontend/node_modules/
+logos/

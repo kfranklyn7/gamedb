@@ -6,17 +6,24 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PlatformService {
     @Autowired
     private PlatformRepository platformRepository;
+
     @Cacheable(value = "platforms", key = "#pageable.hashCode()")
-    public Page<Platform>  allPlatforms(Pageable pageable){
+    public Page<Platform> allPlatforms(Pageable pageable) {
         return platformRepository.findAll(pageable);
     }
-    public Optional<Platform> findById(Integer id){
+
+    public Optional<Platform> findById(Integer id) {
         return platformRepository.findByIgdbId(id);
+    }
+
+    public List<Platform> findByName(String name) {
+        return platformRepository.findByNameContainingIgnoreCase(name);
     }
 }

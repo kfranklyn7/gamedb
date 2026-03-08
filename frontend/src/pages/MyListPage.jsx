@@ -112,9 +112,13 @@ const MyListPage = () => {
         const themes = new Set();
 
         tabFiltered.forEach(item => {
-            item.game.genreNames?.forEach(g => genres.add(g));
-            item.game.platforms?.forEach(p => platforms.add(p));
-            item.game.themeNames?.forEach(t => themes.add(t));
+            const gameGenres = item.game.genreNames || item.game.genres || [];
+            const gamePlatforms = item.game.platforms || item.game.platformNames || [];
+            const gameThemes = item.game.themeNames || item.game.themes || [];
+
+            gameGenres.filter(Boolean).forEach(g => genres.add(typeof g === 'object' ? g.name || g.value : g));
+            gamePlatforms.filter(Boolean).forEach(p => platforms.add(typeof p === 'object' ? p.name || p.value : p));
+            gameThemes.filter(Boolean).forEach(t => themes.add(typeof t === 'object' ? t.name || t.value : t));
         });
 
         return {
@@ -128,17 +132,23 @@ const MyListPage = () => {
     const filtered = useMemo(() => {
         return tabFiltered.filter(item => {
             const g = item.game;
+            // Helper to get string value
+            const getStr = (v) => typeof v === 'object' && v !== null ? v.name || v.value : v;
+
             // Genres: OR within category
             if (activeFilters.genre.length > 0) {
-                if (!g.genreNames?.some(gn => activeFilters.genre.includes(gn))) return false;
+                const genresArr = g.genreNames || g.genres || [];
+                if (!genresArr.some(gn => activeFilters.genre.includes(getStr(gn)))) return false;
             }
             // Platforms: OR within category
             if (activeFilters.platform.length > 0) {
-                if (!g.platforms?.some(p => activeFilters.platform.includes(p))) return false;
+                const platformsArr = g.platforms || g.platformNames || [];
+                if (!platformsArr.some(p => activeFilters.platform.includes(getStr(p)))) return false;
             }
             // Themes: OR within category
             if (activeFilters.theme.length > 0) {
-                if (!g.themeNames?.some(t => activeFilters.theme.includes(t))) return false;
+                const themesArr = g.themeNames || g.themes || [];
+                if (!themesArr.some(t => activeFilters.theme.includes(getStr(t)))) return false;
             }
             return true;
         });
@@ -250,7 +260,7 @@ const MyListPage = () => {
                 <>
                     {/* Chapter Tabs — notebook divider style */}
                     <div className="flex overflow-x-auto hide-scrollbar gap-1 mb-6 pb-1">
-                        {tabs.map((tab, i) => {
+                        {tabs.map((tab) => {
                             const isActive = activeTab === tab.id;
                             const statusConf = STATUS_CONFIG[tab.id];
                             return (

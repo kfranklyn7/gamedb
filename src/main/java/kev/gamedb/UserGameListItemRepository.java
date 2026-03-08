@@ -11,6 +11,7 @@ public interface UserGameListItemRepository extends MongoRepository<UserGameList
     List<UserGameListItem> findByUserId(String userId);
     List<UserGameListItem> findByUserIdAndStatus(String userId, GameStatus status);
     Optional<UserGameListItem> findByUserIdAndGameId(String userId, Integer gameId);
+    List<UserGameListItem> findByGameId(Integer gameId);
 
     // Paginated versions
     Page<UserGameListItem> findByUserId(String userId, Pageable pageable);

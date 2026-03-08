@@ -8,19 +8,19 @@ const RatingBadge = ({ rating, count, size = 'md' }) => {
     // The backend double might be 1-100.
     const displayRating = (rating / 10).toFixed(1);
     const colorClass =
-        rating >= 80 ? 'bg-green-100 text-green-700 border-green-200' :
-            rating >= 60 ? 'bg-amber-100 text-amber-700 border-amber-200' :
-                'bg-red-100 text-red-700 border-red-200';
+        rating >= 80 ? 'bg-green-500 text-white border-green-600 shadow-retro' :
+            rating >= 60 ? 'bg-amber-500 text-white border-amber-600 shadow-retro' :
+                'bg-red-500 text-white border-red-600 shadow-retro';
 
     const sizeClass = {
-        sm: 'text-xs px-2 py-0.5',
-        md: 'text-sm px-2.5 py-1',
-        lg: 'text-lg px-3 py-1.5'
+        sm: 'text-[10px] px-1.5 py-0.5',
+        md: 'text-xs px-2 py-1',
+        lg: 'text-sm px-3 py-1.5'
     }[size];
 
     return (
-        <div className={`flex items-center gap-1 font-display font-medium rounded-full border ${colorClass} ${sizeClass}`} title={`${count ? count + ' ratings' : 'Rating'}`}>
-            <span>⭐</span>
+        <div className={`flex items-center gap-1 font-display font-bold rounded-dynamic-btn terminal-border ${colorClass} ${sizeClass}`} title={`${count ? count + ' ratings' : 'Rating'}`}>
+            <span className="text-[10px]">★</span>
             <span>{displayRating}</span>
         </div>
     );

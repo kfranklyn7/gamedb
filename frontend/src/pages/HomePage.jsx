@@ -166,7 +166,7 @@ const HomePage = () => {
                 />
 
                 <Shelf
-                    title="Recently Completed"
+                    title="Completed"
                     icon={Trophy}
                     items={recentlyCompleted}
                     emptyMessage="You haven't completed any quests yet."

@@ -41,5 +41,31 @@ export const userListApi = {
     removeItem: async (gameId) => {
         const response = await client.delete(`/user/list/${gameId}`);
         return response.data;
+    },
+
+    // Get user profile (stats, recent, preferences)
+    getUserProfile: async (username) => {
+        const response = await client.get(`/users/${username}`);
+        return response.data;
+    },
+
+    // Update user preferences
+    updatePreferences: async (username, preferences) => {
+        const response = await client.put(`/users/${username}/preferences`, preferences);
+        return response.data;
+    },
+
+    // Get the community users list
+    getCommunityUsers: async () => {
+        const response = await client.get('/users');
+        return response.data;
+    },
+
+    // Get another user's public list
+    getPublicList: async (username, listIdOrName = 'ALL', page = 0, size = 50) => {
+        const response = await client.get(`/users/${username}/list/${listIdOrName}`, {
+            params: { page, size }
+        });
+        return response.data;
     }
 };

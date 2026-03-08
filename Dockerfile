@@ -1,5 +1,5 @@
 # --- Stage 1: Build the backend ---
-FROM eclipse-temurin:21-jdk-alpine AS builder
+FROM eclipse-temurin:25-jdk-alpine AS builder
 
 WORKDIR /app
 

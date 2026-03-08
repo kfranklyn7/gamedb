@@ -6,7 +6,9 @@ export default {
   ],
   safelist: [
     'palette-indigo', 'palette-emerald', 'palette-rose',
-    'palette-amber', 'palette-cyan', 'palette-violet'
+    'palette-amber', 'palette-cyan', 'palette-violet',
+    'palette-crimson', 'palette-neon', 'palette-void', 'palette-slayer',
+    'palette-terminal', 'palette-hacker', 'palette-retro', 'palette-archive'
   ],
   darkMode: 'class',
   theme: {

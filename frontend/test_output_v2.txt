@@ -1,0 +1,427 @@
+
+> frontend@0.0.0 test
+> vitest --run
+
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mC:/Users/kevon/IntelliJ/gamedb/frontend[39m
+
+stderr | src/tests/ListManagement.test.jsx > List Management > should call addItem when adding a game in GameDetailPage
+An update to GameDetailPage inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to GameDetailPage inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to GameDetailPage inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/tests/ListManagement.test.jsx > List Management > should display games in MyListPage and handle removal
+An update to MyListPage inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32mΓ£ô[39m src/tests/ListManagement.test.jsx [2m([22m[2m2 tests[22m[2m)[22m[32m 135[2mms[22m[39m
+ [31mΓ¥»[39m src/tests/UserPreferences.test.jsx [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 223[2mms[22m[39m
+[31m     [31m├ù[31m should allow changing UI settings in the settings modal[39m[32m 170[2mms[22m[39m
+     [32mΓ£ô[39m should toggle theme mode[32m 51[2mms[22m[39m
+ [31mΓ¥»[39m src/tests/JournalFunctions.test.jsx [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 289[2mms[22m[39m
+     [32mΓ£ô[39m should sort games correctly in MyListPage[32m 235[2mms[22m[39m
+[31m     [31m├ù[31m should filter games by genre in MyListPage[39m[32m 53[2mms[22m[39m
+ [32mΓ£ô[39m src/tests/BrowsePage.test.jsx [2m([22m[2m3 tests[22m[2m)[22m[33m 1378[2mms[22m[39m
+     [33m[2mΓ£ô[22m[39m should trigger API call when a platform is selected [33m 757[2mms[22m[39m
+     [33m[2mΓ£ô[22m[39m should handle sorting changes in the header [33m 378[2mms[22m[39m
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ» Failed Tests 2 ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»
+
+ FAIL  src/tests/JournalFunctions.test.jsx > Journal Functions > should filter games by genre in MyListPage
+TestingLibraryElementError: Found multiple elements with the text: Action
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+<span
+  class="truncate"
+>
+  Action
+</span>
+
+Ignored nodes: comments, script, style
+<span
+  class="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-white font-bold uppercase tracking-wider"
+>
+  Action
+</span>
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <div
+      class="animate-fade-in pb-12"
+    >
+      <div
+        class="mb-10 text-center"
+      >
+        <div
+          class="inline-flex items-center justify-center p-4 bg-surface rounded-2xl shadow-sm border border-border mb-6"
+        >
+          <svg
+            aria-hidden="true"
+            class="lucide lucide-book-open text-accent-500"
+            fill="none"
+            height="40"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            width="40"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 7v14"
+            />
+            <path
+              d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+            />
+          </svg>
+        </div>
+        <h1
+          class="text-4xl sm:text-5xl font-display font-bold text-text mb-4"
+        >
+          Quest Journal
+        </h1>
+        <p
+          class="text-text-muted text-lg max-w-2xl mx-auto"
+        >
+          Your personal chronicle of games played, playing, and planned.
+        </p>
+      </div>
+      <div
+        class="flex overflow-x-auto hide-scrollbar gap-1 mb-6 pb-1"
+      >
+        <button
+          class="
+                                        flex-shrink-0 px-4 py-2.5 font-medium text-sm
+                                        rounded-t-xl transition-all duration-200
+                                        bg-accent-50 dark:bg-accent-950/30
+                                               text-accent-700 dark:text-accent-400
+                                               shadow-md z-10 relative font-semibold
+                                    "
+        >
+          All Quests
+          <span
+            class="ml-2 text-xs opacity-70"
+          >
+            (
+            2
+            )
+          </span>
+        </button>
+        <button
+          class="
+                                        flex-shrink-0 px-4 py-2.5 font-medium text-sm
+                                        rounded-t-xl transition-all duration-200
+                                        bg-blue-50 dark:bg-blue-950/50
+                                               text-blue-700 dark:text-blue-400
+                                               opacity-50 hover:opacity-80
+                                    "
+        >
+          Playing
+        </button>
+        <button
+          class="
+                                        flex-shrink-0 px-4 py-2.5 font-medium text-sm
+                                        rounded-t-xl transition-all duration-200
+                                        bg-green-50 dark:bg-green-950/50
+                                               text-green-700 dark:text-green-400
+                                               opacity-50 hover:opacity-80
+                                    "
+        >
+          Completed
+        </button>
+        <button
+          class="
+                                        flex-shrink-0 px-4 py-2.5 font-medium text-sm
+                                        rounded-t-xl transition-all duration-200
+                                        bg-violet-50 dark:bg-violet-950/50
+                                               text-violet-700 dark:text-violet-400
+                                               opacity-50 hover:opacity-80
+                                    "
+        >
+          Plan to Play
+        </button>
+        <button
+          class="
+                                        flex-shrink-0 px-4 py-2.5 font-medium text-sm
+                                        rounded-t-xl transition-all duration-200
+                                        bg-amber-50 dark:bg-amber-950/50
+                                               text-amber-700 dark:text-amber-400
+                                               opacity-50 hover:opacity-80
+                                    "
+        >
+          On Hold
+        </button>
+        <button
+          class="
+                                        flex-shrink-0 px-4 py-2.5 font-medium text-sm
+                                        rounded-t-xl transition-all duration-200
+                                        bg-red-50 dark:bg-red-950/50
+                                               text-red-700 dark:text-red-400
+                                               opacity-50 hover:opacity-80
+                                    "
+        >
+          Dropped
+        </button>
+      </div>
+      <div
+        class="mb-6"
+      />
+      <div
+        class="space-y-2 mb-4"
+      >
+        <div
+          class="flex items-center justify-between gap-3 flex-wrap"
+        >
+          <div
+            class="relative"
+          >
+            <button
+              class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium
+                       rounded-lg bg-surface shadow-sm
+                       hover:bg-slate-50 dark:hover:bg-slate-800
+                       text-text transition-colors"
+              type="button"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-arrow-up-down text-text-muted"
+                fill="none"
+                height="14"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"[3...
+ Γ¥» Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ Γ¥» getElementError node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ Γ¥» getMultipleElementsFoundError node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ Γ¥» node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ Γ¥» node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ Γ¥» src/tests/JournalFunctions.test.jsx:83:37
+     81| 
+     82|         // Toggle Action filter (Alpha Quest has Action)
+     83|         const actionFilter = screen.getByText('Action');
+       |                                     ^
+     84|         fireEvent.click(actionFilter);
+     85| 
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/2]ΓÄ»
+
+ FAIL  src/tests/UserPreferences.test.jsx > User Preferences (Navbar Settings) > should allow changing UI settings in the settings modal
+TestingLibraryElementError: Unable to find an element with the text: OFF. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+<body>
+  <div>
+    <nav
+      class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-border transition-all duration-300 nav-container shadow-retro"
+    >
+      <div
+        class="max-w-[2000px] mx-auto px-4 density-pad"
+      >
+        <div
+          class="flex justify-between items-center h-full"
+        >
+          <a
+            class="flex items-center gap-2 group"
+            data-discover="true"
+            href="/"
+          >
+            <div
+              class="p-2 bg-accent-500 text-white rounded-dynamic group-hover:bg-accent-600 transition-colors shadow-retro"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-gamepad2 lucide-gamepad-2"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <line
+                  x1="6"
+                  x2="10"
+                  y1="11"
+                  y2="11"
+                />
+                <line
+                  x1="8"
+                  x2="8"
+                  y1="9"
+                  y2="13"
+                />
+                <line
+                  x1="15"
+                  x2="15.01"
+                  y1="12"
+                  y2="12"
+                />
+                <line
+                  x1="18"
+                  x2="18.01"
+                  y1="10"
+                  y2="10"
+                />
+                <path
+                  d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"
+                />
+              </svg>
+            </div>
+            <span
+              class="font-display font-bold text-xl tracking-wide hidden sm:block"
+            >
+              QUESTLOG // ARCHIVE
+            </span>
+          </a>
+          <div
+            class="flex items-center gap-6"
+          >
+            <a
+              class="text-text hover:text-accent-500 font-medium transition-colors"
+              data-discover="true"
+              href="/"
+            >
+              &gt;
+               HOME
+            </a>
+            <a
+              class="text-text hover:text-accent-500 font-medium transition-colors"
+              data-discover="true"
+              href="/browse"
+            >
+              &gt;
+               BROWSE
+            </a>
+            <a
+              class="text-text hover:text-accent-500 font-medium transition-colors"
+              data-discover="true"
+              href="/my-list"
+            >
+              &gt;
+               JOURNAL
+            </a>
+          </div>
+          <div
+            class="flex items-center gap-4"
+          >
+            <button
+              aria-label="Toggle Theme"
+              class="p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
+            >
+              <svg
+                aria-hidden="true"
+                class="lucide lucide-sun"
+                fill="none"
+                height="20"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                />
+                <path
+                  d="M12 2v2"
+                />
+                <path
+                  d="M12 20v2"
+                />
+                <path
+                  d="m4.93 4.93 1.41 1.41"
+                />
+                <path
+                  d="m17.66 17.66 1.41 1.41"
+                />
+                <path
+                  d="M2 12h2"
+                />
+                <path
+                  d="M20 12h2"
+                />
+                <path
+                  d="m6.34 17.66-1.41 1.41"
+                />
+                <path
+                  d="m19.07 4.93-1.41 1.41"
+                />
+              </svg>
+            </button>
+            <button
+              aria-label="Settings"
+              class="p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
+            >
+              <svg
+                aria-hidden="true"
+                class...
+ Γ¥» Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ Γ¥» node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ Γ¥» node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ Γ¥» node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ Γ¥» src/tests/UserPreferences.test.jsx:75:31
+     73| 
+     74|         // Change effects
+     75|         const offBtn = screen.getByText('OFF');
+       |                               ^
+     76|         fireEvent.click(offBtn);
+     77|         expect(setEffects).toHaveBeenCalledWith('off');
+
+ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[2/2]ΓÄ»
+
+
+[2m Test Files [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m2 passed[39m[22m[90m (4)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m7 passed[39m[22m[90m (9)[39m
+[2m   Start at [22m 13:17:32
+[2m   Duration [22m 2.43s[2m (transform 538ms, setup 500ms, import 993ms, tests 2.02s, environment 2.17s)[22m
+

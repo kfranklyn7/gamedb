@@ -25,11 +25,11 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
     const developer = game.developers?.[0] || '';
     const pubDev = [publisher, developer].filter(Boolean).join(' · ');
 
-    const genreTags = game.genreNames || [];
-    const platformTags = game.platforms || [];
-    const themeTags = game.themes || [];
-    const keywordTags = game.keywordNames || [];
-    const gameModeTags = game.gameModes || [];
+    const genreTags = game.genreNames || game.genres || [];
+    const platformTags = game.platforms || game.platformNames || [];
+    const themeTags = game.themes || game.themeNames || [];
+    const keywordTags = game.keywordNames || game.keywords || [];
+    const gameModeTags = game.gameModes || game.game_modes || [];
 
     const formatDate = (dateStr) => {
         if (!dateStr) return null;
@@ -118,7 +118,11 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
                         <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
                             <span className="w-20 shrink-0 text-[10px] font-black uppercase tracking-widest text-text-muted/70">Genres</span>
                             <div className="flex flex-wrap gap-2">
-                                {genreTags.map(g => <CategoryTag key={g} category="genre" value={g} size="sm" />)}
+                                {genreTags.map((g, idx) => {
+                                    const val = typeof g === 'object' && g !== null ? g.name || g.value : g;
+                                    const key = typeof g === 'object' && g !== null ? g.igdbId || g.id || val : g;
+                                    return <CategoryTag key={key || idx} category="genre" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
@@ -126,7 +130,11 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
                         <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
                             <span className="w-20 shrink-0 text-[10px] font-black uppercase tracking-widest text-text-muted/70">Platforms</span>
                             <div className="flex flex-wrap gap-2">
-                                {platformTags.map(p => <CategoryTag key={p} category="platform" value={p} size="sm" />)}
+                                {platformTags.map((p, idx) => {
+                                    const val = typeof p === 'object' && p !== null ? p.name || p.value : p;
+                                    const key = typeof p === 'object' && p !== null ? p.igdbId || p.id || val : p;
+                                    return <CategoryTag key={key || idx} category="platform" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
@@ -134,7 +142,11 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
                         <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
                             <span className="w-20 shrink-0 text-[10px] font-black uppercase tracking-widest text-text-muted/70">Themes</span>
                             <div className="flex flex-wrap gap-2">
-                                {themeTags.map(t => <CategoryTag key={t} category="theme" value={t} size="sm" />)}
+                                {themeTags.map((t, idx) => {
+                                    const val = typeof t === 'object' && t !== null ? t.name || t.value : t;
+                                    const key = typeof t === 'object' && t !== null ? t.igdbId || t.id || val : t;
+                                    return <CategoryTag key={key || idx} category="theme" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
@@ -142,7 +154,11 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
                         <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
                             <span className="w-20 shrink-0 text-[10px] font-black uppercase tracking-widest text-text-muted/70">Keywords</span>
                             <div className="flex flex-wrap gap-2">
-                                {keywordTags.map(k => <CategoryTag key={k} category="keyword" value={k} size="sm" />)}
+                                {keywordTags.map((k, idx) => {
+                                    const val = typeof k === 'object' && k !== null ? k.name || k.value : k;
+                                    const key = typeof k === 'object' && k !== null ? k.igdbId || k.id || val : k;
+                                    return <CategoryTag key={key || idx} category="keyword" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
@@ -150,22 +166,28 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
                         <div className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4">
                             <span className="w-20 shrink-0 text-[10px] font-black uppercase tracking-widest text-text-muted/70">Game Modes</span>
                             <div className="flex flex-wrap gap-2">
-                                {gameModeTags.map(m => <CategoryTag key={m} category="gameMode" value={m} size="sm" />)}
+                                {gameModeTags.map((m, idx) => {
+                                    const val = typeof m === 'object' && m !== null ? m.name || m.value : m;
+                                    const key = typeof m === 'object' && m !== null ? m.igdbId || m.id || val : m;
+                                    return <CategoryTag key={key || idx} category="gameMode" value={val} size="sm" />;
+                                })}
                             </div>
                         </div>
                     )}
                 </div>
 
                 {/* Actions Footer */}
-                <div className="mt-6 pt-4 border-t border-border flex justify-between items-center opacity-80 group-hover:opacity-100 transition-opacity">
-                    <div className="flex items-center gap-3">
-                        <button onClick={() => onEdit(listItem)} className="flex items-center gap-2 px-4 py-2 bg-accent-50 text-accent-600 hover:bg-accent-100 dark:bg-accent-900/30 dark:text-accent-400 dark:hover:bg-accent-900/50 rounded-lg text-sm font-bold transition-colors">
-                            <Edit3 size={16} /> Update Journal
-                        </button>
-                        <button onClick={() => onDelete(game.igdbId)} className="flex items-center gap-2 px-4 py-2 text-text-muted hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg text-sm font-bold transition-colors">
-                            <Trash2 size={16} /> Abandon Quest
-                        </button>
-                    </div>
+                <div className={`mt-6 pt-4 border-t border-border flex ${onEdit && onDelete ? 'justify-between' : 'justify-end'} items-center opacity-80 group-hover:opacity-100 transition-opacity`}>
+                    {onEdit && onDelete && (
+                        <div className="flex items-center gap-3">
+                            <button onClick={() => onEdit(listItem)} className="flex items-center gap-2 px-4 py-2 bg-accent-50 text-accent-600 hover:bg-accent-100 dark:bg-accent-900/30 dark:text-accent-400 dark:hover:bg-accent-900/50 rounded-lg text-sm font-bold transition-colors">
+                                <Edit3 size={16} /> Update Journal
+                            </button>
+                            <button onClick={() => onDelete(game.igdbId)} className="flex items-center gap-2 px-4 py-2 text-text-muted hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 rounded-lg text-sm font-bold transition-colors">
+                                <Trash2 size={16} /> Abandon Quest
+                            </button>
+                        </div>
+                    )}
                     <IgdbLink url={game.url} slug={game.slug} variant="button" size="sm" />
                 </div>
             </div>

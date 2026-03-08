@@ -13,9 +13,15 @@ ENDPOINTS = {
         'limit': 500,
         'where': ''
     },
+    'platform_logos': {
+        'collection': 'platform_logos',
+        'fields': 'id, alpha_channel, animated, height, image_id, url, width;',
+        'limit': 500,
+        'where': ''
+    },
     'platforms': {
         'collection': 'platforms',
-        'fields': 'id, name, abbreviation, slug, category, generation, summary, url;',
+        'fields': 'id, name, abbreviation, slug, category, generation, platform_family, platform_logo, summary, url;',
         'limit': 500,
         'where': ''
     },

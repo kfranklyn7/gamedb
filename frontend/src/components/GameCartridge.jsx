@@ -38,6 +38,17 @@ const GameCartridge = ({ listItem, onEdit, onDelete }) => {
                     </Link>
                     <div className="flex flex-wrap items-center gap-2 mt-1">
                         <StatusBadge status={status} size="sm" />
+                        {/* Add platform badges here to fix regression of missing platforms */}
+                        {(game.platformData || []).slice(0, 2).map((p, idx) => (
+                            <CategoryTag
+                                key={p.id || idx}
+                                category="platform"
+                                value={p.name}
+                                logoUrl={p.logoUrl}
+                                family={p.family}
+                                size="xs"
+                            />
+                        ))}
                         <span className="text-xs text-text-muted">Updated: {formatDate(lastUpdated)}</span>
                     </div>
                 </div>

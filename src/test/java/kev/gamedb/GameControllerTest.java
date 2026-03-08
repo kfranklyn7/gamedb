@@ -65,7 +65,7 @@ class GameControllerTest {
     void searchAdvanced_ShouldReturnResults() throws Exception {
         GameSearchDTO criteria = new GameSearchDTO();
         criteria.setSearchTerm("Witch");
-        when(searchService.searchGames(any(GameSearchDTO.class))).thenReturn(Collections.emptyList());
+        when(searchService.searchGames(any(GameSearchDTO.class))).thenReturn(new PageImpl<>(Collections.emptyList()));
 
         mockMvc.perform(post("/api/v1/games/search-advanced")
                         .contentType(MediaType.APPLICATION_JSON)

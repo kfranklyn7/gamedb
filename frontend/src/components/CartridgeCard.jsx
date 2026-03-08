@@ -8,14 +8,14 @@ const CartridgeCard = ({ listItem, onEdit, onDelete }) => {
     const { game, status, personalRating } = listItem;
     const coverUrl = getParsedCover(game.cover);
 
-    const genreTags = game.genreNames || [];
+    const genreTags = game.genreNames || game.genres || [];
     const visibleGenres = genreTags.slice(0, 3);
     const publisher = game.publishers?.[0] || '';
     const developer = game.developers?.[0] || '';
     const pubDev = [publisher, developer].filter(Boolean).join(' · ');
 
     return (
-        <div className="relative flex w-full bg-[#828488] dark:bg-[#4d4f53] rounded-t-[40px] rounded-b-md shadow-[0_15px_25px_rgba(0,0,0,0.6)] px-4 py-5 border-b-[6px] border-[#5a5c5f] dark:border-[#2a2b2d] group cursor-pointer hover:-translate-y-1 transition-transform min-h-[170px] overflow-hidden">
+        <div className="relative flex w-full bg-[#828488] dark:bg-[#4d4f53] rounded-t-[40px] rounded-b-md shadow-[0_15px_25px_rgba(0,0,0,0.6)] px-4 py-5 border-b-[6px] border-[#5a5c5f] dark:border-[#2a2b2d] group cursor-pointer hover:-translate-y-1 transition-transform min-h-[196px] overflow-hidden">
 
             {/* Top curves & indents for N64 cartridge plastic body look */}
             <div className="absolute top-0 left-0 w-full h-[30px] bg-gradient-to-b from-white/20 to-transparent pointer-events-none z-10 rounded-t-[40px] opacity-40"></div>
@@ -48,9 +48,13 @@ const CartridgeCard = ({ listItem, onEdit, onDelete }) => {
                     </div>
 
                     <div className="flex flex-col gap-2 mt-auto pt-2">
-                        <div className="flex gap-1.5 flex-wrap">
+                        <div className="flex gap-1.5 flex-wrap overflow-hidden max-h-[28px]">
                             <StatusBadge status={status} size="sm" />
-                            {visibleGenres.map(g => <span key={g} className="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-white font-bold uppercase tracking-wider">{g}</span>)}
+                            {visibleGenres.map((g, idx) => {
+                                const val = typeof g === 'object' && g !== null ? g.name || g.value : g;
+                                const key = typeof g === 'object' && g !== null ? g.igdbId || g.id || val : g;
+                                return <span key={key || idx} className="text-[9px] px-1.5 py-0.5 rounded bg-white/10 text-white font-bold uppercase tracking-wider">{val}</span>;
+                            })}
                         </div>
 
                         <div className="flex items-center gap-3 border-t border-white/10 pt-2 relative z-40">
@@ -59,10 +63,12 @@ const CartridgeCard = ({ listItem, onEdit, onDelete }) => {
                             <span className="bg-black/80 px-1.5 py-0.5 rounded shadow-inner text-accent-400 font-bold text-xs flex items-center gap-1 border border-white/5">🏆 {personalRating || '-'}</span>
 
                             {/* Actions (with pointer-events-auto to override the Link above) */}
-                            <div className="ml-auto flex items-center gap-3 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-auto">
-                                <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onEdit(listItem); }} className="text-white/60 hover:text-white transition-colors" title="Edit Entry"><Edit3 size={14} /></button>
-                                <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDelete(game.igdbId); }} className="text-white/60 hover:text-red-400 transition-colors" title="Remove"><Trash2 size={14} /></button>
-                            </div>
+                            {onEdit && onDelete && (
+                                <div className="ml-auto flex items-center gap-3 opacity-60 group-hover:opacity-100 transition-opacity pointer-events-auto">
+                                    <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onEdit(listItem); }} className="text-white/60 hover:text-white transition-colors" title="Edit Entry"><Edit3 size={14} /></button>
+                                    <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDelete(game.igdbId); }} className="text-white/60 hover:text-red-400 transition-colors" title="Remove"><Trash2 size={14} /></button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -1,156 +1,263 @@
 package kev.gamedb;
 
-import kev.gamedb.dto.GameSearchDTO;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.MongoExpression;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
+import kev.gamedb.dto.GameSearchDTO;
 
+import java.time.Instant;
+import java.time.Year;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class GameSearchService {
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
-    @Cacheable(value = "gameSearch", key = "#criteria.hashCode()")
-    public List<Game> searchGames(GameSearchDTO criteria) {
-        List<AggregationOperation> pipeline = new ArrayList<>();
+        @Autowired
+        private MongoTemplate mongoTemplate;
 
-        // 1. FAST INITIAL MATCH (Uses Text Index)
-        if (criteria.getSearchTerm() != null && !criteria.getSearchTerm().isEmpty()) {
-            pipeline.add(Aggregation.match(TextCriteria.forDefaultLanguage()
-                    .matchingAny(criteria.getSearchTerm())));
+        public Page<GameLite> searchGames(GameSearchDTO criteria) {
+                System.out.println("Starting searchGames with criteria: " + criteria);
 
-            // Add score immediately for sorting
-            pipeline.add(Aggregation.addFields()
-                    .addFieldWithValue("score", MongoExpression.create("{\"$meta\": \"textScore\"}"))
-                    .build());
+                try {
+                        MongoCollection<Document> gamesCollection = mongoTemplate.getCollection("games");
+
+                        // 1. Build Filter
+                        List<Bson> filters = new ArrayList<>();
+                        if (criteria.getSearchTerm() != null && !criteria.getSearchTerm().isEmpty()) {
+                                filters.add(Filters.regex("name", criteria.getSearchTerm(), "i"));
+                        }
+                        if (criteria.getPlatforms() != null && !criteria.getPlatforms().isEmpty()) {
+                                List<Long> ids = new ArrayList<>();
+                                for (String s : criteria.getPlatforms())
+                                        ids.add(Long.parseLong(s));
+                                filters.add(Filters.all("platforms", ids));
+                        }
+                        if (criteria.getGenres() != null && !criteria.getGenres().isEmpty()) {
+                                List<Long> ids = new ArrayList<>();
+                                for (String s : criteria.getGenres())
+                                        ids.add(Long.parseLong(s));
+                                filters.add(Filters.in("genres", ids));
+                        }
+                        if (criteria.getThemes() != null && !criteria.getThemes().isEmpty()) {
+                                List<Long> ids = new ArrayList<>();
+                                for (String s : criteria.getThemes())
+                                        ids.add(Long.parseLong(s));
+                                filters.add(Filters.in("themes", ids));
+                        }
+                        if (criteria.getMinTotalRating() != null) {
+                                filters.add(Filters.gte("total_rating", criteria.getMinTotalRating()));
+                        }
+
+                        if (criteria.getMinReleaseYear() != null || criteria.getMaxReleaseYear() != null) {
+                                List<Bson> yearFilters = new ArrayList<>();
+                                if (criteria.getMinReleaseYear() != null) {
+                                        Date start = Date.from(Year.of(criteria.getMinReleaseYear()).atDay(1)
+                                                        .atStartOfDay().toInstant(ZoneOffset.UTC));
+                                        yearFilters.add(Filters.gte("first_release_date", start));
+                                }
+                                if (criteria.getMaxReleaseYear() != null) {
+                                        Date end = Date.from(Year.of(criteria.getMaxReleaseYear())
+                                                        .atDay(Year.of(criteria.getMaxReleaseYear()).length())
+                                                        .atTime(23, 59, 59).toInstant(ZoneOffset.UTC));
+                                        yearFilters.add(Filters.lte("first_release_date", end));
+                                }
+                                if (!yearFilters.isEmpty()) {
+                                        filters.add(Filters.and(yearFilters));
+                                }
+                        }
+
+                        // Default sorting/visibility fixes
+                        boolean hasFilters = (criteria.getSearchTerm() != null && !criteria.getSearchTerm().isEmpty())
+                                        || (criteria.getPlatforms() != null && !criteria.getPlatforms().isEmpty())
+                                        || (criteria.getGenres() != null && !criteria.getGenres().isEmpty())
+                                        || (criteria.getThemes() != null && !criteria.getThemes().isEmpty());
+
+                        if (!hasFilters) {
+                                // Default broad search should only show MAIN GAME (0), REMAKE (8), or REMASTER (9)
+                        // Also allow games where game_type is absent (legacy data synced before the field existed)
+                        filters.add(Filters.or(
+                                Filters.in("game_type", 0, 8, 9),
+                                Filters.exists("game_type", false)
+                        ));
+                                // Make sure it has some rating or cover so blank entries don't flood the top
+                                filters.add(Filters.or(
+                                        Filters.exists("total_rating_count", true),
+                                        Filters.exists("cover", true)
+                                ));
+                        }
+
+                        Bson finalFilter = filters.isEmpty() ? new Document() : Filters.and(filters);
+
+                        // 2. Count
+                        long total = gamesCollection.countDocuments(finalFilter);
+
+                        // 3. Sorting
+                        String sortBy = criteria.getSortBy() != null ? criteria.getSortBy() : "total_rating";
+                        if (sortBy.equals("rating"))
+                                sortBy = "total_rating";
+                        if (sortBy.equals("releaseDate"))
+                                sortBy = "first_release_date";
+
+                        boolean isAscending = "asc".equalsIgnoreCase(criteria.getSortDirection());
+                        Bson sortBson = isAscending ? Sorts.ascending(sortBy) : Sorts.descending(sortBy);
+
+                        // 4. Pagination
+                        int page = criteria.getPage();
+                        int size = criteria.getSize();
+                        if (size <= 0)
+                                size = 20;
+                        int skip = page * size;
+
+                        // 5. Aggregation Pipeline (Raw)
+                        List<Bson> pipeline = new ArrayList<>();
+                        pipeline.add(new Document("$match", finalFilter));
+                        pipeline.add(new Document("$sort", sortBson));
+                        pipeline.add(new Document("$skip", skip));
+                        pipeline.add(new Document("$limit", size));
+
+                        // Lookups
+                        pipeline.add(new Document("$lookup",
+                                        new Document("from", "platforms").append("localField", "platforms")
+                                                        .append("foreignField", "igdbId")
+                                                        .append("as", "platformObjects")));
+                        pipeline.add(new Document("$lookup",
+                                        new Document("from", "genres").append("localField", "genres")
+                                                        .append("foreignField", "igdbId")
+                                                        .append("as", "genreObjects")));
+                        pipeline.add(new Document("$lookup",
+                                        new Document("from", "themes").append("localField", "themes")
+                                                        .append("foreignField", "igdbId")
+                                                        .append("as", "themeObjects")));
+                        // 1. Lookup involved_companies bridging collection
+                        pipeline.add(new Document("$lookup",
+                                        new Document("from", "involved_companies").append("localField", "igdbId")
+                                                        .append("foreignField", "game")
+                                                        .append("as", "companyRelations")));
+
+                        // 2. Lookup the actual company names from the companies collection using the
+                        // company ids
+                        pipeline.add(new Document("$lookup",
+                                        new Document("from", "companies")
+                                                        .append("localField", "companyRelations.company")
+                                                        .append("foreignField", "igdbId")
+                                                        .append("as", "involvedCompanyObjects")));
+                        pipeline.add(new Document("$lookup",
+                                        new Document("from", "covers").append("localField", "cover")
+                                                        .append("foreignField", "igdbId").append("as", "coverObject")));
+                        pipeline.add(new Document("$unwind", new Document("path", "$coverObject")
+                                        .append("preserveNullAndEmptyArrays", true)));
+
+                        // 6. Project Stage - CRITICAL: Extract only primitives to avoid any DBRef leaks
+                        Document project = new Document();
+                        project.append("igdbId", 1);
+                        project.append("name", 1);
+                        project.append("slug", 1);
+                        project.append("summary", 1);
+                        project.append("total_rating", 1);
+                        project.append("community_rating", 1);
+                        project.append("community_rating_count", 1);
+                        project.append("releaseDate", "$first_release_date"); // ALIASING
+
+                        project.append("genreNames", new Document("$map", new Document("input", "$genreObjects")
+                                        .append("as", "g").append("in", "$$g.name")));
+                        project.append("platformNames", new Document("$map", new Document("input", "$platformObjects")
+                                        .append("as", "p").append("in", "$$p.name")));
+                        project.append("platformData",
+                                        new Document("$map", new Document("input", "$platformObjects").append("as", "p")
+                                                        .append("in", new Document("id", "$$p.igdbId")
+                                                                        .append("name", "$$p.name")
+                                                                        .append("logoUrl", "$$p.platformLogoUrl"))));
+                        project.append("themeNames", new Document("$map", new Document("input", "$themeObjects")
+                                        .append("as", "t").append("in", "$$t.name")));
+
+                        // Involved Companies
+                        // Filter out just the Developers by checking the bridging collection, then
+                        // mapped to names
+                        project.append("involvedCompanyNames",
+                                        new Document("$map", new Document("input", "$involvedCompanyObjects")
+                                                        .append("as", "c").append("in", "$$c.name")));
+
+                        // To keep it performant and simple for the DTO without writing a massive nested
+                        // To keep it performant and simple for the DTO without writing a massive nested
+                        // $filter,
+                        // we pass the resolved company objects to the frontend. The frontend's
+                        // `extractName`
+                        // successfully pulls `arr[0].name` from these maps.
+                        project.append("developers",
+                                        new Document("$map", new Document("input", "$involvedCompanyObjects")
+                                                        .append("as", "c")
+                                                        .append("in", new Document("name", "$$c.name"))));
+
+                        project.append("publishers",
+                                        new Document("$map", new Document("input", "$involvedCompanyObjects")
+                                                        .append("as", "c")
+                                                        .append("in", new Document("name", "$$c.name"))));
+
+                        project.append("coverUrl", "$coverObject.url");
+
+                        pipeline.add(new Document("$project", project));
+
+                        List<Document> rawResults = new ArrayList<>();
+                        gamesCollection.aggregate(pipeline).forEach(rawResults::add);
+
+                        // 7. Manual Mapping to GameLite
+                        List<GameLite> content = rawResults.stream().map(doc -> {
+                                System.out.println("DEBUG Game: " + doc.getString("name") + " | Genres: "
+                                                + doc.get("genreNames") + " | Themes: " + doc.get("themeNames"));
+                                GameLite lite = new GameLite();
+                                lite.setIgdbId(doc.getInteger("igdbId"));
+                                lite.setName(doc.getString("name"));
+                                lite.setSlug(doc.getString("slug"));
+                                lite.setSummary(doc.getString("summary"));
+                                lite.setTotal_rating(doc.get("total_rating") instanceof Number
+                                                ? ((Number) doc.get("total_rating")).doubleValue()
+                                                : null);
+
+                                if (doc.get("community_rating") instanceof Number) {
+                                        lite.setTotal_rating(((Number) doc.get("community_rating")).doubleValue());
+                                }
+
+                                Object rd = doc.get("releaseDate");
+                                if (rd instanceof Date)
+                                        lite.setReleaseDate(((Date) rd).toInstant());
+                                else if (rd instanceof Instant)
+                                        lite.setReleaseDate((Instant) rd);
+
+                                lite.setGenreNames((List<String>) doc.get("genreNames"));
+                                lite.setPlatformNames((List<String>) doc.get("platformNames"));
+                                lite.setPlatformData((List<Map<String, Object>>) doc.get("platformData"));
+                                lite.setThemeNames((List<String>) doc.get("themeNames"));
+                                lite.setCoverUrl(doc.getString("coverUrl"));
+                                lite.setInvolvedCompanyNames((List<String>) doc.get("involvedCompanyNames"));
+                                lite.setDevelopers((List<Map<String, Object>>) doc.get("developers"));
+
+                                return lite;
+                        }).collect(Collectors.toList());
+
+                        System.out.println("Search complete. Returning results.");
+                        return new PageImpl<>(content, PageRequest.of(page, size), total);
+
+                } catch (Exception e) {
+                        System.err.println("CRITICAL ERROR in GameSearchService: " + e.getMessage());
+                        e.printStackTrace();
+                        throw e;
+                }
         }
-
-        // 2. CONSTRUCT FILTERS
-        List<Criteria> filters = new ArrayList<>();
-        if (criteria.getGenres() != null && !criteria.getGenres().isEmpty())
-            filters.add(Criteria.where("genres").in(criteria.getGenres()));
-        if (criteria.getPlatforms() != null && !criteria.getPlatforms().isEmpty())
-            filters.add(Criteria.where("platforms").in(criteria.getPlatforms()));
-        if (criteria.getThemes() != null && !criteria.getThemes().isEmpty())
-            filters.add(Criteria.where("themes").in(criteria.getThemes()));
-        if (criteria.getGameModes() != null && !criteria.getGameModes().isEmpty())
-            filters.add(Criteria.where("game_modes").in(criteria.getGameModes()));
-        if (criteria.getInvolvedCompanies() != null && !criteria.getInvolvedCompanies().isEmpty())
-            filters.add(Criteria.where("involved_companies").in(criteria.getInvolvedCompanies()));
-        if (criteria.getMinTotalRating() != null)
-            filters.add(Criteria.where("total_rating").gte(criteria.getMinTotalRating()));
-
-        if (criteria.getMinReleaseYear() != null || criteria.getMaxReleaseYear() != null) {
-            Criteria dateCriteria = Criteria.where("first_release_date");
-            if (criteria.getMinReleaseYear() != null) {
-                java.time.Instant start = java.time.Year.of(criteria.getMinReleaseYear()).atDay(1)
-                        .atStartOfDay(java.time.ZoneOffset.UTC).toInstant();
-                dateCriteria.gte(start);
-            }
-            if (criteria.getMaxReleaseYear() != null) {
-                java.time.Instant end = java.time.Year.of(criteria.getMaxReleaseYear()).atMonth(12).atDay(31)
-                        .atTime(23, 59, 59).toInstant(java.time.ZoneOffset.UTC);
-                dateCriteria.lte(end);
-            }
-            filters.add(dateCriteria);
-        }
-
-        if (!filters.isEmpty()) {
-            pipeline.add(Aggregation.match(new Criteria().andOperator(filters.toArray(new Criteria[0]))));
-        }
-
-        // 3. SORT & PAGINATE FIRST
-        String sortByField = criteria.getSortBy();
-        if (sortByField == null || sortByField.isEmpty()) {
-            sortByField = (criteria.getSearchTerm() != null) ? "score" : "total_rating";
-        }
-        Sort.Direction dir = (criteria.getSortDirection() != null
-                && criteria.getSortDirection().equalsIgnoreCase("asc")) ? Sort.Direction.ASC : Sort.Direction.DESC;
-        pipeline.add(Aggregation.sort(dir, sortByField));
-        pipeline.add(Aggregation.skip((long) criteria.getPage() * criteria.getSize()));
-        pipeline.add(Aggregation.limit(criteria.getSize()));
-
-        // 4. CLEAN DATA FOR JOINS (Safely handle dirty stringified arrays)
-        // Correcting JSON syntax: all operators must be quoted.
-        // Also: There is no $isString operator. We use { $type: "string" }
-        String cleanArrayExp = " { \"$cond\": { " +
-                "\"if\": { \"$isArray\": \"$%s\" }, " +
-                "\"then\": \"$%s\", " +
-                "\"else\": { \"$cond\": { " +
-                "\"if\": { \"$and\": [ { \"$eq\": [{ \"$type\": \"$%s\" }, \"string\"] }, { \"$ne\": [\"$%s\", \"\"] } ] }, "
-                +
-                "\"then\": { \"$filter\": { " +
-                "\"input\": { \"$map\": { " +
-                "\"input\": { \"$split\": [ { \"$replaceAll\": { \"input\": { \"$replaceAll\": { \"input\": \"$%s\", \"find\": \"[\", \"replacement\": \"\" } }, \"find\": \"]\", \"replacement\": \"\" } }, \",\" ] }, "
-                +
-                "\"as\": \"id\", " +
-                "\"in\": { \"$convert\": { \"input\": { \"$trim\": { \"input\": \"$$id\" } }, \"to\": \"int\", \"onError\": null, \"onNull\": null } } "
-                +
-                "} }, " +
-                "\"as\": \"val\", " +
-                "\"cond\": { \"$ne\": [\"$$val\", null] } " +
-                "} }, " +
-                "\"else\": [] " +
-                "} } " +
-                "} } ";
-
-        pipeline.add(Aggregation.addFields()
-                .addFieldWithValue("cleanPlatforms",
-                        MongoExpression.create(String.format(cleanArrayExp, "platforms", "platforms", "platforms",
-                                "platforms", "platforms")))
-                .addFieldWithValue("cleanGenres",
-                        MongoExpression
-                                .create(String.format(cleanArrayExp, "genres", "genres", "genres", "genres", "genres")))
-                .addFieldWithValue("cleanThemes",
-                        MongoExpression
-                                .create(String.format(cleanArrayExp, "themes", "themes", "themes", "themes", "themes")))
-                .addFieldWithValue("cleanModes",
-                        MongoExpression.create(String.format(cleanArrayExp, "game_modes", "game_modes", "game_modes",
-                                "game_modes", "game_modes")))
-                .addFieldWithValue("cleanInvolved",
-                        MongoExpression.create(String.format(cleanArrayExp, "involved_companies", "involved_companies",
-                                "involved_companies", "involved_companies", "involved_companies")))
-                .addFieldWithValue("cleanFranchises",
-                        MongoExpression.create(String.format(cleanArrayExp, "franchises", "franchises", "franchises",
-                                "franchises", "franchises")))
-                .addFieldWithValue("cleanCollections",
-                        MongoExpression.create(String.format(cleanArrayExp, "collections", "collections", "collections",
-                                "collections", "collections")))
-                .addFieldWithValue("first_release_date", MongoExpression.create(
-                        "{ \"$cond\": { \"if\": { \"$eq\": [\"$first_release_date\", \"\"] }, \"then\": null, \"else\": \"$first_release_date\" } }"))
-                .build());
-
-        // 5. LOOKUPS
-        pipeline.add(Aggregation.lookup("platforms", "cleanPlatforms", "igdbId", "platforms"));
-        pipeline.add(Aggregation.lookup("genres", "cleanGenres", "igdbId", "genres"));
-        pipeline.add(Aggregation.lookup("themes", "cleanThemes", "igdbId", "themes"));
-        pipeline.add(Aggregation.lookup("game_modes", "cleanModes", "igdbId", "game_modes"));
-        pipeline.add(Aggregation.lookup("franchises", "cleanFranchises", "igdbId", "franchises"));
-        pipeline.add(Aggregation.lookup("collections", "cleanCollections", "igdbId", "collectionObjects"));
-
-        // Complex lookup for involved_companies to get company data
-        pipeline.add(Aggregation.lookup("involved_companies", "cleanInvolved", "igdbId", "involved_companies"));
-
-        // 6. FINAL MAPPING & NAME EXTRACTION
-        pipeline.add(Aggregation.addFields()
-                .addFieldWithValue("franchiseName",
-                        MongoExpression.create("{\"$arrayElemAt\": [\"$franchises.name\", 0]}"))
-                .addFieldWithValue("seriesName",
-                        MongoExpression.create("{\"$arrayElemAt\": [\"$collectionObjects.name\", 0]}"))
-                .addFieldWithValue("collection",
-                        MongoExpression.create("{\"$arrayElemAt\": [\"$collectionObjects\", 0]}"))
-                .build());
-
-        return mongoTemplate.aggregate(Aggregation.newAggregation(pipeline), "games", Game.class).getMappedResults();
-    }
 }

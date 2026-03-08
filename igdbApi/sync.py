@@ -76,6 +76,14 @@ class IGDBSync:
             if 'status' in item:
                 val = item.pop('status')
                 item['status'] = status_map.get(val, str(val))
+        
+        # Resolve platform_logo to platformLogoUrl
+        if endpoint_name == 'platforms' and 'platform_logo' in item:
+            logo_id = item.get('platform_logo') # Keep it for a moment
+            logo_doc = self.db['platform_logos'].find_one({'igdbId': logo_id})
+            if logo_doc and 'url' in logo_doc:
+                item['platformLogoUrl'] = logo_doc['url']
+                item.pop('platform_logo') # Only pop if we successfully resolved it
             
         return item
 
@@ -232,7 +240,7 @@ class IGDBSync:
         self.ensure_indexes()
         
         order = [
-            'covers', 'games'
+            'platform_logos', 'platforms', 'genres', 'themes', 'covers', 'games'
         ]
         for ep in order:
             if ep in ENDPOINTS:
