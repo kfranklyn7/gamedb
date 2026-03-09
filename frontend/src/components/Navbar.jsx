@@ -56,7 +56,7 @@ const Navbar = () => {
                     </Link>
 
                     {/* Navigation Links - Desktop */}
-                    <div className="hidden md:flex items-center gap-6">
+                    <div className="hidden lg:flex items-center gap-6">
                         <Link to="/" className="text-text hover:text-accent-500 font-medium transition-colors">
                             {'>'} HOME
                         </Link>
@@ -78,61 +78,57 @@ const Navbar = () => {
                         {/* Mobile Menu Toggle */}
                         <button
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="md:hidden p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
+                            className="lg:hidden p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
                             aria-label="Toggle Mobile Menu"
                         >
                             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                         </button>
-                        <button
-                            onClick={toggleMode}
-                            aria-label="Toggle Theme"
-                            className="p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
-                        >
-                            {mode === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-                        </button>
 
-                        <button
-                            onClick={() => setIsSettingsOpen(true)}
-                            aria-label="Settings"
-                            className="p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
-                        >
-                            <Settings size={20} />
-                        </button>
+                        <div className="hidden lg:flex items-center gap-2 sm:gap-4">
+                            <button
+                                onClick={toggleMode}
+                                aria-label="Toggle Theme"
+                                className="p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
+                            >
+                                {mode === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                            </button>
 
-                        <div className="w-px h-6 bg-border hidden sm:block"></div>
+                            <button
+                                onClick={() => setIsSettingsOpen(true)}
+                                aria-label="Settings"
+                                className="p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
+                            >
+                                <Settings size={20} />
+                            </button>
 
-                        {isAuthenticated ? (
-                            <div className="flex items-center gap-2">
+                            <div className="w-px h-6 bg-border hidden sm:block"></div>
+
+                            {isAuthenticated ? (
                                 <button
                                     onClick={handleLogout}
-                                    className="flex items-center gap-1 px-3 py-2 rounded-dynamic-btn text-sm font-medium text-red-600 hover:bg-red-50 transition-colors border border-transparent hover:border-red-200"
+                                    className="p-2 hover:bg-red-50 text-text-muted hover:text-red-500 transition-colors rounded-dynamic"
+                                    title="Logout"
                                 >
-                                    <LogOut size={16} />
-                                    <span className="hidden sm:inline">LOGOUT</span>
+                                    <LogOut size={20} />
                                 </button>
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-2">
-                                <Link
-                                    to="/login"
-                                    className="px-3 py-2 rounded-dynamic-btn text-sm font-medium text-text bg-surface border border-border hover:border-accent-500 hover:text-accent-500 transition-colors"
-                                >
-                                    LOGIN
-                                </Link>
-                                <Link
-                                    to="/register"
-                                    className="px-3 py-2 rounded-dynamic-btn text-sm font-medium bg-accent-500 text-white hover:bg-accent-600 shadow-retro transition-colors"
-                                >
-                                    SIGN UP
-                                </Link>
-                            </div>
-                        )}
+                            ) : (
+                                <div className="flex items-center gap-2">
+                                    <Link to="/login" className="flex items-center gap-2 text-sm font-medium text-text bg-surface-hover hover:text-accent-500 hover:bg-accent-50 py-1.5 px-3 rounded-dynamic-btn transition-colors border border-border">
+                                        <LogIn size={16} /> LOGIN
+                                    </Link>
+                                    <Link to="/register" className="flex items-center gap-2 text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 py-1.5 px-3 rounded-dynamic-btn transition-colors shadow-sm">
+                                        <UserPlus size={16} /> SIGN UP
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                {/* Mobile Menu Dropdown */}
-                {isMobileMenuOpen && (
-                    <div className="md:hidden py-4 border-t border-border mt-2 space-y-4">
+            {/* Mobile Menu Dropdown Overlay */}
+            {isMobileMenuOpen && (
+                <div className="lg:hidden absolute top-full left-0 right-0 bg-surface/95 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.5)] border-b border-border py-4 space-y-4 px-4 origin-top animate-scale-in">
                         <Link 
                             to="/" 
                             onClick={() => setIsMobileMenuOpen(false)}
@@ -163,9 +159,61 @@ const Navbar = () => {
                                 {'>'} JOURNAL
                             </Link>
                         )}
+
+                        <div className="h-px bg-border my-2"></div>
+                        
+                        {/* Mobile Utility Controls */}
+                        <div className="flex items-center justify-around px-2 pt-2">
+                            <button
+                                onClick={toggleMode}
+                                className="flex flex-col items-center gap-1 p-2 text-text-muted hover:text-accent-500 transition-colors"
+                            >
+                                {mode === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                                <span className="text-[10px] font-bold">THEME</span>
+                            </button>
+                            <button
+                                onClick={() => setDensity(density === 'comfortable' ? 'compact' : 'comfortable')}
+                                className="flex flex-col items-center gap-1 p-2 text-text-muted hover:text-accent-500 transition-colors"
+                            >
+                                {density === 'comfortable' ? <Zap size={20} /> : <Layout size={20} />}
+                                <span className="text-[10px] font-bold">DENSITY</span>
+                            </button>
+                            <button
+                                onClick={() => {
+                                    setIsSettingsOpen(true);
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="flex flex-col items-center gap-1 p-2 text-text-muted hover:text-accent-500 transition-colors"
+                            >
+                                <Settings size={20} />
+                                <span className="text-[10px] font-bold">CONFIG</span>
+                            </button>
+                            {isAuthenticated && (
+                                <button
+                                    onClick={() => {
+                                        handleLogout();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    className="flex flex-col items-center gap-1 p-2 text-text-muted hover:text-red-500 transition-colors"
+                                >
+                                    <LogOut size={20} />
+                                    <span className="text-[10px] font-bold">LOGOUT</span>
+                                </button>
+                            )}
+                        </div>
+
+                        {!isAuthenticated && (
+                            <div className="px-2 pt-2 flex flex-col gap-2">
+                                <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 text-sm font-medium text-text bg-surface-hover hover:text-accent-500 py-2 rounded-dynamic-btn border border-border">
+                                    <LogIn size={16} /> LOGIN
+                                </Link>
+                                <Link to="/register" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center justify-center gap-2 text-sm font-medium text-white bg-accent-500 hover:bg-accent-600 py-2 rounded-dynamic-btn shadow-sm">
+                                    <UserPlus size={16} /> SIGN UP
+                                </Link>
+                            </div>
+                        )}
                     </div>
                 )}
-            </div>
 
             {/* Settings Modal - Portaled to document.body to avoid sticky nav stacking issues */}
             {isSettingsOpen && createPortal(
