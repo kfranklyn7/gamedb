@@ -400,24 +400,28 @@ const BrowsePage = () => {
 
                             {/* Pagination Controls */}
                             {games.length > 0 && (
-                                <div className="flex justify-center items-center gap-4 mt-8 pb-8">
-                                    <button
-                                        disabled={page === 0 || loading}
-                                        onClick={() => setPage(p => Math.max(0, p - 1))}
-                                        className="px-4 py-2 bg-surface terminal-border rounded-dynamic-btn disabled:opacity-50 hover:bg-accent-50 text-text-muted hover:text-accent-600 transition-colors font-bold tracking-widest text-xs"
-                                    >
-                                        &lt; PREVIOUS_PAGE
-                                    </button>
-                                    <span className="text-text-muted font-bold tracking-widest text-xs">
+                                <div className="flex flex-col-reverse sm:flex-row justify-center items-center gap-4 sm:gap-6 mt-8 pb-8">
+                                    <div className="flex justify-between w-full sm:w-auto gap-4">
+                                        <button
+                                            disabled={page === 0 || loading}
+                                            onClick={() => setPage(p => Math.max(0, p - 1))}
+                                            className="w-full sm:w-auto px-4 py-2 bg-surface terminal-border rounded-dynamic-btn disabled:opacity-50 hover:bg-accent-50 text-text-muted hover:text-accent-600 transition-colors font-bold tracking-widest text-xs"
+                                        >
+                                            <span className="sm:hidden">&lt; PREV</span>
+                                            <span className="hidden sm:inline">&lt; PREVIOUS_PAGE</span>
+                                        </button>
+                                        <button
+                                            disabled={!hasNextPage || loading}
+                                            onClick={() => setPage(p => p + 1)}
+                                            className="w-full sm:w-auto px-4 py-2 bg-surface terminal-border rounded-dynamic-btn disabled:opacity-50 hover:bg-accent-50 text-text-muted hover:text-accent-600 transition-colors font-bold tracking-widest text-xs"
+                                        >
+                                            <span className="sm:hidden">NEXT &gt;</span>
+                                            <span className="hidden sm:inline">NEXT_PAGE &gt;</span>
+                                        </button>
+                                    </div>
+                                    <span className="text-text-muted font-bold tracking-widest text-xs mb-2 sm:mb-0">
                                         [ PAGE {page + 1} OF {Math.ceil(totalFound / PAGE_SIZE) || 1} ]
                                     </span>
-                                    <button
-                                        disabled={!hasNextPage || loading}
-                                        onClick={() => setPage(p => p + 1)}
-                                        className="px-4 py-2 bg-surface terminal-border rounded-dynamic-btn disabled:opacity-50 hover:bg-accent-50 text-text-muted hover:text-accent-600 transition-colors font-bold tracking-widest text-xs"
-                                    >
-                                        NEXT_PAGE &gt;
-                                    </button>
                                 </div>
                             )}
                         </div>

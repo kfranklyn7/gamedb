@@ -41,7 +41,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-border transition-all duration-300 nav-container shadow-retro">
+        <nav className="sticky top-0 z-[100] bg-surface/80 backdrop-blur-md border-b border-border transition-all duration-300 nav-container shadow-retro">
             <div className="max-w-[2000px] mx-auto px-4 density-pad">
                 <div className="flex justify-between items-center h-full">
                     <Link to="/" className="flex items-center gap-3 group">
