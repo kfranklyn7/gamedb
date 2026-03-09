@@ -1,0 +1,13 @@
+services:
+  nginx:
+    volumes:
+      - ./nginx/nginx.local.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8081:80" # Map a different local port for the Docker stack
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    ports:
+      - "8082:80" # Optional direct access to frontend
