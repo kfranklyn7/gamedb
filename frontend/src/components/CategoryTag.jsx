@@ -25,6 +25,7 @@ const CategoryTag = ({
     logoUrl = null,
     family = null,
     iconOnly = false,
+    variant = 'soft', // 'soft' (default) or 'solid'
 }) => {
     if (!value) return null;
 
@@ -34,13 +35,13 @@ const CategoryTag = ({
     const Icon = getTagIcon(category, value, family);
 
     const sizeClasses = {
-        xs: 'text-[9px] px-1.5 py-0.5 gap-1 min-h-[16px]',
+        xs: 'text-[10px] px-1.5 py-0.5 gap-1 min-h-[16px]',
         sm: 'text-[11px] px-2 py-0.5 gap-1 min-h-[20px]',
         md: 'text-xs px-2.5 py-1 gap-1.5 min-h-[24px]',
         lg: 'text-sm px-3 py-1.5 gap-2 min-h-[28px]',
     };
 
-    const iconSizes = { xs: 9, sm: 11, md: 13, lg: 15 };
+    const iconSizes = { xs: 11, sm: 11, md: 13, lg: 15 };
 
     const activeStyles = active
         ? { background: `${hexColor}40`, borderColor: hexColor, fontWeight: 600 }
@@ -54,6 +55,18 @@ const CategoryTag = ({
     const isGraphicLogoOnly = false;
 
     let styles = { ...defaultStyles, ...activeStyles };
+
+    // Solid variant override (Premium look for brand tags)
+    if (variant === 'solid') {
+        styles = {
+            background: hexColor,
+            borderColor: hexColor,
+            color: '#fff',
+            fontWeight: 700,
+            boxShadow: `0 2px 4px ${hexColor}40`,
+            textShadow: '0 1px 2px rgba(0,0,0,0.2)',
+        };
+    }
 
     const renderIcon = () => {
         if (!showIcon) return null;
@@ -79,7 +92,8 @@ const CategoryTag = ({
         }
 
         if (hasSpecificBrandIcon) {
-            return <Icon size={Icon.name === 'SiNintendo' ? iconSizes[size] * 2.2 : iconSizes[size] * 1.4} />;
+            const iconScale = variant === 'solid' ? 1.6 : 1.4;
+            return <Icon size={Icon.name === 'SiNintendo' ? iconSizes[size] * 2.2 : iconSizes[size] * iconScale} />;
         }
 
         if (Icon) {

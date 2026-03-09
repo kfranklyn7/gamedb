@@ -14,7 +14,7 @@ public class PlatformService {
     @Autowired
     private PlatformRepository platformRepository;
 
-    @Cacheable(value = "platforms", key = "#pageable.hashCode()")
+    @Cacheable(value = "platforms")
     public Page<Platform> allPlatforms(Pageable pageable) {
         return platformRepository.findAll(pageable);
     }

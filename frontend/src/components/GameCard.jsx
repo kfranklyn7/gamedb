@@ -19,8 +19,9 @@ const GameCard = ({ game }) => {
     const platformTags = game.platforms || game.platformNames || [];
     const themeTags = game.themes || [];
 
-    const MAX_GENRES = 6;
-    const MAX_THEMES = 5;
+    const MAX_GENRES = 10;
+    const MAX_THEMES = 10;
+    const MAX_PLATFORMS_MOBILE = 3;
     const visibleGenres = genreTags.slice(0, MAX_GENRES);
     const visibleThemes = themeTags.slice(0, MAX_THEMES);
 
@@ -64,8 +65,9 @@ const GameCard = ({ game }) => {
             <div className="density-p-content flex flex-col flex-grow density-gap min-h-[90px] pt-3">
 
                 {/* Platform badges */}
-                <div className="flex flex-wrap gap-1 mb-1">
-                    {Array.isArray(game.platformData || platformTags) && (game.platformData || platformTags).slice(0, 3).map((p, idx) => {
+                {/* Platform badges */}
+                <div className="flex flex-wrap gap-1 mb-1.5">
+                    {Array.isArray(game.platformData || platformTags) && (game.platformData || platformTags).slice(0, 6).map((p, idx) => {
                         const isObject = typeof p === 'object' && p !== null;
                         const val = isObject ? p.name || p.value : p;
                         const logoUrl = isObject ? p.logoUrl : null;
@@ -79,14 +81,14 @@ const GameCard = ({ game }) => {
                                 value={val}
                                 logoUrl={logoUrl}
                                 family={family}
-                                size="sm"
-                                iconOnly={true}
+                                size="xs" // Shrunk to fit
+                                iconOnly={false}
                             />
                         );
                     })}
-                    {platformTags.length > 3 && (
-                        <span className="text-[10px] font-black text-text-muted px-1.5 py-0.5 bg-background border border-border rounded uppercase flex items-center justify-center min-w-[24px]">
-                            +{platformTags.length - 3}
+                    {platformTags.length > 6 && (
+                        <span className="text-[10px] font-black text-text-muted px-1.5 py-0.5 bg-background border border-border rounded-lg uppercase flex items-center justify-center min-w-[20px]">
+                            +{platformTags.length - 6}
                         </span>
                     )}
                 </div>
