@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
-import { Gamepad2, LogOut, LogIn, UserPlus, Settings, X, Sun, Moon, Zap, Layout, CornerUpLeft } from 'lucide-react';
+import { Gamepad2, LogOut, LogIn, UserPlus, Settings, X, Sun, Moon, Zap, Layout, CornerUpLeft, Menu } from 'lucide-react';
 
 const Navbar = () => {
     const { logout, isAuthenticated } = useAuth();
@@ -14,6 +14,7 @@ const Navbar = () => {
     } = useTheme();
     const navigate = useNavigate();
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     const handleLogout = () => {
         logout();
@@ -54,8 +55,8 @@ const Navbar = () => {
                         </div>
                     </Link>
 
-                    {/* Navigation Links */}
-                    <div className="flex items-center gap-6">
+                    {/* Navigation Links - Desktop */}
+                    <div className="hidden md:flex items-center gap-6">
                         <Link to="/" className="text-text hover:text-accent-500 font-medium transition-colors">
                             {'>'} HOME
                         </Link>
@@ -73,7 +74,15 @@ const Navbar = () => {
                     </div>
 
                     {/* Right side controls */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4">
+                        {/* Mobile Menu Toggle */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            className="md:hidden p-2 hover:bg-accent-50 text-text-muted hover:text-accent-500 transition-colors rounded-dynamic"
+                            aria-label="Toggle Mobile Menu"
+                        >
+                            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                        </button>
                         <button
                             onClick={toggleMode}
                             aria-label="Toggle Theme"
@@ -120,6 +129,42 @@ const Navbar = () => {
                         )}
                     </div>
                 </div>
+
+                {/* Mobile Menu Dropdown */}
+                {isMobileMenuOpen && (
+                    <div className="md:hidden py-4 border-t border-border mt-2 space-y-4">
+                        <Link 
+                            to="/" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="block text-text hover:text-accent-500 font-medium transition-colors px-2"
+                        >
+                            {'>'} HOME
+                        </Link>
+                        <Link 
+                            to="/browse" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="block text-text hover:text-accent-500 font-medium transition-colors px-2"
+                        >
+                            {'>'} BROWSE
+                        </Link>
+                        <Link 
+                            to="/community" 
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className="block text-text hover:text-accent-500 font-medium transition-colors px-2"
+                        >
+                            {'>'} COMMUNITY
+                        </Link>
+                        {isAuthenticated && (
+                            <Link 
+                                to="/my-list" 
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="block text-text hover:text-accent-500 font-medium transition-colors px-2"
+                            >
+                                {'>'} JOURNAL
+                            </Link>
+                        )}
+                    </div>
+                )}
             </div>
 
             {/* Settings Modal - Portaled to document.body to avoid sticky nav stacking issues */}

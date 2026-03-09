@@ -24,6 +24,7 @@ const BrowsePage = () => {
     const [page, setPage] = useState(0);
     const [hasNextPage, setHasNextPage] = useState(false);
     const [expandPlatforms, setExpandPlatforms] = useState(false);
+    const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
     const PAGE_SIZE = 24;
     const [totalFound, setTotalFound] = useState(0);
 
@@ -141,14 +142,53 @@ const BrowsePage = () => {
     );
 
     return (
-        <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-background palette-transition">
-            <div className="flex flex-1 overflow-hidden container-archive">
+        <div className="flex flex-col h-[calc(100vh-64px)] overflow-hidden bg-background palette-transition relative">
+            {/* Mobile Filters Toggle Button */}
+            <div className="lg:hidden p-4 border-b border-border bg-surface/80 backdrop-blur-md sticky top-0 z-40 flex justify-between items-center shadow-sm">
+                <button
+                    onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
+                    className="flex items-center gap-2 text-sm font-bold text-text bg-background border border-border px-4 py-2 rounded-dynamic hover:border-accent-500 transition-colors"
+                >
+                    <Filter size={16} className="text-accent-500" />
+                    {isMobileFiltersOpen ? 'HIDE FILTERS' : 'SHOW FILTERS'}
+                    {((selectedPlatforms.length + selectedGenres.length + selectedThemes.length) > 0) && (
+                        <span className="bg-accent-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-[10px]">
+                            {selectedPlatforms.length + selectedGenres.length + selectedThemes.length}
+                        </span>
+                    )}
+                </button>
+            </div>
+
+            <div className="flex flex-1 overflow-hidden container-archive relative">
+                {/* Overlay for mobile sidebar */}
+                {isMobileFiltersOpen && (
+                    <div 
+                        className="fixed inset-0 bg-black/50 z-20 lg:hidden"
+                        onClick={() => setIsMobileFiltersOpen(false)}
+                    />
+                )}
+
                 {/* Sidebar */}
-                <aside className="w-72 flex-shrink-0 border-r border-border bg-surface/30 flex flex-col overflow-hidden">
-                    <div className="p-4 border-b border-border bg-surface/50">
-                        <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest flex items-center gap-2 mb-4">
+                <aside 
+                    className={`
+                        absolute lg:static inset-y-0 left-0 z-30
+                        w-72 sm:w-80 lg:w-72 flex-shrink-0 border-r border-border bg-surface flex flex-col overflow-hidden shadow-2xl lg:shadow-none
+                        transform transition-transform duration-300 ease-in-out
+                        ${isMobileFiltersOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+                    `}
+                >
+                    <div className="p-4 border-b border-border bg-surface/50 flex justify-between items-center">
+                        <h2 className="text-xs font-bold text-text-muted uppercase tracking-widest flex items-center gap-2">
                             <Filter size={14} /> Refine Search
                         </h2>
+                        <button 
+                            className="lg:hidden p-1 text-text-muted hover:text-red-500 transition-colors"
+                            onClick={() => setIsMobileFiltersOpen(false)}
+                        >
+                            <X size={18} />
+                        </button>
+                    </div>
+                    <div className="p-4 pb-0 bg-surface/50">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" size={16} />
                             <input
@@ -270,16 +310,16 @@ const BrowsePage = () => {
                 <main className="flex-1 overflow-y-auto bg-background/20 relative custom-scrollbar">
                     {/* Header bar */}
                     <div className="sticky top-0 z-10 p-4 bg-background/80 backdrop-blur-md border-b border-border flex justify-between items-center">
-                        <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-2 sm:gap-6">
                             <div className="flex items-center gap-2 text-text-muted text-xs font-bold tracking-widest">
-                                <LayoutGrid size={14} />
-                                <span>ARCHIVE // {loading ? 'SCANNING...' : `FOUND_${totalFound}_RECORDS`}</span>
+                                <LayoutGrid size={14} className="min-w-max" />
+                                <span className="truncate">ARCHIVE // {loading ? 'SCANNING...' : `FOUND_${totalFound}`}</span>
                             </div>
 
-                            <div className="h-6 w-px bg-border hidden md:block"></div>
+                            <div className="h-6 w-px bg-border hidden sm:block"></div>
 
-                            <div className="hidden md:flex items-center gap-3">
-                                <span className="text-[10px] font-black text-text-muted uppercase tracking-tighter">Sort Sequence:</span>
+                            <div className="hidden sm:flex items-center gap-2 lg:gap-3">
+                                <span className="text-[10px] font-black text-text-muted uppercase tracking-tighter hidden md:inline">Sort Sequence:</span>
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
