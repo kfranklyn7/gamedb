@@ -112,6 +112,16 @@ const App = () => {
           <footer className="border-t border-border mt-12 py-6 bg-surface text-center space-y-1">
             <p className="text-sm font-medium text-text-muted">
               <span className="font-display font-bold">QuestLog</span> &copy; {new Date().getFullYear()}
+              <span className="mx-2">•</span>
+              <a 
+                href="/swagger-ui/index.html" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-accent-400 transition-colors"
+                title="View API Documentation"
+              >
+                API Docs
+              </a>
             </p>
             <IgdbAttribution />
           </footer>
