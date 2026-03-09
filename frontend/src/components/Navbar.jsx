@@ -128,7 +128,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Dropdown Overlay */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden absolute top-full left-0 right-0 bg-surface/95 backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.5)] border-b border-border py-4 space-y-4 px-4 origin-top animate-scale-in">
+                <div className="lg:hidden absolute top-full left-0 right-0 bg-surface backdrop-blur-md shadow-[0_20px_40px_rgba(0,0,0,0.5)] border-b border-t border-border py-4 space-y-4 px-4 origin-top animate-scale-in">
                         <Link 
                             to="/" 
                             onClick={() => setIsMobileMenuOpen(false)}
@@ -251,7 +251,7 @@ const Navbar = () => {
                                 </div>
                             </section>
 
-                            <div className="grid grid-cols-2 gap-8">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
                                 {/* Corners */}
                                 <section>
                                     <h3 className="text-xs font-bold text-text-muted uppercase tracking-widest mb-3 flex items-center gap-2">
@@ -260,14 +260,14 @@ const Navbar = () => {
                                     <div className="flex bg-background p-1 rounded-dynamic-btn border border-border">
                                         <button
                                             onClick={() => setCorners('sharp')}
-                                            className={`flex-1 py-1.5 text-xs font-bold rounded-dynamic-btn transition-all ${corners === 'sharp' ? 'bg-accent-500 text-white shadow-md' : 'text-text-muted hover:text-text'
+                                            className={`flex-1 py-1.5 text-[10px] sm:text-xs font-bold rounded-dynamic-btn transition-all ${corners === 'sharp' ? 'bg-accent-500 text-white shadow-md' : 'text-text-muted hover:text-text'
                                                 }`}
                                         >
                                             SHARP
                                         </button>
                                         <button
                                             onClick={() => setCorners('rounded')}
-                                            className={`flex-1 py-1.5 text-xs font-bold rounded-dynamic-btn transition-all ${corners === 'rounded' ? 'bg-accent-500 text-white shadow-md' : 'text-text-muted hover:text-text'
+                                            className={`flex-1 py-1.5 text-[10px] sm:text-xs font-bold rounded-dynamic-btn transition-all ${corners === 'rounded' ? 'bg-accent-500 text-white shadow-md' : 'text-text-muted hover:text-text'
                                                 }`}
                                         >
                                             ROUND
@@ -283,14 +283,14 @@ const Navbar = () => {
                                     <div className="flex bg-background p-1 rounded-dynamic-btn border border-border">
                                         <button
                                             onClick={() => setDensity('comfortable')}
-                                            className={`flex-1 py-1.5 text-xs font-bold rounded-dynamic-btn transition-all ${density === 'comfortable' ? 'bg-accent-500 text-white shadow-md' : 'text-text-muted hover:text-text'
+                                            className={`flex-1 py-1.5 text-[10px] sm:text-xs font-bold rounded-dynamic-btn transition-all ${density === 'comfortable' ? 'bg-accent-500 text-white shadow-md' : 'text-text-muted hover:text-text'
                                                 }`}
                                         >
                                             COMFORT
                                         </button>
                                         <button
                                             onClick={() => setDensity('compact')}
-                                            className={`flex-1 py-1.5 text-xs font-bold rounded-dynamic-btn transition-all ${density === 'compact' ? 'bg-accent-500 text-white shadow-md' : 'text-text-muted hover:text-text'
+                                            className={`flex-1 py-1.5 text-[10px] sm:text-xs font-bold rounded-dynamic-btn transition-all ${density === 'compact' ? 'bg-accent-500 text-white shadow-md' : 'text-text-muted hover:text-text'
                                                 }`}
                                         >
                                             COMPACT

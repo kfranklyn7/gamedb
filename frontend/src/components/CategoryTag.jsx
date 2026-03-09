@@ -90,8 +90,8 @@ const CategoryTag = ({
     };
 
     const renderedIcon = renderIcon();
-    // Never hide platform text if we want subtext, even if iconOnly is passed.
-    const shouldHideText = iconOnly && renderedIcon && category !== 'platform';
+    // Hide text if iconOnly is passed and icon is successfully grabbed.
+    const shouldHideText = iconOnly && renderedIcon;
 
     return (
         <button
@@ -99,7 +99,7 @@ const CategoryTag = ({
             onClick={onClick}
             disabled={!onClick}
             className={`
-        inline-flex items-center rounded-lg font-medium border
+        inline-flex items-center rounded-lg font-medium border max-w-full
         transition-all duration-150 whitespace-nowrap
         ${onClick ? 'cursor-pointer hover:shadow-sm hover:scale-[1.03]' : 'cursor-default'}
         ${sizeClasses[size]} ${shouldHideText ? '!px-1.5 justify-center' : ''}
