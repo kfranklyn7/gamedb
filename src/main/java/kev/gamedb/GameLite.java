@@ -18,6 +18,8 @@ public class GameLite {
     private Instant releaseDate;
 
     private Double total_rating;
+    private Double communityRating;
+    private Integer communityRatingCount;
 
     @JsonProperty("genreNames")
     private List<String> genreNames;

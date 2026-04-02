@@ -8,6 +8,7 @@ import ScoreBox from '../components/ScoreBox';
 import CategoryTag from '../components/CategoryTag';
 import IgdbLink from '../components/IgdbLink';
 import QuestModal from '../components/QuestModal';
+import DetailSkeleton from '../components/skeletons/DetailSkeleton';
 import { Loader2, Calendar, CheckSquare } from 'lucide-react';
 
 const GameDetailPage = () => {
@@ -39,8 +40,8 @@ const GameDetailPage = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center items-center min-h-[60vh]">
-                <Loader2 className="animate-spin text-accent-500" size={48} />
+            <div className="animate-fade-in relative">
+                <DetailSkeleton />
             </div>
         );
     }
@@ -135,8 +136,7 @@ const GameDetailPage = () => {
                             {/* Score boxes */}
                             <ScoreBox
                                 type="community"
-                                score={game.total_rating}
-                                voteCount={game.total_rating_count}
+                                game={game}
                                 size="lg"
                             />
 

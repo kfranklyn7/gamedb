@@ -78,7 +78,7 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
                     </div>
 
                     <div className="flex gap-2 shrink-0">
-                        <ScoreBox type="community" score={game.total_rating} voteCount={game.total_rating_count} size="md" />
+                        <ScoreBox type="community" game={game} size="md" />
                         <ScoreBox type="personal" score={personalRating} size="md" />
                     </div>
                 </div>
@@ -175,6 +175,16 @@ const CaseCard = ({ listItem, onEdit, onDelete }) => {
                         </div>
                     )}
                 </div>
+
+                {/* Journal Notes / Review */}
+                {listItem.review && (
+                    <div className="mt-4 p-4 bg-slate-50 dark:bg-slate-900/30 rounded-xl border border-slate-200 dark:border-slate-800 relative group overflow-hidden">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-accent-400 rounded-l-xl opacity-80" />
+                        <div className="text-sm font-medium text-text italic">
+                            "{listItem.review}"
+                        </div>
+                    </div>
+                )}
 
                 {/* Actions Footer */}
                 <div className={`mt-6 pt-4 border-t border-border flex ${onEdit && onDelete ? 'justify-between' : 'justify-end'} items-center opacity-80 group-hover:opacity-100 transition-opacity`}>

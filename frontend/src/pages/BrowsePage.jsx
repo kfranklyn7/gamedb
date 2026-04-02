@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { gamesApi } from '../api/games';
 import GameCard from '../components/GameCard';
 import CategoryTag from '../components/CategoryTag';
+import GameCardSkeleton from '../components/skeletons/GameCardSkeleton';
 import { Search, Filter, Loader2, ChevronRight, X, LayoutGrid, ArrowUp, ArrowDown, ChevronDown, ChevronUp } from 'lucide-react';
 import { POPULAR_PLATFORMS } from '../components/CategoryTagConfig';
 
@@ -370,14 +371,18 @@ const BrowsePage = () => {
                         </div>
                     </div>
 
-                    {loading ? (
-                        <div className="flex flex-col items-center justify-center h-full gap-4 text-accent-500 opacity-50">
-                            <Loader2 className="animate-spin" size={48} />
-                            <span className="font-display font-bold text-sm tracking-tighter">SYNCHRONIZING_DATA...</span>
-                        </div>
-                    ) : (
+                    {loading && games.length === 0 ? (
                         <div className="p-6 density-pad">
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 sm:gap-10 density-gap">
+                                {Array.from({ length: 12 }).map((_, i) => (
+                                    <GameCardSkeleton key={i} />
+                                ))}
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="p-6 density-pad relative">
+                            {/* If loading is true but we already have games (fetching next page), we can show an overlay OR just let it finish. The opacity class below handles the visual feedback. */}
+                            <div className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8 sm:gap-10 density-gap transition-opacity duration-300 ${loading ? 'opacity-50 pointer-events-none' : ''}`}>
                                 {games.map((game, idx) => (
                                     <div key={game.igdbId} className="animate-fade-in" style={{ animationDelay: `${idx * 20}ms` }}>
                                         <GameCard game={game} />

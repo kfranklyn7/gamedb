@@ -231,7 +231,10 @@ public class GameSearchService {
                                                 : null);
 
                                 if (doc.get("community_rating") instanceof Number) {
-                                        lite.setTotal_rating(((Number) doc.get("community_rating")).doubleValue());
+                                        lite.setCommunityRating(((Number) doc.get("community_rating")).doubleValue());
+                                }
+                                if (doc.get("community_rating_count") instanceof Number) {
+                                        lite.setCommunityRatingCount(((Number) doc.get("community_rating_count")).intValue());
                                 }
 
                                 Object rd = doc.get("releaseDate");

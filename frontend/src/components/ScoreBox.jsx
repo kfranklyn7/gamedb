@@ -13,19 +13,44 @@ import { Star, Trophy } from 'lucide-react';
  * @param {number} [voteCount] - Number of community votes (community type only)
  * @param {'sm'|'md'|'lg'} size
  */
-const ScoreBox = ({ type, score, voteCount, size = 'md' }) => {
+const ScoreBox = ({ type, score, voteCount, game, size = 'md' }) => {
     const isCommunity = type === 'community';
+    let isQuestlog = false;
+
+    let finalScore = score;
+    let finalVoteCount = voteCount;
+
+    if (isCommunity && game) {
+        if (game.communityRatingCount >= 2 && game.communityRating != null) {
+            finalScore = game.communityRating * 10; // scaled 0-100
+            finalVoteCount = game.communityRatingCount;
+            isQuestlog = true;
+        } else if (game.total_rating != null) {
+            finalScore = game.total_rating;
+            finalVoteCount = game.total_rating_count;
+        }
+    }
 
     // Format score
     const displayScore = () => {
-        if (score === null || score === undefined) return '--';
-        if (isCommunity) return (score / 10).toFixed(1); // 0-100 → 0.0-10.0
-        return score; // personal is already 0-10
+        if (finalScore === null || finalScore === undefined) return '--';
+        if (isCommunity) return (finalScore / 10).toFixed(1); // 0-100 → 0.0-10.0
+        return typeof finalScore === 'number' ? finalScore.toFixed(1) : finalScore; // personal is 0-10
     };
 
     const config = isCommunity
-        ? {
-            label: 'Community',
+        ? isQuestlog ? {
+            label: 'Questlog',
+            icon: Star,
+            bgLight: 'bg-emerald-50',
+            bgDark: 'dark:bg-emerald-950/40',
+            borderLight: 'border-emerald-200',
+            borderDark: 'dark:border-emerald-800',
+            textColor: 'text-emerald-700 dark:text-emerald-400',
+            iconColor: 'text-emerald-500 dark:text-emerald-400',
+            suffix: '',
+        } : {
+            label: 'IGDB',
             icon: Star,
             bgLight: 'bg-amber-50',
             bgDark: 'dark:bg-amber-950/40',
@@ -96,9 +121,9 @@ const ScoreBox = ({ type, score, voteCount, size = 'md' }) => {
             </div>
 
             {/* Sub-info */}
-            {isCommunity && voteCount != null && (
+            {isCommunity && finalVoteCount != null && (
                 <span className={`text-text-muted ${s.sub}`}>
-                    {voteCount.toLocaleString()} votes
+                    {finalVoteCount.toLocaleString()} votes
                 </span>
             )}
         </div>

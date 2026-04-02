@@ -60,7 +60,7 @@ const QuestModal = ({
         e.preventDefault();
         onSubmit({
             status,
-            personalRating: personalRating || null,
+            personalRating: personalRating,
             review,
             replayCount: replayCount || 0,
             startedAt: startedAt ? new Date(startedAt).toISOString() : null,
@@ -117,7 +117,7 @@ const QuestModal = ({
                             type="range"
                             min="0"
                             max="10"
-                            step="0.5"
+                            step="0.1"
                             value={personalRating}
                             onChange={(e) => setPersonalRating(parseFloat(e.target.value))}
                             className="w-full h-2 bg-border rounded-lg appearance-none cursor-pointer accent-accent-500"

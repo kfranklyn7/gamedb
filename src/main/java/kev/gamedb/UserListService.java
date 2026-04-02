@@ -82,25 +82,18 @@ public class UserListService {
 
         if (request.getStatus() != null)
             item.setStatus(request.getStatus());
-        if (request.getPersonalRating() != null)
-            item.setPersonalRating(request.getPersonalRating());
-        if (request.getReview() != null)
-            item.setReview(request.getReview());
+        item.setPersonalRating(request.getPersonalRating());
+        item.setReview(request.getReview());
         // Quest Journal v2 fields
-        if (request.getReplayCount() != null)
-            item.setReplayCount(request.getReplayCount());
-        if (request.getStartedAt() != null)
-            item.setStartedAt(request.getStartedAt());
-        if (request.getCompletedAt() != null)
-            item.setCompletedAt(request.getCompletedAt());
-        if (request.getPriority() != null)
-            item.setPriority(request.getPriority());
+        item.setReplayCount(request.getReplayCount() != null ? request.getReplayCount() : 0);
+        item.setStartedAt(request.getStartedAt());
+        item.setCompletedAt(request.getCompletedAt());
+        item.setPriority(request.getPriority());
         item.setLastUpdated(Instant.now());
 
         UserGameListItem saved = itemRepository.save(item);
-        if (request.getPersonalRating() != null) {
-            updateCommunityRating(request.getGameId());
-        }
+        updateCommunityRating(request.getGameId());
+        
         return saved;
     }
 
@@ -110,9 +103,7 @@ public class UserListService {
         UserGameListItem item = itemRepository.findByUserIdAndGameId(userId, gameId)
                 .orElseThrow(() -> new ResourceNotFoundException("Game with ID " + gameId + " is not in your list"));
         itemRepository.delete(item);
-        if (item.getPersonalRating() != null) {
-            updateCommunityRating(gameId);
-        }
+        updateCommunityRating(gameId);
     }
 
     // ─── Enhancement 2: PATCH Status ─────────────────────────────────
@@ -540,7 +531,7 @@ public class UserListService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found: " + username));
 
-        return getListContent(user.getId().toHexString(), listIdOrName, page, size, sortBy, sortDirection);
+        return getListContent(user.getUsername(), listIdOrName, page, size, sortBy, sortDirection);
     }
 
     public void updateUserPreferences(String username, Map<String, String> preferences) {

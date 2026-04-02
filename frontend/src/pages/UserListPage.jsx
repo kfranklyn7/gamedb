@@ -7,6 +7,7 @@ import CaseCard from '../components/CaseCard';
 import SortFilterBar from '../components/SortFilterBar';
 import Shelf from '../components/Shelf';
 import { STATUS_CONFIG } from '../components/StatusBadge';
+import CaseCardSkeleton from '../components/skeletons/CaseCardSkeleton';
 import { BookOpen, Loader2, UserCircle } from 'lucide-react';
 
 const UserListPage = () => {
@@ -188,13 +189,85 @@ const UserListPage = () => {
         }
     };
 
-    if (loading) {
+    const renderContent = () => {
+        if (loading) {
+            return (
+                <div className="flex flex-col gap-4 max-w-5xl mx-auto w-full mt-8">
+                    {Array.from({ length: 4 }).map((_, i) => (
+                        <CaseCardSkeleton key={i} />
+                    ))}
+                </div>
+            );
+        }
+
+        if (list.length === 0) {
+            return (
+                <div className="flex flex-col items-center justify-center py-20 px-4 bg-surface rounded-3xl border border-dashed border-border shadow-sm text-center mt-8">
+                    <BookOpen strokeWidth={1} size={64} className="text-text-muted/30 mb-6" />
+                    <h2 className="text-2xl font-bold text-text mb-2">This journal is empty</h2>
+                    <p className="text-text-muted mb-8 text-lg">They haven't logged any quests yet.</p>
+                </div>
+            );
+        }
+
         return (
-            <div className="flex justify-center items-center py-32">
-                <Loader2 className="animate-spin text-accent-500" size={48} />
-            </div>
+            <>
+                <div className="flex overflow-x-auto hide-scrollbar gap-1 mb-6 pb-1">
+                    {tabs.map((tab) => {
+                        const isActive = activeTab === tab.id;
+                        const statusConf = STATUS_CONFIG[tab.id];
+                        return (
+                            <button
+                                key={tab.id}
+                                onClick={() => setActiveTab(tab.id)}
+                                className={`
+                                    flex-shrink-0 px-4 py-2.5 font-medium text-sm
+                                    rounded-t-xl transition-all duration-200
+                                    ${isActive
+                                        ? `${statusConf?.colorBg || 'bg-accent-50 dark:bg-accent-950/30'}
+                                           ${statusConf?.colorText || 'text-accent-700 dark:text-accent-400'}
+                                           shadow-md z-10 relative font-semibold`
+                                        : `${statusConf?.colorBg || 'bg-accent-50 dark:bg-accent-950/30'}
+                                           ${statusConf?.colorText || 'text-accent-700 dark:text-accent-400'}
+                                           opacity-50 hover:opacity-80`
+                                    }
+                                `}
+                            >
+                                {tab.label}
+                                {isActive && (
+                                    <span className="ml-2 text-xs opacity-70">
+                                        ({sorted.length})
+                                    </span>
+                                )}
+                            </button>
+                        );
+                    })}
+                </div>
+
+                <div className="mb-6"></div>
+
+                <SortFilterBar
+                    sortBy={sortBy}
+                    onSortChange={setSortBy}
+                    availableFilters={availableFilters}
+                    activeFilters={activeFilters}
+                    onFilterToggle={handleFilterToggle}
+                    onClearFilters={handleClearFilters}
+                    activeView={activeView}
+                    onViewChange={setActiveView}
+                    showCase={showCase}
+                />
+
+                <Shelf
+                    title={tabs.find(t => t.id === activeTab)?.label}
+                    count={sorted.length}
+                    emptyMessage="No quests match the filters."
+                >
+                    {renderCards()}
+                </Shelf>
+            </>
         );
-    }
+    };
 
     return (
         <div className="animate-fade-in pb-12">
@@ -216,69 +289,7 @@ const UserListPage = () => {
                 </Link>
             </div>
 
-            {list.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-20 px-4 bg-surface rounded-3xl border border-dashed border-border shadow-sm text-center">
-                    <BookOpen strokeWidth={1} size={64} className="text-text-muted/30 mb-6" />
-                    <h2 className="text-2xl font-bold text-text mb-2">This journal is empty</h2>
-                    <p className="text-text-muted mb-8 text-lg">They haven't logged any quests yet.</p>
-                </div>
-            ) : (
-                <>
-                    <div className="flex overflow-x-auto hide-scrollbar gap-1 mb-6 pb-1">
-                        {tabs.map((tab) => {
-                            const isActive = activeTab === tab.id;
-                            const statusConf = STATUS_CONFIG[tab.id];
-                            return (
-                                <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    className={`
-                                        flex-shrink-0 px-4 py-2.5 font-medium text-sm
-                                        rounded-t-xl transition-all duration-200
-                                        ${isActive
-                                            ? `${statusConf?.colorBg || 'bg-accent-50 dark:bg-accent-950/30'}
-                                               ${statusConf?.colorText || 'text-accent-700 dark:text-accent-400'}
-                                               shadow-md z-10 relative font-semibold`
-                                            : `${statusConf?.colorBg || 'bg-accent-50 dark:bg-accent-950/30'}
-                                               ${statusConf?.colorText || 'text-accent-700 dark:text-accent-400'}
-                                               opacity-50 hover:opacity-80`
-                                        }
-                                    `}
-                                >
-                                    {tab.label}
-                                    {isActive && (
-                                        <span className="ml-2 text-xs opacity-70">
-                                            ({sorted.length})
-                                        </span>
-                                    )}
-                                </button>
-                            );
-                        })}
-                    </div>
-
-                    <div className="mb-6"></div>
-
-                    <SortFilterBar
-                        sortBy={sortBy}
-                        onSortChange={setSortBy}
-                        availableFilters={availableFilters}
-                        activeFilters={activeFilters}
-                        onFilterToggle={handleFilterToggle}
-                        onClearFilters={handleClearFilters}
-                        activeView={activeView}
-                        onViewChange={setActiveView}
-                        showCase={showCase}
-                    />
-
-                    <Shelf
-                        title={tabs.find(t => t.id === activeTab)?.label}
-                        count={sorted.length}
-                        emptyMessage="No quests match the filters."
-                    >
-                        {renderCards()}
-                    </Shelf>
-                </>
-            )}
+            {renderContent()}
         </div>
     );
 };

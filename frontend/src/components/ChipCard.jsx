@@ -52,8 +52,12 @@ const ChipCard = ({ listItem }) => {
                     </h3>
 
                     <div className="flex items-center justify-between w-full px-1.5 opacity-95 relative z-10 mt-auto">
-                        <span className="text-white font-bold text-[8.5px] tracking-widest flex items-center gap-0.5 drop-shadow">⭐ {game.total_rating ? Math.round(game.total_rating) : '-'}</span>
-                        <span className="text-white font-bold text-[8.5px] tracking-widest flex items-center gap-0.5 drop-shadow">🏆 {personalRating ? personalRating.toFixed(1) : '-'}</span>
+                        {game.communityRatingCount >= 2 && game.communityRating != null ? (
+                             <span className="text-emerald-300 font-bold text-[8.5px] tracking-widest flex items-center gap-0.5 drop-shadow" title="Questlog Rating">⭐ {game.communityRating.toFixed(1)}</span>
+                        ) : (
+                             <span className="text-white font-bold text-[8.5px] tracking-widest flex items-center gap-0.5 drop-shadow" title="IGDB Rating">⭐ {game.total_rating ? (game.total_rating / 10).toFixed(1) : '-'}</span>
+                        )}
+                        <span className="text-white font-bold text-[8.5px] tracking-widest flex items-center gap-0.5 drop-shadow" title="Your XP">🏆 {personalRating ? personalRating.toFixed(1) : '-'}</span>
                     </div>
                 </div>
             </div>
