@@ -42,10 +42,15 @@ const CartridgeCard = ({ listItem, onEdit, onDelete }) => {
                 </div>
 
                 {/* Label info right side */}
-                <div className="flex-grow p-3 flex flex-col justify-between relative z-10 bg-[#111] pointer-events-none">
+                <div className="flex-grow p-3 flex flex-col justify-between relative z-40 bg-[#111] pointer-events-none">
                     <div>
                         <h3 className="text-base sm:text-lg font-bold text-white font-display tracking-tight leading-tight line-clamp-2">{game.name}</h3>
                         {pubDev && <p className="text-[10px] text-gray-400 mt-0.5 uppercase tracking-widest truncate">{pubDev}</p>}
+                        {listItem.review && (
+                            <div className="mt-2 pl-2 border-l border-accent-500/50 text-[10px] sm:text-xs text-white/50 italic line-clamp-2 pr-1">
+                                "{listItem.review}"
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex flex-col gap-2 mt-auto pt-2">
